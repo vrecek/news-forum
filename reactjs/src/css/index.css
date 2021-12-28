@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-weight: 300;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Sora', sans-serif;
+  color: white;
+}

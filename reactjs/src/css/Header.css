@@ -1,0 +1,159 @@
+.header {
+  background: url("https://acegif.com/wp-content/gif/outerspace-70.gif");
+  background-size: cover;
+  height: calc(100vh - 70px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 30rem;
+}
+
+.header h1 {
+  text-align: center;
+  font-size: clamp(1rem, 7vw, 4rem);
+  font-weight: 100;
+  text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green, 0 0 16px green;
+  -webkit-animation: anim 20s infinite;
+          animation: anim 20s infinite;
+}
+
+.header p {
+  text-align: center;
+  width: 80%;
+  margin: .5em auto 2.5em auto;
+  font-weight: 100;
+  -webkit-filter: blur(0.3px);
+          filter: blur(0.3px);
+  text-shadow: 0 0 1px black, 0 0 2px black, 0 0 3px black, 0 0 4px black;
+  font-size: clamp(0.7rem, 3vw, 1rem);
+}
+
+.header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+}
+
+.header div button {
+  margin: 0 1em 2em 1em;
+  padding: 1em 0;
+  width: clamp(200px, 15vw, 300px);
+  border: 2px solid goldenrod;
+  border-radius: .3em;
+  cursor: pointer;
+  background: #101010;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.6rem, 4vw, 1rem);
+  position: relative;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.header div button:hover {
+  -webkit-transition-delay: .3s;
+          transition-delay: .3s;
+  -webkit-box-shadow: 0 0 4px #404040, 0 0 8px #404040,0 0 16px #404040,0 0 24px #404040;
+          box-shadow: 0 0 4px #404040, 0 0 8px #404040,0 0 16px #404040,0 0 24px #404040;
+  background: #202020;
+}
+
+.header div button:hover::before {
+  -webkit-transform: translateX(-50%) scaleX(0);
+          transform: translateX(-50%) scaleX(0);
+}
+
+.header div button:before {
+  position: absolute;
+  content: '';
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  top: -2px;
+  height: calc(100% + 4px);
+  background: #101010;
+  width: 70%;
+  -webkit-transition: .7s;
+  transition: .7s;
+}
+
+.header div button span {
+  font-weight: 700;
+  letter-spacing: 4px;
+  -webkit-filter: blur(0.4px);
+          filter: blur(0.4px);
+  z-index: 999;
+}
+
+@-webkit-keyframes anim {
+  0% {
+    -webkit-filter: blur(1px) hue-rotate(0deg);
+            filter: blur(1px) hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: blur(1px) hue-rotate(360deg);
+            filter: blur(1px) hue-rotate(360deg);
+  }
+}
+
+@keyframes anim {
+  0% {
+    -webkit-filter: blur(1px) hue-rotate(0deg);
+            filter: blur(1px) hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: blur(1px) hue-rotate(360deg);
+            filter: blur(1px) hue-rotate(360deg);
+  }
+}
+
+@-webkit-keyframes animRed {
+  0% {
+    -webkit-filter: blur(0.5px) hue-rotate(0deg);
+            filter: blur(0.5px) hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: blur(0.5px) hue-rotate(360deg);
+            filter: blur(0.5px) hue-rotate(360deg);
+  }
+}
+
+@keyframes animRed {
+  0% {
+    -webkit-filter: blur(0.5px) hue-rotate(0deg);
+            filter: blur(0.5px) hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: blur(0.5px) hue-rotate(360deg);
+            filter: blur(0.5px) hue-rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    -webkit-animation: animRed 20s infinite;
+            animation: animRed 20s infinite;
+  }
+  .header p {
+    width: 100%;
+    text-align: justify;
+    padding: 0 .1em;
+  }
+}

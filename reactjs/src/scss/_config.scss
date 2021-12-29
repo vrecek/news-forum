@@ -1,5 +1,13 @@
+// font-family: 'Sora', sans-serif; font-family: 'Roboto Mono', monospace;
+
 @mixin flex-sa-c{
    display: flex;
    align-items: center;
    justify-content: space-around;
+}
+
+@mixin flex-c-c{
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }

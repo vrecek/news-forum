@@ -1,0 +1,224 @@
+@import '../config';
+
+$lines: (
+   1: '20%',
+   2: '50%',
+   3: '80%'
+);
+
+.nav{
+   background: #101010;
+   height:70px;
+   padding:.2em 0;
+   @include flex-sa-c;
+   position: relative;
+
+   div.image{
+      @include flex-c-c;
+
+      width:25%;
+      height:100%;
+
+      img{
+         height:100%;
+      }
+   }
+   
+   ul{
+      @include flex-c-c;
+      list-style: none;
+      width:50%;
+
+      li{
+         margin: 0 1em;   
+
+         a{
+            @include flex-c-c;
+            font-weight: 200;
+            color:white;
+            text-decoration: none;
+            transition: .3s;
+
+            &:hover{
+               color:orange;
+               text-shadow: 9px 9px 2px blue;
+               filter: blur(.5px);
+            }
+         }
+
+         svg{
+            width:20px;
+            height:20px;
+            margin-right: .1em;
+         }
+
+      }
+   }
+
+   section{
+      @include flex-sa-c;
+      width:25%;
+
+      aside{
+         position: absolute;
+         top:100%;
+         right:0;
+         background: #404040;
+         border:1px solid rgb(0, 128, 202); border-width: 1px 0 1px 1px;
+         border-radius: .3em 0 0 .3em;
+         width:340px;
+         max-width: 100%;
+         transform:translateX(100%);
+         transition: all 1s;
+         z-index: 999;
+
+         &::before{
+            content: '';
+            position: absolute;
+            left:0;
+            top:0;
+            width:5%;
+            height:100%;
+            background: rgb(0, 128, 202);
+         }
+
+         ol{
+            list-style: none;
+            width:95%;
+            margin: 0 0 0 auto;
+
+            a{
+               color:white;
+               text-decoration: none;   
+
+               li{
+                  display: flex;
+                  padding:.5em;
+                  align-items: center;
+                  transition: .2s;
+                  position: relative;
+
+                  &::before{
+                     position: absolute;
+                     content: '';
+                     top:50%;
+                     transform: translateY(-50%);
+                     left:0;
+                     width:0;
+                     height:0;
+                     transition:all .2s;
+                  }
+
+                  &.first{
+                     padding: 1em .5em .5em .5em;
+                  }
+                  &.last{
+                     padding: .5em .5em 1em .5em;
+                  }
+
+                  span{
+                     margin: 0 auto;
+                     font-size: clamp(.8rem,5vw,1rem);
+                  }
+
+                  svg{
+                     width:clamp(20px,6vw,25px);
+                     height:clamp(20px,6vw,25px);
+                  }
+
+                  &:hover{
+                     background: rgb(0, 128, 202);
+
+                     &:not(.last):not(.first)::before{
+                        background: rgb(0, 128, 202);
+                        width:8px;
+                        height:140%;
+                        border-radius: 0 50% 50% 0;
+                     }
+                  }
+               }
+            }
+
+            li.line{           
+               width:70%;
+               margin:1em auto;
+               border:1px solid rgb(0, 128, 202);      
+            }
+         }
+      }
+
+      button{
+         padding: 1em 0;
+         width:150px;
+         font-family: 'Roboto Mono', monospace;
+         font-weight: 400;
+         border:2px solid blue;
+         border-radius: .4em;
+         cursor: pointer;
+         background: none;
+         color:blue;
+         transition: .3s;
+
+         &:hover{
+            background: rgb(35, 24, 134);
+            box-shadow: 0px 0px 4px blue,0px 0px 8px blue,0px 0px 16px blue;
+            color:chartreuse;
+         }
+      }
+
+      div{
+         width:30px;
+         height:30px;
+         cursor: pointer;
+         position: relative;
+
+         span{
+            width:100%;
+            border:2px solid white;
+            transition: all 1s;
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+
+            @each $num, $item in $lines{
+               &:nth-child(#{$num}){
+                  top: #{$item};
+               }
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 1024px){
+   .nav{
+      div.image{ display: none; }
+      
+      section{ width:250px; }
+   }
+}
+
+@media (max-width: 768px){
+   .nav{
+      ul{ li{ span{ display: none; } } }
+   }
+}
+
+@media (max-width: 480px){
+   .nav{
+      ul{ 
+         li{ 
+            margin-right: .7em;
+
+            svg{ margin:0; width:clamp(17px,6vw,20px); height:clamp(17px,6vw,20px); } 
+         } 
+      }
+
+      section{
+         width: auto;
+
+         button{ display: none; } 
+      }
+   }
+} 

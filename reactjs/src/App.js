@@ -1,12 +1,17 @@
 import './css/index.css'
-import HeaderNav from './components/MainPage/HeaderNav'
+import Layout from './components/Layout/Layout'
+import { Route, Routes } from 'react-router-dom'
+import MainPage from './components/MainPage/MainPage';
 
 function App() {
   return (
-    <div className="App">
-      <HeaderNav />
-      xd
-    </div>
+    <Layout>
+      <Routes>
+
+        <Route path='/' element={ <MainPage /> } />
+
+      </Routes>
+    </Layout>
   );
 }
 

@@ -1,0 +1,275 @@
+.nav {
+  background: #101010;
+  height: 70px;
+  padding: .2em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: relative;
+}
+
+.nav div.image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 25%;
+  height: 100%;
+}
+
+.nav div.image img {
+  height: 100%;
+}
+
+.nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  list-style: none;
+  width: 50%;
+}
+
+.nav ul li {
+  margin: 0 1em;
+}
+
+.nav ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 200;
+  color: white;
+  text-decoration: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.nav ul li a:hover {
+  color: orange;
+  text-shadow: 9px 9px 2px blue;
+  -webkit-filter: blur(0.5px);
+          filter: blur(0.5px);
+}
+
+.nav ul li svg {
+  width: 20px;
+  height: 20px;
+  margin-right: .1em;
+}
+
+.nav section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 25%;
+}
+
+.nav section aside {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #404040;
+  border: 1px solid #0080ca;
+  border-width: 1px 0 1px 1px;
+  border-radius: .3em 0 0 .3em;
+  width: 340px;
+  max-width: 100%;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  z-index: 999;
+}
+
+.nav section aside::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5%;
+  height: 100%;
+  background: #0080ca;
+}
+
+.nav section aside ol {
+  list-style: none;
+  width: 95%;
+  margin: 0 0 0 auto;
+}
+
+.nav section aside ol a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav section aside ol a li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: .5em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: .2s;
+  transition: .2s;
+  position: relative;
+}
+
+.nav section aside ol a li::before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+  width: 0;
+  height: 0;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.nav section aside ol a li.first {
+  padding: 1em .5em .5em .5em;
+}
+
+.nav section aside ol a li.last {
+  padding: .5em .5em 1em .5em;
+}
+
+.nav section aside ol a li span {
+  margin: 0 auto;
+  font-size: clamp(0.8rem, 5vw, 1rem);
+}
+
+.nav section aside ol a li svg {
+  width: clamp(20px, 6vw, 25px);
+  height: clamp(20px, 6vw, 25px);
+}
+
+.nav section aside ol a li:hover {
+  background: #0080ca;
+}
+
+.nav section aside ol a li:hover:not(.last):not(.first)::before {
+  background: #0080ca;
+  width: 8px;
+  height: 140%;
+  border-radius: 0 50% 50% 0;
+}
+
+.nav section aside ol li.line {
+  width: 70%;
+  margin: 1em auto;
+  border: 1px solid #0080ca;
+}
+
+.nav section button {
+  padding: 1em 0;
+  width: 150px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+  border: 2px solid blue;
+  border-radius: .4em;
+  cursor: pointer;
+  background: none;
+  color: blue;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.nav section button:hover {
+  background: #231886;
+  -webkit-box-shadow: 0px 0px 4px blue,0px 0px 8px blue,0px 0px 16px blue;
+          box-shadow: 0px 0px 4px blue,0px 0px 8px blue,0px 0px 16px blue;
+  color: chartreuse;
+}
+
+.nav section div {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav section div span {
+  width: 100%;
+  border: 2px solid white;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.nav section div span:nth-child(1) {
+  top: 20%;
+}
+
+.nav section div span:nth-child(2) {
+  top: 50%;
+}
+
+.nav section div span:nth-child(3) {
+  top: 80%;
+}
+
+@media (max-width: 1024px) {
+  .nav div.image {
+    display: none;
+  }
+  .nav section {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav ul li span {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav ul li {
+    margin-right: .7em;
+  }
+  .nav ul li svg {
+    margin: 0;
+    width: clamp(17px, 6vw, 20px);
+    height: clamp(17px, 6vw, 20px);
+  }
+  .nav section {
+    width: auto;
+  }
+  .nav section button {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+.uparr{
+   position: fixed;
+   right:.5em;
+   z-index: 9;
+   bottom:.5em;
+
+   svg{
+      width:30px;
+      height:30px;
+      cursor: pointer;
+      transition: .3s;
+      pointer-events: none;
+      opacity: 0;
+      transition: .5s;
+
+      &:hover{
+         color:cadetblue;
+      }
+   } 
+}

@@ -10,7 +10,10 @@
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99999;
 }
 
 .nav div.image {

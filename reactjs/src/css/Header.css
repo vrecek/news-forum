@@ -15,7 +15,50 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 30rem;
+  position: relative;
+}
+
+.header svg {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  color: #888888;
+}
+
+.header svg:nth-child(4) {
+  bottom: 10%;
+  -webkit-animation: arrows 3s infinite;
+          animation: arrows 3s infinite;
+}
+
+.header svg:nth-child(5) {
+  bottom: 15%;
+  -webkit-animation: arrows 3s infinite;
+          animation: arrows 3s infinite;
+}
+
+.header svg:nth-child(6) {
+  bottom: 20%;
+  -webkit-animation: arrows 3s infinite;
+          animation: arrows 3s infinite;
+}
+
+.header svg:nth-child(4) {
+  -webkit-animation-delay: .6s;
+          animation-delay: .6s;
+}
+
+.header svg:nth-child(5) {
+  -webkit-animation-delay: .4s;
+          animation-delay: .4s;
+}
+
+.header svg:nth-child(6) {
+  -webkit-animation-delay: .2s;
+          animation-delay: .2s;
 }
 
 .header h1 {
@@ -54,14 +97,14 @@
 .header div button {
   margin: 0 1em 2em 1em;
   padding: 1em 0;
-  width: clamp(200px, 15vw, 300px);
+  width: clamp(180px, 15vw, 300px);
   border: 2px solid goldenrod;
   border-radius: .3em;
   cursor: pointer;
   background: #101010;
   color: white;
   font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.6rem, 4vw, 1rem);
+  font-size: clamp(0.6rem, 3.5vw, 1rem);
   position: relative;
   -webkit-transition: .3s;
   transition: .3s;
@@ -100,6 +143,24 @@
   -webkit-filter: blur(0.4px);
           filter: blur(0.4px);
   z-index: 999;
+}
+
+@-webkit-keyframes arrows {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes arrows {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes anim {
@@ -154,6 +215,6 @@
   .header p {
     width: 100%;
     text-align: justify;
-    padding: 0 .1em;
+    padding: 0 .3em;
   }
 }

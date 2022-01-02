@@ -1,0 +1,62 @@
+@import '../config';
+
+aside{
+   border-left: 2px solid #303030;
+   width:20%;
+   height:calc(100vh - 70px);
+   position: sticky;
+   top:70px;
+   background: #101010;
+   border-top: 2px solid #303030;
+
+   .reltop{
+      display: block;
+      color:rgb(206, 203, 199);
+      text-decoration: none;
+      padding-left: .5em;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .85rem;
+      transition: .3s;
+
+      &:hover{
+         background: #303030;
+         text-shadow: 0 0 5px blue;
+      }
+   }
+
+   h5{
+      text-align: center;
+      font-family: 'Roboto Mono', monospace;
+      padding:.4em 0 .2em 0;
+      color:grey;
+      text-decoration: underline;
+   }
+
+   article{
+      height:25%;
+      width: 95%;
+      margin:.5em auto .5em auto;
+
+      figure{
+         height: 70%;
+         overflow: hidden;
+         img{ width: 100%; }
+      }
+
+      p{
+         font-size: .7rem;
+         text-align: justify;
+         
+         a{
+            font-size: .7rem;
+            text-decoration: none;
+            color:rgb(197, 53, 0);
+            transition: .15s;
+
+            &:hover{
+               color:rgb(34, 34, 185);
+            }
+         }
+      }
+   } 
+}

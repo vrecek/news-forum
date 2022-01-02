@@ -1,0 +1,113 @@
+.tilescont h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  position: relative;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin: 1em auto;
+  white-space: nowrap;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.tilescont h1 span {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 100;
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 0;
+  border-right: 3px solid #00227e;
+  overflow: hidden;
+  color: #003fee;
+}
+
+.tilescont h1 span.animated {
+  -webkit-animation: text 3s linear;
+          animation: text 3s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.tilescont section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 920px;
+  margin: 0 auto;
+}
+
+.tilescont section div {
+  width: 280px;
+  height: 250px;
+  border: 2px solid #303030;
+  border-radius: .3em;
+  margin: .2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.tilescont section div:hover {
+  opacity: .7;
+  -webkit-transform: scale(0.92);
+          transform: scale(0.92);
+}
+
+.tilescont section div figure {
+  height: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 1em;
+}
+
+.tilescont section div figure img {
+  height: 100%;
+}
+
+.tilescont section div p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+@-webkit-keyframes text {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+    text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green;
+  }
+}
+
+@keyframes text {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+    text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green;
+  }
+}

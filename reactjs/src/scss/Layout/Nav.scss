@@ -11,7 +11,9 @@ $lines: (
    height:70px;
    padding:.2em 0;
    @include flex-sa-c;
-   position: relative;
+   position: sticky;
+   top:0;
+   z-index: 99999;
 
    div.image{
       @include flex-c-c;

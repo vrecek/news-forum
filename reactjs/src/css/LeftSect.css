@@ -1,0 +1,12 @@
+.leftright {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  height: 1500px;
+  border-bottom: 2px solid #303030;
+}
+
+.leftsection {
+  width: 79%;
+}

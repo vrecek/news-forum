@@ -1,0 +1,77 @@
+@import '../config';
+
+.tilescont{
+   h1{
+      text-align: center;
+      font-size: 2.5rem;
+      position: relative;
+      width: min-content;
+      margin:1em auto;
+      white-space: nowrap;
+      font-weight: 100;
+      letter-spacing: 1px;
+
+      span{
+         display: block;
+         font-size: 2.5rem;
+         font-weight: 100;
+         left:0;
+         top:0;
+         position: absolute;
+         height:100%;
+         width:0;
+         border-right: 3px solid rgb(0, 34, 126);   
+         overflow:hidden;
+         color:rgb(0, 63, 238);
+
+         &.animated{ 
+            animation: text 3s linear;
+            animation-fill-mode: forwards; 
+         }
+      }
+   }
+
+   section{
+      @include flex-c-c;
+      flex-wrap: wrap;
+      width:920px;
+      margin:0 auto;
+      
+      div{
+         width:280px;
+         height:250px;
+         border:2px solid #303030;
+         border-radius: .3em;
+         margin:.2em;
+         position: relative;
+         cursor: pointer;
+         transition: .4s;
+
+         &:hover{
+            opacity:.7;
+            transform: scale(.92);
+         }
+
+         figure{
+            height:35%;
+            @include flex-c-c;
+            margin-bottom: 1em;
+
+            img{ height:100%; }
+         }
+
+         p{
+            position: absolute;
+            left:50%; top:50%; transform:translate(-50%,-50%);
+         }
+      }
+   }
+}
+
+@keyframes text {
+   0%{ width:0; }
+   100%{ 
+      width:100%; 
+      text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green;
+   }
+}

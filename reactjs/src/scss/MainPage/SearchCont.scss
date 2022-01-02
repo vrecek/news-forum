@@ -1,0 +1,70 @@
+@import '../config';
+
+.searchcont{
+   background: #111111;
+   margin-top: 3em;
+   padding-right: 2em;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   ul{
+      list-style: none;
+      display: flex;
+
+      li{
+         padding:1.2em 2em;
+         @include flex-c-c;
+         cursor: pointer;
+         transition: .3s;
+         font-weight: 200;
+
+         &:hover{
+            background: #050505;
+         }
+      }
+   }
+
+   div{
+      @include flex-c-c;
+      position: relative;
+
+      svg{
+         width: 25px;
+         height:25px;
+      }
+
+      input{
+         padding:.5em .2em;
+         color:blanchedalmond;
+         margin-left: .2em;
+         background: none;
+         border:2px solid rgb(131, 131, 255);
+         border-radius: .3em;
+         font-size: 1.1rem;
+         font-family: 'Roboto Mono', monospace;
+         outline: 0;
+         transition: .5s;
+      }
+
+      span{
+         position: absolute;
+         font-family: 'Roboto Mono', monospace;
+         color:rgb(102, 102, 102);
+         top: 50%;
+         left:20%;
+         transform: translate(-20%,-50%);
+         pointer-events: none;
+         transition: .5s;
+
+         &.focused{        
+            left:58%;
+            top:-16%;
+            transform: translate(-58%, 0);
+            font-size: .8rem;
+            padding:0 .5em;
+            background: #101010;
+         }
+      }
+   }
+}

@@ -1,5 +1,16 @@
 @import '../config';
 
+$arrs: (
+   4: "10%",
+   5: "15%",
+   6: "20%"
+);
+$delay: (
+   4: ".6s",
+   5: ".4s",
+   6: ".2s"
+);
+
 .header{
    background: url("https://acegif.com/wp-content/gif/outerspace-70.gif");
    background-size: cover;
@@ -8,7 +19,28 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   margin-bottom: 30rem;
+   position: relative;
+
+   svg{
+      width:35px;
+      height:35px;
+      position: absolute;
+      left:50%; transform:translateX(-50%);
+      color: rgb(136, 136, 136);
+
+      @each $num, $item in $arrs{
+         &:nth-child(#{$num}){
+            bottom: #{$item};
+            animation: arrows 3s infinite;
+         }
+      }
+
+      @each $num, $item in $delay{
+         &:nth-child(#{$num}){
+            animation-delay: #{$item};
+         }
+      }
+   }
 
    h1{
       text-align: center;
@@ -36,14 +68,14 @@
       button{
          margin:0 1em 2em 1em;
          padding:1em 0;
-         width: clamp(200px, 15vw, 300px);
+         width: clamp(180px, 15vw, 300px);
          border:2px solid goldenrod;
          border-radius: .3em;
          cursor: pointer;
          background: #101010;
          color:white;
          font-family: 'Roboto Mono', monospace;
-         font-size: clamp(.6rem, 4vw, 1rem);
+         font-size: clamp(.6rem, 3.5vw, 1rem);
          position: relative;
          transition: .3s;
 
@@ -78,6 +110,11 @@
    }
 }
 
+@keyframes arrows {
+   0%{opacity:0;}
+   100%{opacity: 1;}
+}
+
 @keyframes anim {
    0%{
       filter: blur(1px) hue-rotate(0deg);
@@ -101,6 +138,6 @@
 @media (max-width: 480px){
    .header{
       h1{ animation: animRed 20s infinite; }
-      p{ width:100%; text-align: justify; padding:0 .1em; }
+      p{ width:100%; text-align: justify; padding:0 .3em; }
    }
 } 

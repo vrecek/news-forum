@@ -11,6 +11,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  position: relative;
 }
 
 .searchcont ul {
@@ -20,7 +21,7 @@
   display: flex;
 }
 
-.searchcont ul li {
+.searchcont ul li.outer {
   padding: 1.2em 2em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -35,10 +36,72 @@
   -webkit-transition: .3s;
   transition: .3s;
   font-weight: 200;
+  font-size: clamp(0.7rem, 1.7vw, 1rem);
 }
 
-.searchcont ul li:hover {
+.searchcont ul li.outer.clicked {
+  background: #000032 !important;
+}
+
+.searchcont ul li.outer:hover {
   background: #050505;
+}
+
+.searchcont ul li.outer svg {
+  pointer-events: none;
+}
+
+.searchcont ul ol.innerlist {
+  position: absolute;
+  background: #000032;
+  top: 100%;
+  width: 79%;
+  left: 0;
+  z-index: 999;
+  height: 0;
+  -webkit-transition: .5s;
+  transition: .5s;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.searchcont ul ol.innerlist ul {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.searchcont ul ol.innerlist ul li {
+  font-size: clamp(0.55rem, 3vw, 0.9rem);
+  color: blanchedalmond;
+  font-weight: 300;
+  margin-bottom: .3em;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.searchcont ul ol.innerlist ul li:first-child {
+  font-size: clamp(0.65rem, 4vw, 1.1rem);
+  color: #929292;
+  font-weight: 200;
+  font-family: 'Roboto Mono', monospace;
+  border-bottom: 1px solid grey;
+  margin-bottom: .5em;
+  pointer-events: none;
+}
+
+.searchcont ul ol.innerlist ul li:hover {
+  color: #00d150;
+  text-shadow: 0 0 2px grey;
+  font-weight: 700;
 }
 
 .searchcont div {
@@ -64,6 +127,7 @@
   color: blanchedalmond;
   margin-left: .2em;
   background: none;
+  width: 100%;
   border: 2px solid #8383ff;
   border-radius: .3em;
   font-size: 1.1rem;
@@ -94,4 +158,32 @@
   font-size: .8rem;
   padding: 0 .5em;
   background: #101010;
+}
+
+@media (max-width: 768px) {
+  .searchcont ul ol.innerlist {
+    max-height: 200px !important;
+    width: 100%;
+  }
+  .searchcont div input, .searchcont div span {
+    display: none;
+  }
+  .searchcont div svg {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchcont ul {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: left;
+  }
+  .searchcont ul li.outer {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
 }

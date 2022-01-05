@@ -3,7 +3,7 @@
 .tilescont{
    h1{
       text-align: center;
-      font-size: 2.5rem;
+      font-size: clamp(1.5rem,5vw,2.5rem);
       position: relative;
       width: min-content;
       margin:1em auto;
@@ -13,7 +13,7 @@
 
       span{
          display: block;
-         font-size: 2.5rem;
+         font-size: clamp(1.5rem,5vw,2.5rem);
          font-weight: 100;
          left:0;
          top:0;
@@ -32,7 +32,7 @@
    }
 
    section{
-      @include flex-c-c;
+      @include flex-sa-c;
       flex-wrap: wrap;
       width:920px;
       margin:0 auto;
@@ -63,6 +63,8 @@
          p{
             position: absolute;
             left:50%; top:50%; transform:translate(-50%,-50%);
+            white-space: nowrap;
+            font-size: clamp(.8rem, 3vw, 1rem);
          }
       }
    }
@@ -75,3 +77,35 @@
       text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green;
    }
 }
+
+@media (max-width: 1024px){
+   .tilescont{
+      section{
+         width: 100%;
+
+         div{
+            width:30vw;
+            height:27vw;
+
+            &:nth-child(4),
+            &:nth-child(5),
+            &:nth-child(6)
+            { margin-top: 4em; }
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .tilescont{
+      section{
+         div{
+            width:90%;
+            @include flex-c-c;
+            margin:.2em auto !important;
+
+            p{ bottom:0; transform: translate(-50%, 50%); }
+         }
+      }
+   }
+} 

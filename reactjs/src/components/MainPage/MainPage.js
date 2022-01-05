@@ -5,25 +5,10 @@ import TilesCont from './TilesCont'
 import SearchCont from './SearchCont'
 import LeftSect from './LeftSect'
 import Aside from './Aside'
+import Feedback from './Feedback'
 
 const MainPage = () => {
    /* 
-      obok pare dropdown NA KLIK
-
-      featured
-      image lewo i text floatowy
-      read more napis not  btn
-
-      2-3-4 100% img i text w srodku info what
-      ze 2 rzzedy
-
-      lewwo img prawo text
-      i na odrwor
-      pare razy
-
-      img duzy pod krotki text i reaed more
-
-      1 2 3 ... 888 889 900
       
       send feedback nodemailer
 
@@ -40,7 +25,7 @@ const MainPage = () => {
                <LeftSect />
                <Aside />
             </section>
-            dsds
+            <Feedback />
          </main>
       </>
    )

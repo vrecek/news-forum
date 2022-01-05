@@ -12,7 +12,7 @@
    .para{
       text-align: center;
       font-family:'Roboto Mono', monospace;
-      font-size: clamp(.7rem, 5vw, .9rem);
+      font-size: clamp(.6rem, 3vw, .9rem);
       padding-bottom:4em;
    }
 
@@ -55,8 +55,8 @@
             }
 
             svg{
-               width:60px;
-               height:60px;
+               width:clamp(35px,6vw,60px);
+               height:clamp(35px,6vw,60px);
                color:white;
                transition: .4s;
                pointer-events: none;
@@ -74,7 +74,8 @@
       }
 
       article{
-         width:50%;height:500px;
+         width:50%;
+         height:530px;
          position: relative;
 
          figure{
@@ -105,8 +106,8 @@
          }  
 
          p{
-            font-size: .8rem;
-            line-height: 2em;
+            font-size: clamp(.75rem,4vw,.8rem);
+            line-height: clamp(1em,6vw,2em);
             text-shadow: 1px 1px 4px purple;
             font-family: 'Roboto Mono', monospace;
             font-weight: 200;
@@ -117,11 +118,11 @@
             bottom:0;
             left:0;
             padding:.8em 0;
-            width: 25%;
+            width: 10em;
             border:2px solid rgb(0, 81, 255);
             background: rgba(16, 16, 1, .8);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: clamp(.8rem,4vw,1rem);
             color:whitesmoke;
             border-radius: .4em;
             transition: .3s;
@@ -137,3 +138,33 @@
       }
    }
 }
+
+@media (max-width: 1024px){
+   .slidercont{
+      .inner-cont{
+         flex-direction: column;
+
+         article{
+            width: 90%; 
+
+            figure{
+               width:100%;
+               height:auto;
+            }
+         }
+         
+         figure.plfig{
+            height:auto;
+            width: 40%;
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .slidercont{
+      .inner-cont{
+         figure.plfig{ width: 60%; }
+      }
+   }
+} 

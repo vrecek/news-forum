@@ -12,7 +12,7 @@
 .slidercont .para {
   text-align: center;
   font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.7rem, 5vw, 0.9rem);
+  font-size: clamp(0.6rem, 3vw, 0.9rem);
   padding-bottom: 4em;
 }
 
@@ -80,8 +80,8 @@
 }
 
 .slidercont .inner-cont figure button svg {
-  width: 60px;
-  height: 60px;
+  width: clamp(35px, 6vw, 60px);
+  height: clamp(35px, 6vw, 60px);
   color: white;
   -webkit-transition: .4s;
   transition: .4s;
@@ -99,7 +99,7 @@
 
 .slidercont .inner-cont article {
   width: 50%;
-  height: 500px;
+  height: 530px;
   position: relative;
 }
 
@@ -144,8 +144,8 @@
 }
 
 .slidercont .inner-cont article p {
-  font-size: .8rem;
-  line-height: 2em;
+  font-size: clamp(0.75rem, 4vw, 0.8rem);
+  line-height: clamp(1em, 6vw, 2em);
   text-shadow: 1px 1px 4px purple;
   font-family: 'Roboto Mono', monospace;
   font-weight: 200;
@@ -156,11 +156,11 @@
   bottom: 0;
   left: 0;
   padding: .8em 0;
-  width: 25%;
+  width: 10em;
   border: 2px solid #0051ff;
   background: rgba(16, 16, 1, 0.8);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 4vw, 1rem);
   color: whitesmoke;
   border-radius: .4em;
   -webkit-transition: .3s;
@@ -175,4 +175,30 @@
 
 .slidercont .inner-cont article button span {
   font-family: 'Roboto Mono', monospace;
+}
+
+@media (max-width: 1024px) {
+  .slidercont .inner-cont {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .slidercont .inner-cont article {
+    width: 90%;
+  }
+  .slidercont .inner-cont article figure {
+    width: 100%;
+    height: auto;
+  }
+  .slidercont .inner-cont figure.plfig {
+    height: auto;
+    width: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slidercont .inner-cont figure.plfig {
+    width: 60%;
+  }
 }

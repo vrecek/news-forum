@@ -3,7 +3,10 @@ import React from 'react'
 const Button = ({ text, cname, action }) => {
    return (
       <button style={ !cname ? basicStyle : null } onClick={ action } className={ cname }>
-         <span>{ text }</span>
+         <span className='addspan'></span>
+         <span className='addspan'></span>
+         <span className='addspan'></span>
+         <span className='text'>{ text }</span>
       </button>
    )
 }

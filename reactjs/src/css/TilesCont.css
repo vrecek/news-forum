@@ -1,6 +1,6 @@
 .tilescont h1 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   position: relative;
   width: -webkit-min-content;
   width: -moz-min-content;
@@ -13,7 +13,7 @@
 
 .tilescont h1 span {
   display: block;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   font-weight: 100;
   left: 0;
   top: 0;
@@ -39,9 +39,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 920px;
@@ -90,6 +89,8 @@
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: clamp(0.8rem, 3vw, 1rem);
 }
 
 @-webkit-keyframes text {
@@ -109,5 +110,39 @@
   100% {
     width: 100%;
     text-shadow: 0 0 2px green, 0 0 4px green, 0 0 8px green;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tilescont section {
+    width: 100%;
+  }
+  .tilescont section div {
+    width: 30vw;
+    height: 27vw;
+  }
+  .tilescont section div:nth-child(4), .tilescont section div:nth-child(5), .tilescont section div:nth-child(6) {
+    margin-top: 4em;
+  }
+}
+
+@media (max-width: 480px) {
+  .tilescont section div {
+    width: 90%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin: .2em auto !important;
+  }
+  .tilescont section div p {
+    bottom: 0;
+    -webkit-transform: translate(-50%, 50%);
+            transform: translate(-50%, 50%);
   }
 }

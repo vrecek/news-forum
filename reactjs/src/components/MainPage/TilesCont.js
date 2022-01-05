@@ -11,16 +11,20 @@ import { useRef, useEffect } from 'react'
 
 const TilesCont = () => {
    const refere = useRef(null);
-   let scroll = null;
    let item = null;
    useEffect(() => {
-      scroll = refere.current.offsetTop - refere.current.offsetHeight;
       item = refere.current.childNodes[0].childNodes[1];
       window.addEventListener('scroll', eventHandle)
    }, [])
 
    function eventHandle(){
-      if(window.scrollY >= scroll) {
+      const rect = item.getBoundingClientRect()
+      if (
+         rect.top >= 0 &&
+         rect.left >= 0 &&
+         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      ){
          item.className = 'animated'; 
          setTimeout(() => {
             item.style.border = '0';

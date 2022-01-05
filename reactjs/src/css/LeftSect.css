@@ -3,10 +3,162 @@
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  height: 1500px;
   border-bottom: 2px solid #303030;
 }
 
 .leftsection {
   width: 79%;
+  background: url("https://wallpaper.dog/large/17011864.jpg");
+  background-attachment: fixed;
+  padding: 1em;
+}
+
+.leftsection figure {
+  height: 30vw;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: .3s;
+  transition: .3s;
+  overflow: hidden;
+  margin-bottom: 4em;
+}
+
+.leftsection figure:hover {
+  -webkit-filter: contrast(80%);
+          filter: contrast(80%);
+}
+
+.leftsection figure div.outer {
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.leftsection figure div.imgcont {
+  height: inherit;
+  position: relative;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 100%;
+}
+
+.leftsection figure div.imgcont p {
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  font-size: clamp(1rem, 6vw, 4rem);
+  color: yellow;
+  padding-left: .3em;
+  text-shadow: 0 0 3px white;
+  -webkit-filter: blur(0.5px);
+          filter: blur(0.5px);
+  text-shadow: 0 0 2px black,  0 0 4px black,  0 0 8px black,  0 0 16px black;
+  border-left: 5px solid yellow;
+  font-weight: 400;
+}
+
+.leftsection figure div.imgcont img {
+  height: 100%;
+  width: 100%;
+}
+
+.leftsection figure div.radiocont {
+  position: absolute;
+  right: 5%;
+  bottom: 8%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.leftsection figure div.radiocont span {
+  display: block;
+  width: clamp(10px, 4vw, 20px);
+  height: clamp(10px, 4vw, 20px);
+  background: #e6e200;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 0 .3em;
+}
+
+.leftsection figure div.radiocont span.activeradio {
+  background: #0082be;
+  -webkit-box-shadow: 0 0 2px red, 0 0 4px red, 0 0 8px red;
+          box-shadow: 0 0 2px red, 0 0 4px red, 0 0 8px red;
+}
+
+.leftsection .newsCont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.leftsection .newsCont article {
+  width: 23vw;
+  height: 21vw;
+  margin: 1em .5em;
+  position: relative;
+  border: 1px solid #797979;
+  cursor: pointer;
+  background-size: 100% 100%;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.leftsection .newsCont article:hover {
+  background-size: 120% 120%;
+}
+
+.leftsection .newsCont article h3 {
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+  font-size: clamp(0.9rem, 5vw, 1.8rem);
+  font-weight: 600;
+  color: whitesmoke;
+  text-shadow: 0 0 2px black, 0 0 4px black, 0 0 8px black;
+}
+
+.leftsection .newsCont article h4 {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.6rem, 4vw, 0.9rem);
+  text-shadow: 0 0 2px black;
+}
+
+@media (max-width: 1024px) {
+  .leftright {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .leftsection {
+    width: 100%;
+  }
+  .leftsection figure {
+    width: 98%;
+    height: clamp(140px, 40vw, 40vw);
+  }
+  .leftsection .newsCont article {
+    width: 28vw;
+    height: 27vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftsection .newsCont article {
+    width: clamp(280px, 65vw, 50px);
+    height: clamp(20px, 65vw, 250px);
+  }
 }

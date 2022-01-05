@@ -7,21 +7,70 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+   position: relative;
 
    ul{
       list-style: none;
       display: flex;
 
-      li{
+      li.outer{
          padding:1.2em 2em;
          @include flex-c-c;
          cursor: pointer;
          transition: .3s;
-         font-weight: 200;
+         font-weight: 200;   
+         font-size: clamp(.7rem,1.7vw,1rem);
+         
+         &.clicked{ background: rgb(0, 0, 50) !important; }
 
          &:hover{
             background: #050505;
          }
+
+         svg{ pointer-events: none; }
+      }
+
+      ol.innerlist{
+         position: absolute;
+         background: rgb(0, 0, 50);
+         top:100%;
+         width: 79%;
+         left:0;
+         z-index: 999;
+         height:0;
+         transition: .5s;
+         overflow: hidden;
+         @include flex-sa-c;
+
+         ul{
+            flex-direction: column;
+
+            li{
+               &:first-child{
+                  font-size: clamp(.65rem, 4vw,1.1rem);
+                  color:rgb(146, 146, 146);
+                  font-weight: 200;
+                  font-family: 'Roboto Mono', monospace;
+                  border-bottom: 1px solid grey;
+                  margin-bottom: .5em;
+                  pointer-events: none;
+               }
+
+               font-size: clamp(.55rem,3vw,.9rem);
+               color:blanchedalmond;
+               font-weight: 300;
+               margin-bottom: .3em;
+               transition: .3s;
+
+               &:hover{
+                  color:rgb(0, 209, 80);
+                  text-shadow: 0 0 2px grey;
+                  font-weight: 700;
+               }
+            }
+         }
+
+
       }
    }
 
@@ -39,6 +88,7 @@
          color:blanchedalmond;
          margin-left: .2em;
          background: none;
+         width:100%;
          border:2px solid rgb(131, 131, 255);
          border-radius: .3em;
          font-size: 1.1rem;
@@ -68,3 +118,24 @@
       }
    }
 }
+
+@media (max-width: 768px){
+   .searchcont{
+      ul{ ol.innerlist{ max-height:200px !important; width: 100%; } }
+
+      div{
+         input,span { display: none; }
+         svg{ cursor: pointer; }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .searchcont{
+      ul{
+         flex-direction: column;
+         text-align: left;
+         li.outer{ justify-content: space-between; }
+      }
+   }
+} 

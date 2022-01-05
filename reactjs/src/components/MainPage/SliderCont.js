@@ -14,7 +14,7 @@ const SliderCont = () => {
    let finished = true;
    let counter = 1;
    function changeSlide(e, direction){
-      if(!finished) return;
+      if(!finished || e.target.classList.contains('text')) return;
       finished = false;
 
       const cont = e.target.parentElement.childNodes[1].childNodes[0]
@@ -49,7 +49,7 @@ const SliderCont = () => {
          <p className='para'>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.</p>
 
          <section className='inner-cont'>
-            <figure>
+            <figure className='plfig'>
                <Button action={ (e)=>changeSlide(e, 'left') } text={ <BiLeftArrow /> } cname='n' />
                <div className='outdiv'> 
                   <div ref={ dref }>        

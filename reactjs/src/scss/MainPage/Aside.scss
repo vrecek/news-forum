@@ -60,3 +60,19 @@ aside{
       }
    } 
 }
+
+@media (max-width: 1024px){
+   aside{
+      width: 100%;
+      height: auto;
+
+      article{
+         margin:2em auto;
+
+         figure{
+            height: clamp(120px,30vw,30vw);
+            img{ height: 100%; width: 100%;}
+         }
+      }
+   }
+}

@@ -64,3 +64,20 @@ aside article p a {
 aside article p a:hover {
   color: #2222b9;
 }
+
+@media (max-width: 1024px) {
+  aside {
+    width: 100%;
+    height: auto;
+  }
+  aside article {
+    margin: 2em auto;
+  }
+  aside article figure {
+    height: clamp(120px, 30vw, 30vw);
+  }
+  aside article figure img {
+    height: 100%;
+    width: 100%;
+  }
+}

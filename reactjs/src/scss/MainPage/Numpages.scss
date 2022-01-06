@@ -10,7 +10,7 @@
       width: 45px;
       border:2px solid black; border-width: 2px 0px 2px 2px;
       background: #202020;
-      height: 45px;
+      height: clamp(40px,7vw,45px);
       text-align: center;
       font-weight: 100;
       cursor: pointer;

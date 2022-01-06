@@ -1,3 +1,154 @@
 .feedback {
-  background: green;
+  padding-bottom: 5em;
+}
+
+.feedback h2 {
+  text-align: center;
+  padding: 1em 0 2em 0;
+  text-shadow: 0 0 2px grey,0 0 4px grey,0 0 8px grey;
+  -webkit-filter: blur(0.5px);
+          filter: blur(0.5px);
+  font-weight: 200;
+}
+
+.feedback form {
+  width: 840px;
+  max-width: 100%;
+  border: 2px solid #2d4d8a;
+  border-radius: .2em;
+  height: 300px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.feedback form button {
+  position: absolute;
+  top: 101%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: #101010 !important;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.feedback form button:hover {
+  background: #050505 !important;
+  color: #e00ce0 !important;
+  -webkit-box-shadow: 0 0 2px pink, 0 0 4px pink, 0 0 8px purple, 0 0 16px purple;
+          box-shadow: 0 0 2px pink, 0 0 4px pink, 0 0 8px purple, 0 0 16px purple;
+}
+
+.feedback form section {
+  position: relative;
+}
+
+.feedback form section span {
+  font-size: .6rem;
+  color: red;
+}
+
+.feedback form section span.txtarea {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.feedback form section.creds {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 30%;
+  border-right: 2px solid #4e74bd;
+  background: #151515;
+}
+
+.feedback form section.creds p {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  color: #bd1414;
+  font-size: .7rem;
+}
+
+.feedback form section.creds div {
+  width: 100%;
+  padding: 0 .5em;
+}
+
+.feedback form section.creds div h3 {
+  font-size: .8rem;
+  font-weight: 200;
+  padding: 0 .5em;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.feedback form section.creds div input {
+  display: block;
+  width: 100%;
+  padding: .4em;
+  outline: 0;
+  border: 2px solid #1747ce;
+  background: none;
+  font-family: 'Sora', sans-serif;
+  color: white;
+  border-radius: .4em;
+  font-size: 1.1rem;
+}
+
+.feedback form section.area {
+  width: 70%;
+}
+
+.feedback form section.area textarea {
+  width: 100%;
+  height: 100%;
+  background: #101010;
+  outline: 0;
+  border: 0;
+  resize: none;
+  color: white;
+  padding: 1em .5em .5em .5em;
+  font-size: 1.1rem;
+  font-weight: 100;
+  font-family: 'Sora', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .feedback form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .feedback form section.creds {
+    width: 100%;
+    padding-bottom: .5em;
+  }
+  .feedback form section.creds p {
+    display: none;
+  }
+  .feedback form section.area {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback form button {
+    width: 95% !important;
+  }
 }

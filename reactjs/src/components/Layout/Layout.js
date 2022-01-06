@@ -1,9 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Nav from './Nav'
-import { BsFillArrowUpCircleFill, BsWindowSidebar } from 'react-icons/bs'
+import { BsFillArrowUpCircleFill } from 'react-icons/bs'
 import '../../css/Necc.css'
 import { useRef, useEffect } from 'react'
+import Footer from './Footer'
 
 const Layout = (props) => {
    const arrref = useRef(null)
@@ -31,6 +32,7 @@ const Layout = (props) => {
             {
                props.children
             }
+            <Footer />
          </Router>
       </>
    )

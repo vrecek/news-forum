@@ -1,5 +1,141 @@
 @import '../config';
 
 .feedback{
-   background: green;
+   padding-bottom: 5em;
+
+   h2{
+      text-align: center;
+      padding:1em 0 2em 0;
+      text-shadow: 0 0 2px grey,0 0 4px grey,0 0 8px grey;
+      filter: blur(.5px);
+      font-weight: 200;
+   }
+
+   form{
+      width: 840px;
+      max-width: 100%;
+      border:2px solid rgb(45, 77, 138);
+      border-radius: .2em;
+      height:300px;
+      margin:0 auto;
+      display: flex;
+      position: relative;
+
+      button{
+         position: absolute;
+         top:101%;
+         left: 50%;
+         transform: translateX(-50%);
+         background: #101010 !important;
+         transition: .3s;
+
+         &:hover{
+            background: #050505 !important;
+            color: rgb(224, 12, 224) !important;
+            box-shadow: 0 0 2px pink, 0 0 4px pink, 0 0 8px purple, 0 0 16px purple;
+         }
+      }
+
+      section{
+         position: relative;
+
+         span{
+            font-size: .6rem;
+            color:red;
+
+            &.txtarea{
+               position: absolute;
+               left:5px;
+               top:5px;
+            }
+         }
+
+         &.creds{
+            @include flex-sa-c;
+            flex-direction: column;
+            width:30%;
+            border-right: 2px solid rgb(78, 116, 189);
+            background: #151515;
+
+            p{
+               position: absolute;
+               bottom:5px;
+               left:5px;
+               color:rgb(189, 20, 20);
+               font-size: .7rem;
+            }
+
+            div{
+               width: 100%;
+               padding: 0 .5em;
+
+               h3{
+                  font-size: .8rem;
+                  font-weight: 200;
+                  padding: 0 .5em;
+                  transition: .5s;
+               }
+               
+               input{
+                  display: block;
+                  width:100%;
+                  padding:.4em;
+                  outline: 0;
+                  border:2px solid rgb(23, 71, 206);
+                  background: none;
+                  font-family: 'Sora', sans-serif;
+                  color:white;
+                  border-radius: .4em;
+                  font-size: 1.1rem;
+               }
+            }       
+         }
+
+         &.area{
+            width:70%;
+
+            textarea{
+               width:100%;
+               height:100%;
+               background: #101010;
+               outline: 0;
+               border: 0;
+               resize: none;
+               color:white;
+               padding:1em .5em .5em .5em;
+               font-size: 1.1rem;
+               font-weight: 100;
+               font-family: 'Sora', sans-serif;
+            }
+         }
+      }
+   }
 }
+
+@media (max-width: 768px){
+   .feedback{
+      form{
+         flex-direction: column;
+
+         section{
+            &.creds{
+               width: 100%;
+               padding-bottom: .5em;
+
+               p{ display: none; }
+            }
+
+            &.area{
+               width: 100%;
+               height: 100%;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .feedback{
+      form{ button{ width: 95% !important; } }
+   }
+} 

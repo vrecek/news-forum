@@ -23,4 +23,9 @@ const basicStyle = {
    cursor: 'pointer'
 }
 
+Button.defaultProps = {
+   text: 'Button',
+   action: () => console.log('Button clicked')
+}
+
 export default Button

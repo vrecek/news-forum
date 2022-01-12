@@ -83,6 +83,38 @@
          height:25px;
       }
 
+      section{
+         position: absolute;
+         right:0;
+         top:112%;
+         width:100%;
+         background: #050505;
+         border-radius: .1em;
+         border: 2px solid #202020; border-width: 0 2px 2px 2px;
+         z-index: 999;
+
+         &.hidden{
+            opacity: 0;
+            pointer-events: none;
+         }
+
+         a{
+            display: block;
+            width: 100%;
+            padding: .5em 0;
+            transition: .3s;
+            text-align: center;
+            color: rgb(189, 189, 189);
+            filter: blur(.4px);
+            text-decoration: none;
+            font-weight: 500;
+            
+            &:hover{
+               background: #252525;
+            }
+         }
+      }
+
       input{
          padding:.5em .2em;
          color:blanchedalmond;

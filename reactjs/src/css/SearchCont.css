@@ -122,6 +122,41 @@
   height: 25px;
 }
 
+.searchcont div section {
+  position: absolute;
+  right: 0;
+  top: 112%;
+  width: 100%;
+  background: #050505;
+  border-radius: .1em;
+  border: 2px solid #202020;
+  border-width: 0 2px 2px 2px;
+  z-index: 999;
+}
+
+.searchcont div section.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.searchcont div section a {
+  display: block;
+  width: 100%;
+  padding: .5em 0;
+  -webkit-transition: .3s;
+  transition: .3s;
+  text-align: center;
+  color: #bdbdbd;
+  -webkit-filter: blur(0.4px);
+          filter: blur(0.4px);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.searchcont div section a:hover {
+  background: #252525;
+}
+
 .searchcont div input {
   padding: .5em .2em;
   color: blanchedalmond;

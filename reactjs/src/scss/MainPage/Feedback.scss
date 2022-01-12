@@ -3,6 +3,21 @@
 .feedback{
    padding-bottom: 5em;
 
+   p#mailp{
+      text-align: center;
+      position: absolute;
+      width:100%;
+      bottom:101%;
+      padding:.5em 0;
+   }
+
+   p.false{
+      background: red;
+   }
+   p.true{
+      background: rgb(1, 109, 1);
+   }
+
    h2{
       text-align: center;
       padding:1em 0 2em 0;

@@ -119,12 +119,12 @@
 
 .leftsection .newsCont article h3 {
   position: absolute;
-  bottom: 30%;
+  bottom: 25%;
   left: 10%;
   font-size: clamp(0.9rem, 5vw, 1.8rem);
-  font-weight: 600;
+  font-weight: 500;
   color: whitesmoke;
-  text-shadow: 0 0 2px black, 0 0 4px black, 0 0 8px black;
+  text-shadow: 0 0 4px black, 0 0 8px black, 0 0 16px black;
 }
 
 .leftsection .newsCont article h4 {
@@ -133,7 +133,8 @@
   bottom: 5px;
   font-family: 'Roboto Mono', monospace;
   font-size: clamp(0.6rem, 4vw, 0.9rem);
-  text-shadow: 0 0 2px black;
+  font-weight: 500;
+  text-shadow: 0 0 2px black, 0 0 4px black;
 }
 
 @media (max-width: 1024px) {

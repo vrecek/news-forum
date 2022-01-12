@@ -2,6 +2,22 @@
   padding-bottom: 5em;
 }
 
+.feedback p#mailp {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 101%;
+  padding: .5em 0;
+}
+
+.feedback p.false {
+  background: red;
+}
+
+.feedback p.true {
+  background: #016d01;
+}
+
 .feedback h2 {
   text-align: center;
   padding: 1em 0 2em 0;

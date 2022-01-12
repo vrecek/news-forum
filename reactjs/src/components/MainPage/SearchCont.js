@@ -2,9 +2,14 @@ import React from 'react'
 import '../../css/SearchCont.css'
 import { BsSearch } from 'react-icons/bs'
 import { AiFillCaretDown } from 'react-icons/ai'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { fetchGet } from '../../js/fetches'
+import { useNavigate } from 'react-router-dom'
 
 const SearchCont = () => {
+   const navigate = useNavigate()
+   const [search, setSearch] = useState(null)
+
    function focusFunc(e, action){
       const span = e.target.parentElement.childNodes[2]
       const val = e.target.value
@@ -43,6 +48,20 @@ const SearchCont = () => {
          li.className = 'outer clicked'
          ol.style.height = '350px'
       }
+   }
+
+   function querySrch(e){
+      e.target.parentElement.children[3].classList.toggle('hidden', e.target.value === '')
+      if(e.target.value === ''){
+         setSearch(null)
+         return
+      } 
+
+      fetchGet(`/api/news/search/${e.target.value}`)
+      .then(data => {
+         setSearch(data)
+      })
+      .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
    }
 
    return (
@@ -214,8 +233,16 @@ const SearchCont = () => {
          </ul>
          <div>
             <BsSearch />
-            <input spellCheck='false' onBlur={ (e)=>focusFunc(e,"blur") } onFocus={ (e)=>focusFunc(e,"focus") } type='text' />
+            <input onChange={ querySrch } spellCheck='false' onBlur={ (e)=>focusFunc(e,"blur") } onFocus={ (e)=>focusFunc(e,"focus") } type='text' />
             <span>search...</span>
+
+            <section>
+               {
+                  search && search.map(it => (
+                     <a key={ it._id } href='/'>{ it.shortTitle }</a>
+                  ))
+               }
+            </section>
          </div>
       </div>
    )

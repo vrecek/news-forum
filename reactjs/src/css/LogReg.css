@@ -1,0 +1,266 @@
+.registerpage,
+.loginpage {
+  min-height: calc(110vh - 70px);
+  background: url("https://wallpapercave.com/wp/iTE916Z.jpg");
+  background-size: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.registerpage form,
+.loginpage form {
+  background: #252525;
+  padding: 3em 1em 1em 1em;
+  border-radius: .1em;
+  width: 450px;
+  color: #dfdfdf;
+  border: 2px solid #d4d4d4;
+  margin: 4em 0;
+  position: relative;
+}
+
+.registerpage form .msgCont,
+.loginpage form .msgCont {
+  -webkit-animation: loginOpacity 2s;
+          animation: loginOpacity 2s;
+  -webkit-animation-delay: 2.5s;
+          animation-delay: 2.5s;
+}
+
+.registerpage form .passeye,
+.loginpage form .passeye {
+  position: absolute;
+  right: 2%;
+  top: 67%;
+  -webkit-transform: translateY(-67%);
+          transform: translateY(-67%);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.registerpage form .passeye .toggled,
+.loginpage form .passeye .toggled {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(120deg);
+          transform: translate(-50%, -50%) rotate(120deg);
+  width: 10%;
+  height: 100%;
+  background: #fff;
+  pointer-events: none;
+}
+
+.registerpage form .passeye svg,
+.loginpage form .passeye svg {
+  width: 25px;
+  height: 25px;
+  pointer-events: none;
+}
+
+.registerpage form span.false,
+.registerpage form span.true,
+.loginpage form span.false,
+.loginpage form span.true {
+  display: block;
+  width: 100%;
+  color: white;
+  padding: .5em 0;
+  text-align: center;
+  margin-bottom: .1em;
+  font-size: .85rem;
+}
+
+.registerpage form span.false:last-of-type,
+.registerpage form span.true:last-of-type,
+.loginpage form span.false:last-of-type,
+.loginpage form span.true:last-of-type {
+  margin-bottom: .5em;
+}
+
+.registerpage form span.false,
+.loginpage form span.false {
+  background: red;
+}
+
+.registerpage form span.true,
+.loginpage form span.true {
+  background: green;
+}
+
+.registerpage form button,
+.loginpage form button {
+  display: block;
+  margin: 0 auto 1em auto;
+  border: 2px solid #dfdfdf;
+  background: none;
+  border-radius: .2em;
+  padding: .8em 0;
+  width: 100%;
+  color: #dfdfdf;
+  font-size: 1.2rem;
+  cursor: pointer;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.registerpage form button:hover,
+.loginpage form button:hover {
+  background: #c7c6c4;
+  color: black;
+  -webkit-box-shadow: 0 0 2px grey, 0 0 4px grey, 0 0 8px grey, 0 0 16px grey, 0 0 32px grey;
+          box-shadow: 0 0 2px grey, 0 0 4px grey, 0 0 8px grey, 0 0 16px grey, 0 0 32px grey;
+}
+
+.registerpage form h3,
+.loginpage form h3 {
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1em;
+}
+
+.registerpage form h4,
+.loginpage form h4 {
+  font-size: .9rem;
+  text-align: center;
+}
+
+.registerpage form h4.forg-pass,
+.loginpage form h4.forg-pass {
+  margin-bottom: .7em;
+}
+
+.registerpage form h4 a,
+.loginpage form h4 a {
+  color: orangered;
+  text-decoration: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.registerpage form h4 a:hover,
+.loginpage form h4 a:hover {
+  color: #0499d4;
+}
+
+.registerpage form .checkdiv,
+.loginpage form .checkdiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.registerpage form div:not(.loadgif):not(.icon),
+.loginpage form div:not(.loadgif):not(.icon) {
+  margin-bottom: 1em;
+  position: relative;
+}
+
+.registerpage form div:not(.loadgif):not(.icon) label,
+.loginpage form div:not(.loadgif):not(.icon) label {
+  font-size: .95rem;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.registerpage form div:not(.loadgif):not(.icon) p,
+.loginpage form div:not(.loadgif):not(.icon) p {
+  font-size: .85rem;
+}
+
+.registerpage form div:not(.loadgif):not(.icon) input[type="text"],
+.registerpage form div:not(.loadgif):not(.icon) input[type="password"],
+.loginpage form div:not(.loadgif):not(.icon) input[type="text"],
+.loginpage form div:not(.loadgif):not(.icon) input[type="password"] {
+  width: 100%;
+  outline: 0;
+  background: #555555;
+  border: 1px solid #303030;
+  color: #fff;
+  padding: .8em .5em;
+  font-size: 1rem;
+  font-family: 'Sora', sans-serif;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.registerpage form div:not(.loadgif):not(.icon) input[type="text"].logininp,
+.registerpage form div:not(.loadgif):not(.icon) input[type="password"].logininp,
+.loginpage form div:not(.loadgif):not(.icon) input[type="text"].logininp,
+.loginpage form div:not(.loadgif):not(.icon) input[type="password"].logininp {
+  padding: .8em .5em;
+  font-size: 1.4rem;
+}
+
+.registerpage form div:not(.loadgif):not(.icon) input[type="text"]:focus,
+.registerpage form div:not(.loadgif):not(.icon) input[type="password"]:focus,
+.loginpage form div:not(.loadgif):not(.icon) input[type="text"]:focus,
+.loginpage form div:not(.loadgif):not(.icon) input[type="password"]:focus {
+  background: #a13108;
+}
+
+.registerpage form .icon,
+.loginpage form .icon {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: #252525;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 90px;
+  height: 90px;
+  border: 2px solid #d4d4d4;
+}
+
+.registerpage form .icon svg,
+.loginpage form .icon svg {
+  width: 70%;
+  height: 70%;
+  color: #dfdfdf;
+}
+
+@-webkit-keyframes loginOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes loginOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

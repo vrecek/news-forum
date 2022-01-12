@@ -8,9 +8,9 @@ const Footer = () => {
    return (
       <footer>
          <div className='icons'>
-            <a per='Github' target='_blank' href='https://github.com/vrecek'> <AiFillGithub /> </a>        
-            <a per='Facebook' target='_blank' href='https://github.com/vrecek'> <BsFacebook /> </a>   
-            <a per='Steam' target='_blank' href='https://github.com/vrecek'> <FaSteam /> </a>   
+            <a per='Github' href='https://github.com/vrecek'> <AiFillGithub /> </a>        
+            <a per='Facebook' href='/'> <BsFacebook /> </a>   
+            <a per='Steam' href='/'> <FaSteam /> </a>   
          </div>
 
          <div className='uls'>

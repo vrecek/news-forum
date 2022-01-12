@@ -2,24 +2,33 @@ import React from 'react'
 import '../../css/LeftSect.css'
 import '../../css/Featured.css'
 import '../../css/Numpages.css'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import SliderImg from './SliderImg'
 import News from './News'
 import Featured from './Featured'
+import { fetchGet } from '../../js/fetches'
+import { useNavigate } from 'react-router-dom'
+import { Loading } from '../../js/Loading'
+import { shuffle } from '../../js/shuffle'
 
 const LeftSect = () => {
    const slide = useRef(null)
+   const [news, setNews] = useState(null)
+   const navigate = useNavigate()
+
    useEffect(() => {
       const slider = slide.current
       const len = slider.childNodes.length - 1
       const radioArr = slider.parentElement.childNodes[1].childNodes
       let counter = 1
-      let interval = null
+
+      const load = new Loading(document.body, true)
+      load.attach()
 
       slider.style.transform = `translateX(-100%)`
       radioArr[0].className = 'activeradio'
 
-      interval = setInterval(() => {  
+      setInterval(() => {  
          if(!document.hasFocus()) return
 
          counter++ 
@@ -41,6 +50,13 @@ const LeftSect = () => {
          radioArr[counter - 2].className = ''
          radioArr[counter - 1].className = 'activeradio'
       })
+
+      fetchGet('/api/news')
+      .then(data => {
+         setNews(shuffle(data))
+      })
+      .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
+      .finally(() => load.delete())
    }, [])
 
    return (
@@ -64,15 +80,11 @@ const LeftSect = () => {
          </figure>
 
          <section className='newsCont'>
-            <News />
-            <News />
-            <News />
-            <News />
-            <News />
-            <News />
-            <News />
-            <News />
-            <News />
+            {
+               news && news.map(it => (
+                  <News key={ it._id } src={ it.image } title={ it.title } date={ it.data } />
+               ))
+            }
          </section>
 
          <section className='featured'>

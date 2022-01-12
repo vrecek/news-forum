@@ -58,7 +58,7 @@ const Nav = () => {
          </ul>
 
          <section>
-            <button>Login</button>
+            <button onClick={ ()=>window.location.href = '/login' }>Login</button>
             <div onClick={ toggleMenu }>
                <span></span>
                <span></span>
@@ -66,8 +66,8 @@ const Nav = () => {
             </div>
             <aside>
                <ol>
-                  <Link to='/'> <li className='first'>  <BiLogIn /> <span>Sign in</span> </li> </Link>
-                  <Link to='/'> <li>  <BiUserPlus /> <span>Register</span> </li></Link>
+                  <Link to='/login'> <li className='first'>  <BiLogIn /> <span>Sign in</span> </li> </Link>
+                  <Link to='/register'> <li>  <BiUserPlus /> <span>Register</span> </li></Link>
                   <li className='line'></li>
                   <Link to='/'> <li>  <AiOutlineHome /> <span>Homepage</span> </li></Link>
                   <Link to='/'> <li>  <MdOutlineForum /> <span>Forum</span> </li></Link>

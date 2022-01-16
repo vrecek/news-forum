@@ -1,0 +1,70 @@
+@import '../config';
+
+.errorpage{
+   background: url('https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg');
+   background-size: cover;
+   height: calc(100vh - 70px);
+   padding: 1em 0;
+   @include flex-sa-c;
+   flex-direction: column;
+
+   section{
+      &:nth-child(2){
+         background: #101010;
+         padding:1em;
+      }
+
+      img{
+         display: block;
+         margin: 0 auto;
+         max-width: 95%;
+      }
+
+      h1,
+      h2{
+         text-align: center;   
+         color:rgb(236, 18, 18);
+      }
+
+      h1{
+         font-size: clamp(1.7rem, 7vw, 3rem);
+         margin-bottom: .2em;
+         font-weight: 100;
+         text-shadow: 0 0 2px rgb(201, 32, 32), 0 0 4px rgb(201, 32, 32), 0 0 8px rgb(201, 32, 32),
+                      0 0 16px rgb(201, 32, 32), 0 0 32px rgb(201, 32, 32), 0 0 64px rgb(201, 32, 32);
+      }
+
+      h2{
+         font-size: clamp(.8rem, 3vw, 1rem);
+         border-bottom: 1px solid red;
+         font-weight: 300;
+         width: 80%;
+         margin: 0 auto;
+         text-shadow: 0 0 4px rgb(201, 32, 32);
+      }
+
+      h3{
+         text-align: center;
+         color:palegoldenrod;
+         text-transform: uppercase;
+         font-size: 1.2rem;
+         margin-bottom: 1.5em;
+         border-bottom: 1px solid palegoldenrod;
+      }
+
+      h4{
+         font-weight: 400;
+         font-family: 'Roboto Mono', monospace;
+      }
+
+      p{
+         background: #202020;
+         padding:1em;
+         text-align: center;
+         margin-bottom: 1em;
+         font-size: clamp(.8rem, 6vw, 1rem);
+      }
+
+
+   }
+}

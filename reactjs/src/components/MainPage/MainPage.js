@@ -8,12 +8,6 @@ import Aside from './Aside'
 import Feedback from './Feedback'
 
 const MainPage = () => {
-   /* 
-      
-      send feedback nodemailer
-
-      footer
-   */
    return (
       <>
          <Header />

@@ -28,7 +28,7 @@ export class Loading{
          div.style.width = '100%'
          div.style.height = '100%'
          div.style.zIndex = '9999999999'
-         div.style.background = 'rgba(0,0,0,.5)'
+         div.style.background = 'rgba(0,0,0,1)'
          div.style.display = 'flex'
          div.style.justifyContent = 'center'
          div.style.alignItems = 'center'

@@ -15,6 +15,77 @@ $lines: (
    top:0;
    z-index: 99999;
 
+   .loggedicons{
+      position: relative;
+
+      a{
+         @include flex-c-c;
+         color:white;
+         position: relative;
+
+         span{
+            position: absolute;
+            min-width: 20px;
+            min-height:20px;
+            border: 1px solid red;
+            @include flex-c-c;
+            border-radius: 50%;
+            font-size: .7rem;
+            right:-40%;
+            bottom:85%;
+         }
+
+         &:hover svg{
+            color: orange;
+            filter: blur(.6px);
+            box-shadow: 0 0 2px blue, 0 0 4px blue, 0 0 8px blue, 0 0 16px blue;
+         }
+
+         &:hover::before{
+            opacity: 1;
+         }
+
+         &::before{
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            content: attr(per);
+            left:50%;
+            transform: translateX(-50%);
+            top:170%;
+            padding:.3em;
+            background: #202020;
+            font-weight: 100;
+            font-size: .8rem;
+            border:1px solid grey;
+            transition: .4s;
+         }
+
+         svg{
+            width:30px;
+            height:30px;
+            transition: .3s;
+            cursor: pointer;
+            border-radius: 40%;
+            position: relative;
+   
+            
+         }
+      }
+
+      p{
+         position: absolute;
+         top:100%;
+         font-size: .7rem;
+         white-space: nowrap;
+         font-family: 'Roboto Mono', monospace;
+
+         span{
+            color:orangered;
+         }
+      }
+   }
+
    div.image{
       @include flex-c-c;
 
@@ -92,6 +163,10 @@ $lines: (
             a{
                color:white;
                text-decoration: none;   
+
+               &.logout-red{
+                  color:rgb(226, 36, 36);
+               }
 
                li{
                   display: flex;

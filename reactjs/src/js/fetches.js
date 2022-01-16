@@ -1,4 +1,4 @@
-export const fetchPost = async (url, body) => {
+export const fetchPost = async (url, body, method='POST') => {
    try{
       const controller = new AbortController()
       setTimeout(() => {
@@ -6,7 +6,7 @@ export const fetchPost = async (url, body) => {
       }, 8000);
 
       const opt = {
-         method: 'POST',
+         method: method,
          headers: {
             'Content-Type': 'application/json'
          },
@@ -42,10 +42,10 @@ export const fetchPost = async (url, body) => {
 }
 
 export const fetchGet = async url => {
-   try{
       const res = await fetch(url)
 
       if(!res.ok){
+         console.log(res.statusText, res)
          throwError(res.statusText, res.status)
       }
 
@@ -56,18 +56,6 @@ export const fetchGet = async url => {
       }
 
       return data
-   }catch(error){ 
-      switch(error.code){
-         case 404:
-            error.message = 'Can not find fetch url address.'
-            break;
-
-         default:
-            break;
-      }
-
-      throw error
-   }
 }
 
 // error func help

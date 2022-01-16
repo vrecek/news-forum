@@ -1,14 +1,19 @@
 import React from 'react'
 import '../../css/Nav.css'
 import logo from '../../images/logo.png'
-import { AiOutlineFire, AiOutlineHome, AiOutlineMail, AiOutlineQuestionCircle, AiFillLock } from 'react-icons/ai'
-import { BiWorld, BiLogIn, BiUserPlus } from 'react-icons/bi'
+import { AiOutlineFire, AiOutlineHome, AiOutlineMail, AiOutlineQuestionCircle, AiFillLock,AiOutlinePoweroff } from 'react-icons/ai'
+import { BiWorld, BiLogIn, BiUserPlus, BiMessageDetail, BiCog } from 'react-icons/bi'
 import { MdOutlineForum, MdOutlinePrivacyTip } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { FaUserCog } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { fetchGet } from '../../js/fetches'
+import { Loading } from '../../js/Loading'
 
 const Nav = () => {
-   const [toggle, setToggle] = useState(false);
+   const [toggle, setToggle] = useState(false)
+   const [logged, setLogged] = useState(false)
+   const navigate = useNavigate()
    const perc = [20, 50, 80];
 
    function toggleMenu(e){
@@ -44,6 +49,24 @@ const Nav = () => {
       }
    }
 
+   useEffect(() => {
+      const load = new Loading(document.body, true)
+      load.attach()
+
+      fetchGet('/api/users/is-authed')
+      .then(data =>{
+         if(data.user){
+            const notViewedMsgs = data.user.messages.filter(x => x.viewed === false)
+            console.log(notViewedMsgs.length)
+            setLogged({ result: data.result, user: data.user, msgs: notViewedMsgs.length })
+         }else{
+            setLogged({ result: data.result, user: data.user })
+         }     
+      })
+      .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
+      .finally(() => load.delete())
+   }, [])
+
    return (
       <nav className='nav'>
          <div className='image'>
@@ -58,7 +81,19 @@ const Nav = () => {
          </ul>
 
          <section>
-            <button onClick={ ()=>window.location.href = '/login' }>Login</button>
+            {
+               logged.result ?
+               <section className='loggedicons'>
+                  <a per='Messages' href='/my-messages'> <BiMessageDetail />
+                     { logged.msgs !== 0 && <span>{ logged.msgs }</span> } 
+                  </a>
+                  <a per='Settings' href='/'> <BiCog /> </a>
+                  <p className='log-as'>Logged: <span>{ logged.user.username }</span></p>
+               </section>
+               :
+               <button onClick={ ()=>window.location.href = '/login' }>Login</button>
+            }
+   
             <div onClick={ toggleMenu }>
                <span></span>
                <span></span>
@@ -66,8 +101,19 @@ const Nav = () => {
             </div>
             <aside>
                <ol>
-                  <Link to='/login'> <li className='first'>  <BiLogIn /> <span>Sign in</span> </li> </Link>
-                  <Link to='/register'> <li>  <BiUserPlus /> <span>Register</span> </li></Link>
+                  {
+                     logged.result ? 
+                     <>
+                        <Link to='/'> <li className='first'>  <FaUserCog /> <span>Profile</span> </li> </Link>
+                        <a className='logout-red' href='http://localhost:5000/api/users/logout'> <li> <AiOutlinePoweroff /> <span>Logout</span> </li></a>
+                     </>
+                     :
+                     <>
+                        <Link to='/login'> <li className='first'> <BiLogIn /> <span>Sign in</span> </li> </Link>
+                        <Link to='/register'> <li> <BiUserPlus /> <span>Register</span> </li></Link>
+                     </>
+                  }
+                  
                   <li className='line'></li>
                   <Link to='/'> <li>  <AiOutlineHome /> <span>Homepage</span> </li></Link>
                   <Link to='/'> <li>  <MdOutlineForum /> <span>Forum</span> </li></Link>

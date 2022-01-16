@@ -16,6 +16,96 @@
   z-index: 99999;
 }
 
+.nav .loggedicons {
+  position: relative;
+}
+
+.nav .loggedicons a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  position: relative;
+}
+
+.nav .loggedicons a span {
+  position: absolute;
+  min-width: 20px;
+  min-height: 20px;
+  border: 1px solid red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  font-size: .7rem;
+  right: -40%;
+  bottom: 85%;
+}
+
+.nav .loggedicons a:hover svg {
+  color: orange;
+  -webkit-filter: blur(0.6px);
+          filter: blur(0.6px);
+  -webkit-box-shadow: 0 0 2px blue, 0 0 4px blue, 0 0 8px blue, 0 0 16px blue;
+          box-shadow: 0 0 2px blue, 0 0 4px blue, 0 0 8px blue, 0 0 16px blue;
+}
+
+.nav .loggedicons a:hover::before {
+  opacity: 1;
+}
+
+.nav .loggedicons a::before {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  content: attr(per);
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  top: 170%;
+  padding: .3em;
+  background: #202020;
+  font-weight: 100;
+  font-size: .8rem;
+  border: 1px solid grey;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.nav .loggedicons a svg {
+  width: 30px;
+  height: 30px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  cursor: pointer;
+  border-radius: 40%;
+  position: relative;
+}
+
+.nav .loggedicons p {
+  position: absolute;
+  top: 100%;
+  font-size: .7rem;
+  white-space: nowrap;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.nav .loggedicons p span {
+  color: orangered;
+}
+
 .nav div.image {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -130,6 +220,10 @@
 .nav section aside ol a {
   color: white;
   text-decoration: none;
+}
+
+.nav section aside ol a.logout-red {
+  color: #e22424;
 }
 
 .nav section aside ol a li {

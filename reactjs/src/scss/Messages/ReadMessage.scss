@@ -1,0 +1,99 @@
+@import '../config';
+
+.msg-read{
+   min-height: calc(100vh - 70px);
+   background: url('https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg');
+   background-size: cover;
+   @include flex-c-c;
+
+   .cont{
+      display: flex;
+      width: 80%;
+      height: 40vw;
+      background: linear-gradient(83deg, rgba(41,41,41,1) 38%, rgba(43,41,41,1) 59%);
+      border: 1px solid black;
+      position: relative;
+
+      section{
+         &.info{
+            width: 20%;
+            padding-top: 2em;
+            border-right: 1px solid black;
+            position: relative;
+
+            svg{
+               position: absolute;
+               width:40px;
+               height:40px;
+               left:110%;
+               top:1%;
+            }
+
+            img{
+               width: 70%;
+               display: block;
+               margin: 0 auto 1em auto;
+            }
+
+            div{
+               &:first-of-type{
+                  border-top: 1px solid black;
+               }
+               text-align: center;
+               padding:1em 0;
+               border-bottom: 1px solid black;
+
+               h4{
+                  color:rgb(255, 123, 0);
+                  margin-bottom: .1em;
+               }
+            }
+         }
+
+         &.text{
+            width: 80%;
+            height:80%;
+            padding:2em;
+            line-height: 1.5em;
+
+            button{
+               position: absolute;
+               left:60%;
+               bottom:2%;
+               transform: translateX(-60%);
+               background: #151515;
+               padding:1rem 0;
+               width: 15%;
+               border-radius: .2em;
+               border:3px solid rgb(255, 0, 0);
+               outline: 0;
+               cursor: pointer;
+               transition: .3s;
+
+               &:hover{
+                  background: black;
+                  filter: blur(1px);
+                  border-color: brown;
+               }
+
+               span{
+                  font-weight: 700;
+                  color:white;
+                  font-size: 1.1rem;
+                  font-family: 'Roboto Mono', monospace;
+               }
+            }
+
+            p{
+               
+            }
+
+            h1{
+               text-align: center;
+               margin-bottom: 1em;
+               font-size: 2rem;
+            }
+         }
+      }
+   }
+}

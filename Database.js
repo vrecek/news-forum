@@ -54,7 +54,7 @@ class Database{
       try{
          // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
          if(!this.schemas[model]){ 
-            this.__throw400(`Model: -${model}- does not exist in class instance schemas.`)
+            this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
          }
 
 
@@ -66,7 +66,7 @@ class Database{
             searchOptions.limit = searchOptions.limit ?? '0'             //  default: no limit
 
             if(!this.schemas[model].schema.paths[searchOptions.searchWhat]){ 
-               this.__throw400(`Field -${searchOptions.searchWhat}- does not exist on ${model} model`)
+               this.__throw500(`Field -${searchOptions.searchWhat}- does not exist on ${model} model`)
             }
 
             // searchWhat SPLIT INTO ARRAY TO USE ON $or find() METHOD TO SEARCH FIELDS PASSED BY USER
@@ -95,6 +95,57 @@ class Database{
    }
 
 
+   // -------------------------------------------- VIEW ONE ITEM IN model DOCUMENT ------------------------------------------------
+   // fix
+   async viewOne(model, value, findBy = '_id'){
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      if(findBy === '_id'){
+         const user = await this.schemas[model].findById(value)
+         //return user.length !== 0 ? user : false
+         console.log(user)
+         return 'xd'
+      }
+   }
+
+
+   // -------------------------------------------- VIEW ARRAY IN model DOCUMENT ------------------------------------------------
+
+   // model MUST BE A STRING TO MODEL PASSED IN CONSTRUCTOR
+   // documentId MUST BE A STRING OF !VALID! ID WHICH YOU WANT SEARCH
+   // arrayName IS ARRAY NAME IN DOCUMENT
+   // filterItemId MUST BE STRING ID TO FILTER MONGOOSE ID'S
+   async viewArray(model, documentId, arrayName, filterItemId = false){
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model] || !this.schemas[model].schema.paths[arrayName]){ 
+         this.__throw500(`Model / Field: -${model}- does not exist in class instance schemas.`)
+      }
+
+      // MAKE SURE id IS A STRING
+      const id = documentId.toString()
+
+      // CHECK IF PASSED ID IS VALID MONGOOSE ID
+      // IF NO, RETURN EMPTY ARRAY
+      // ELSE SELECT ARRAY PASSED ARGUMENT
+      let fullArray = null
+      try{
+         const doc = await this.schemas[model].find({ _id: id })
+         fullArray = doc[0][arrayName]
+      }catch(err){
+         return []
+      }
+      
+      // IF USER WANT FILTER, FILTERS ID AND RETURNS ELEMENT WITH filterItemId ID
+      // ELSE RETURN ALL ELEMENTS
+      if(filterItemId && typeof filterItemId === 'string' && Array.isArray(fullArray)){
+         const filtered = fullArray.filter(x => x._id.toString() === filterItemId)
+         return filtered
+      }else return fullArray
+   }
+
+
    // -------------------------------------------- CHECK IF EXISTS IN model ------------------------------------------------
 
    // model, searchField, searchValue MUST BE A STRING
@@ -104,14 +155,14 @@ class Database{
 
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model]){ 
-         this.__throw400(`Model: -${model}- does not exist in class instance schemas.`)
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
       }
 
       // IF USER DID NOT PASS searchedField OR searchValue RETURN TRUE
       // IF IN model MODEL searchedField FIELD DOES NOT EXIST, THROW ERROR
       if(!searchedField || !searchValue) return true
       if(!this.schemas[model].schema.paths[searchedField]){ 
-         this.__throw400(`Field -${searchedField}- does not exist on ${model} model`)
+         this.__throw500(`Field -${searchedField}- does not exist on ${model} model`)
       }  
 
       const found = await this.schemas[model].find({ [searchedField]: searchValue })
@@ -122,7 +173,30 @@ class Database{
 
 
    /* ----------------------------------------------------------------------------------- */
-   /*                                     POST REQUESTS                                   */
+   /*                           PASSPORT LOCAL, EXPRESS SESSION                           */
+   /* ----------------------------------------------------------------------------------- */
+
+
+   // ---------------------------------- CHECK IF IS AUTHENTICATED ------------------------------------------------
+
+   // RETURNS true AND user IF TRUE, ELSE RETURN false AND null
+   async isAuthed(request, model){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw400(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      if(request.isAuthenticated()){
+         const user = await this.schemas[model].findById(request.session.passport.user)
+         
+         return { result: true, user: user }
+      }else return { result: false, user: null }
+   }
+
+
+   /* ----------------------------------------------------------------------------------- */
+   /*                                 POST / PUT REQUESTS                                 */
    /* ----------------------------------------------------------------------------------- */
 
 
@@ -146,7 +220,7 @@ class Database{
 
             // SKIP THE DEFAULT VALUES AND _id AND __v
             if(fields[x].options.default || (x === '_id' || x === '__v') ) continue
-
+            console.log(body[x])
             // IF FIELD IN body IS NOT PRESENT IN PASSED MODEL, THROW ERROR 
             if(typeof body[x] === 'undefined'){ 
                this.__throw400(`Cant find model required: -${x}- field in passed body.`)
@@ -193,6 +267,91 @@ class Database{
 
        // IF addAllDefault IS NOT BOOLEAN, THROW ERROR
       }else this.__throw400(`addAllDefault must be a boolean. Got -${addAllDefault}- instead.`)
+   }
+
+
+   // -------------------------------------------- UPDATE ONE MODEL ------------------------------------------------
+
+   // model MUST BE A STRING NAME FOR MONGOOSE MODEL REFERENCE
+   // whichOneDocumentUpdate WILL BE A SEARCH QUERY ; MUST BE A OBJECT { db_field: value }
+   // updateWhatField MUST BE A STRING AND THIS WILL BE UPDATED
+   // body IS A REPLACING VALUE, DEPENDS ON SCHEMA TYPE, IT COULD BE STRING, OBJECT, ETC
+   // isThisArray BOOLEAN, IF YES, PUSHES TO ARRAY OTHERWISE NORMAL UPDATE 
+   async updateOne(model, whichOneDocumentUpdate, updateWhatField, body, isThisArray = false){
+      
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      // IF updateWhatField DOES NOT EXIST THROW ERROR
+      if(!this.schemas[model].schema.paths[updateWhatField]){
+         this.__throw500(`Field: -${updateWhatField}- does not exist on ${model} model.`)
+      }
+
+      // GET THE whichOneDocumentUpdate KEY AND VALUE
+      let field, value
+      for(let [key,val] of Object.entries(whichOneDocumentUpdate)){
+         [field, value] = [key,val]
+      }
+
+      // IF field DOES NOT EXIST THROW ERROR
+      if(!this.schemas[model].schema.paths[field]){
+         this.__throw500(`Field: -${updateWhatField}- does not exist on ${model} model.`)
+      }
+
+      // SEARCH THROUGH MODEL ; CHECK IF FIELD CAN BE UPDATED (DOES EXIST?)
+      const searched = await this.schemas[model].find({ [field]: value })
+      if(searched.length === 0) return false
+
+      // IF isThisArray IS TRUE, PUSH TO ARRAY
+      if(isThisArray){
+         await this.schemas[model].findOneAndUpdate(whichOneDocumentUpdate, { $push: { [updateWhatField]: body } })
+         return true
+      }
+      // ELSE REGULAR UPDATE
+      await this.schemas[model].findOneAndUpdate(whichOneDocumentUpdate, { [updateWhatField]: body })
+      return true
+   }
+
+
+   // ------------------------------------------ UPDATE MODEL ARRAY ------------------------------------------------
+
+   // model MUST BE A MODEL IN CONSTRUCTOR
+   // modelId IS A VALID MONGOOSE ID TO MODEL WHICH CONTAIN ARRAY
+   // arrayName, array_id_or_index IS SELF-EXPLANATORY ; STRINGS
+   // arrayField IS ARRAY FIELD STRING
+   async updateArray(model, modelId, arrayName, array_id_or_index, arrayField, value){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      // MAKE SURE MODEL AND ARRAY EXIST
+      const main_model = await this.schemas[model].find({ _id: modelId })
+      const arr = main_model[0][arrayName]  
+      if(!Array.isArray(arr)){
+         this.__throw500(`-arrayName- is not an array. Got ${typeof arr} instead`)
+      }
+
+      // SEARCH ARRAY BY INDEX OR ID
+      const isNumber = /^[0-9]+$/.test(array_id_or_index.toString())
+      
+      if(isNumber){
+         // index
+      }else{
+         // ID
+         const arrSelect = `${arrayName}._id`
+         const arrField = `${arrayName}.$.${arrayField}`
+
+         await this.schemas[model].updateOne({ _id: modelId, [arrSelect]: array_id_or_index }, 
+         { $set:
+             { [arrField]: value } 
+         })
+
+         return true
+      }
    }
 
    /* ----------------------------------------------------------------------------------- */
@@ -396,15 +555,27 @@ class Database{
    }
 
 
+   /* ----------------------------------------------------------------------------------- */
+   /*                                  HELPER METHODS                                     */
+   /* ----------------------------------------------------------------------------------- */
 
-   /* THROW CODE 400 ERROR */
-   __throw400(msg){
+
+// --------------------------------------------------- THROW CODE 500 ERROR -------------------------------------------------
+
+   __throw500(msg){
       const err = new TypeError(msg)
-      err.code = 400
+      err.code = 500
       err.ok = false
       throw err
    }
-   /* ----------------------------------------------------------------------------------- */
+
+   __throw404(msg){
+      const err = new Error(msg)
+      err.code = 404
+      err.ok = false
+      throw err
+   }
+
 }
 
 module.exports = Database

@@ -16,7 +16,6 @@ const RegisterPage = () => {
 
    function registerClick(e){
       e.preventDefault()
-      console.log(e.target)
       
       const load = new Loading(e.target, false, 'loadgif')
       load.attach()

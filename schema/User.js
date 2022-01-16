@@ -24,7 +24,25 @@ const User = mongoose.Schema({
    createDate: {
       type: Date,
       default: Date.now
+   },
+
+   messages: {
+      type: [{
+         from: String,
+         title: String,
+         dateTime: {
+            type: Date,
+            default: Date.now
+         },
+         viewed:  {
+            type: Boolean,
+            default: false
+         },
+         text: String
+      }],
+      
+      default: []
    }
 })
 
-module.exports = mongoose.model("user", User)
+module.exports = mongoose.model("User", User)

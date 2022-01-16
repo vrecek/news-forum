@@ -50,28 +50,36 @@
          }
       }
 
-      span.false,
-      span.true{
-         display: block;
-         width: 100%;
-         color:white;
-         padding:.5em 0;
-         text-align: center;
-         margin-bottom: .1em;
-         font-size: .85rem;
-
-         &:last-of-type{
-            margin-bottom: .5em;
+      span{
+         &.false,
+         &.true{
+            display: block;
+            width: 100%;
+            color:white;
+            padding:.5em 0;
+            text-align: center;
+            margin-bottom: .1em;
+            font-size: .85rem;
+   
+            &:last-of-type{
+               margin-bottom: .5em;
+            }
+         }
+   
+         &.logspan{
+            padding:1em 0;
+            font-size: 1rem;
+         }
+   
+         &.false{
+            background: red;
+         }
+   
+         &.true{
+            background: green;
          }
       }
-
-      span.false{
-         background: red;
-      }
-
-      span.true{
-         background: green;
-      }
+      
 
       button{
          display: block;

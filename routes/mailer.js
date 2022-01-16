@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer')
 const router = express.Router()
 
 router.post('/', async (req,res) => {
+   // https://mail.google.com/
    try{
       const { name, mail, textarea } = req.body
 
@@ -39,7 +40,7 @@ router.post('/', async (req,res) => {
       res.json({ msg: 'Mail sucessfully sent', success: true })
 
    }catch(err){
-      if(err.code === 'EAUTH') return res.json({ msg: 'Authorization failed. Try again later or contact us directly.', success: false })
+      if(err.code === 'EAUTH') return res.json({ msg: 'Authorization token failed. Try again later or contact us directly.', success: false })
 
       return res.json({ msg: err.message, success: false })
    }

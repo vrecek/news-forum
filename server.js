@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const Database = require('./Database');
-const News = require('./schema/News');
+const session = require('express-session')
+const mongoStore = require('connect-mongo')
+const passport = require('passport')
+const User = require('./schema/User')
 
 require('dotenv/config');
 
@@ -18,13 +21,28 @@ require('dotenv/config');
  */
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(session({
+   secret: process.env.SECRET,
+   resave: false,
+   saveUninitialized: true,
+   store: mongoStore.create({
+      mongoUrl: process.env.DB
+   }),
+   cookie: {
+      maxAge: 1000 * 60
+   }
+}))
+require('./Passport')
+app.use(passport.initialize())
+app.use(passport.session())
 /* -------------------------------------------------- */
 
 /**
  * ROUTES
  */
-app.get('/', (req,res) => {
-   res.send('main')
+app.get('/', async (req,res) => {
+   const isauth = req.isAuthenticated()
+   res.json(isauth)
 })
 
 app.use('/mailer', require('./routes/mailer'))

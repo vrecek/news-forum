@@ -73,8 +73,7 @@
   pointer-events: none;
 }
 
-.registerpage form span.false,
-.registerpage form span.true,
+.registerpage form span.false, .registerpage form span.true,
 .loginpage form span.false,
 .loginpage form span.true {
   display: block;
@@ -86,11 +85,16 @@
   font-size: .85rem;
 }
 
-.registerpage form span.false:last-of-type,
-.registerpage form span.true:last-of-type,
+.registerpage form span.false:last-of-type, .registerpage form span.true:last-of-type,
 .loginpage form span.false:last-of-type,
 .loginpage form span.true:last-of-type {
   margin-bottom: .5em;
+}
+
+.registerpage form span.logspan,
+.loginpage form span.logspan {
+  padding: 1em 0;
+  font-size: 1rem;
 }
 
 .registerpage form span.false,

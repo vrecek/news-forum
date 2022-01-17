@@ -57,7 +57,6 @@ const Nav = () => {
       .then(data =>{
          if(data.user){
             const notViewedMsgs = data.user.messages.filter(x => x.viewed === false)
-            console.log(notViewedMsgs.length)
             setLogged({ result: data.result, user: data.user, msgs: notViewedMsgs.length })
          }else{
             setLogged({ result: data.result, user: data.user })
@@ -87,7 +86,7 @@ const Nav = () => {
                   <a per='Messages' href='/my-messages'> <BiMessageDetail />
                      { logged.msgs !== 0 && <span>{ logged.msgs }</span> } 
                   </a>
-                  <a per='Settings' href='/'> <BiCog /> </a>
+                  <a per='Settings' href='/user-settings'> <BiCog /> </a>
                   <p className='log-as'>Logged: <span>{ logged.user.username }</span></p>
                </section>
                :
@@ -104,7 +103,7 @@ const Nav = () => {
                   {
                      logged.result ? 
                      <>
-                        <Link to='/'> <li className='first'>  <FaUserCog /> <span>Profile</span> </li> </Link>
+                        <a href='/user-settings'> <li className='first'>  <FaUserCog /> <span>Profile</span> </li> </a>
                         <a className='logout-red' href='http://localhost:5000/api/users/logout'> <li> <AiOutlinePoweroff /> <span>Logout</span> </li></a>
                      </>
                      :
@@ -122,8 +121,8 @@ const Nav = () => {
                   <li className='line'></li>
                   <Link to='/'> <li>  <AiFillLock /> <span>Terms &amp; Services</span> </li></Link>
                   <Link to='/'> <li>  <MdOutlinePrivacyTip /> <span>Privacy policy</span> </li></Link>
-                  <Link to='/'> <li>  <AiOutlineMail /> <span>Contact us</span> </li></Link>
-                  <Link to='/'> <li className='last'>  <AiOutlineQuestionCircle /> <span>About</span> </li></Link>
+                  <Link to='/contact'> <li>  <AiOutlineMail /> <span>Contact us</span> </li></Link>
+                  <a href='/about'> <li className='last'>  <AiOutlineQuestionCircle /> <span>About</span> </li></a>
                </ol>
             </aside>
          </section>

@@ -7,6 +7,8 @@ import RegisterPage from './components/LoginRegister/RegisterPage';
 import Errorpage from './components/ErrorPage/Errorpage';
 import UserMessages from './components/Messages/UserMessages';
 import ReadMessage from './components/Messages/ReadMessage';
+import Contact from './components/Contact/Contact';
+import About from './components/Contact/About';
 
 function App() {
   return (
@@ -14,11 +16,16 @@ function App() {
       <Routes>
 
         <Route path='/' element={ <MainPage /> } />
+        <Route path='/:nr' element={ <MainPage /> } />
+
         <Route path='/login' element={ <LoginPage /> } />
         <Route path='/register' element={ <RegisterPage /> } />
 
         <Route path='/my-messages' element={ <UserMessages /> } />
         <Route path='/my-messages/:id' element={ <ReadMessage /> } />
+
+        <Route path='/contact' element={ <Contact /> } />
+        <Route path='/about' element={ <About /> } />
 
         <Route path='/error' element={ <Errorpage /> } />
 

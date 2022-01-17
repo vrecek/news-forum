@@ -34,17 +34,59 @@ class Database{
    /* ----------------------------------------------------------------------------------- */
 
 
-   /* CONNECT TO DATABASE */
+   // -------------------------------------------- CONNECT TO DATABASE ------------------------------------------------
+
    async connect(){   
       await mongoose.connect(this.uri, this.options)
       console.log(`Connected to database.`)
    }
+
+
+   /* ----------------------------------------------------------------------------------- */
+   /*                                  STATIC METHODS                                     */
    /* ----------------------------------------------------------------------------------- */
 
+
+   // ---------------------------------------- CALCULATE NUMBER OF PAGES ------------------------------------------------
+
+   // returnArray IF TRUE, RETURNS ARRAY WITH ITEMS FROM 1 TO result
+   // ELSE RETURN PLAIN NUMBER
+   static calcPageNumber(total, max, returnArray = false){
+      let result = Math.ceil(total / max)
+
+      if(returnArray){
+         result = [...Array(result).keys()].map(x => ++x)
+      }
+
+      return result
+   }
 
    /* ----------------------------------------------------------------------------------- */
    /*                                   GET REQUESTS                                      */
    /* ----------------------------------------------------------------------------------- */
+
+
+   // ----------------------------------------- DISPLAY ITEMS ON EACH PAGE -------------------------------------------------
+
+   // ! BETTER USE WITH STATIC calcPageNumber !
+   async displayPageItems(model, numpage, max){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      // ARGS HAVE TO BE A NUMBERS
+      if(!(numpage || number) || !(typeof numpage !== 'number' || typeof max !== 'number')){
+         this.__throw500('-numpage- and -max- are required typeof number arguments. \n Got -${typeof numpage}- and -${typeof max}- instead.')
+      }
+
+      const gap = (numpage - 1) * max
+
+      const items = await this.schemas[model].find().skip(gap).limit(max)
+
+      return items
+   }
 
 
    // -------------------------------------- VIEW ALL ITEMS IN model DOCUMENT ------------------------------------------------
@@ -65,24 +107,36 @@ class Database{
             searchOptions.returnValue = searchOptions.returnValue ?? ''   //  default: return all
             searchOptions.limit = searchOptions.limit ?? '0'             //  default: no limit
 
-            if(!this.schemas[model].schema.paths[searchOptions.searchWhat]){ 
-               this.__throw500(`Field -${searchOptions.searchWhat}- does not exist on ${model} model`)
-            }
 
             // searchWhat SPLIT INTO ARRAY TO USE ON $or find() METHOD TO SEARCH FIELDS PASSED BY USER
             const regex = new RegExp(searchOptions.string, 'i')
             const split = searchOptions.searchWhat.split(' ')
             const words = []
             for(let x of split){
+               if(!this.schemas[model].schema.paths[x]){ 
+                  this.__throw500(`Field -${searchOptions.searchWhat}- does not exist on ${model} model`)
+               }
+
                words.push({
                   [x]: regex
                })
             }
 
             // RETURN FOUND ITEMS
-            const result = await this.schemas[model].find({ $or: words })
-                                                       .select(searchOptions.returnValue)
-                                                       .limit(searchOptions.limit)
+            // searchOptions string AND searchWhat MUST BE TOGETHER
+            // IF NOT YOU CAN SET returnValue AND limit
+            // ELSE SET ALL 4 VALUES
+            let result = null
+            if(searchOptions.string === ''){
+               result = await this.schemas[model].find()
+                                                 .select(searchOptions.returnValue)
+                                                 .limit(searchOptions.limit)
+            }else{
+               result = await this.schemas[model].find({ $or: words })
+                                                 .select(searchOptions.returnValue)
+                                                 .limit(searchOptions.limit)
+            }
+            
             return result
          }else{  
             // RETURN ALL   
@@ -118,6 +172,7 @@ class Database{
    // arrayName IS ARRAY NAME IN DOCUMENT
    // filterItemId MUST BE STRING ID TO FILTER MONGOOSE ID'S
    async viewArray(model, documentId, arrayName, filterItemId = false){
+
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model] || !this.schemas[model].schema.paths[arrayName]){ 
          this.__throw500(`Model / Field: -${model}- does not exist in class instance schemas.`)
@@ -143,6 +198,21 @@ class Database{
          const filtered = fullArray.filter(x => x._id.toString() === filterItemId)
          return filtered
       }else return fullArray
+   }
+
+
+   // -------------------------------------------- RETURN NUMBER OF ELEMENTS ------------------------------------------------
+
+   async returnCount(model){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model / Field: -${model}- does not exist in class instance schemas.`)
+      }
+
+      const elems = await this.schemas[model].find().select('_id')
+
+      return elems.length
    }
 
 

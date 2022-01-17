@@ -42,7 +42,7 @@
   border-width: 2px 2px 2px 2px;
 }
 
-.numpages div.active {
+.numpages div.true {
   background: #707070;
   color: black;
   font-weight: 700;

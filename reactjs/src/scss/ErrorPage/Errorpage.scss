@@ -1,9 +1,8 @@
 @import '../config';
 
 .errorpage{
-   background: url('https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg');
-   background-size: cover;
-   height: calc(100vh - 70px);
+   @include back;
+   height: $fullheight;
    padding: 1em 0;
    @include flex-sa-c;
    flex-direction: column;

@@ -1,0 +1,193 @@
+.about {
+  background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
+  background-size: cover;
+  min-height: calc(100vh - 70px);
+  padding: 2em 4em;
+}
+
+.about h1 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(2.2rem, 9vw, 3rem);
+  -webkit-filter: blur(0.4px);
+          filter: blur(0.4px);
+  color: bisque;
+  text-shadow: 0 0 4px purple, 0 0 8px purple;
+  margin-bottom: 1em;
+}
+
+.about h2 {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin: 0 auto;
+  color: #ddd6d6;
+  border-bottom: 2px solid #b6b3b3;
+  white-space: nowrap;
+  margin-bottom: .3em;
+  font-size: clamp(1rem, 7vw, 1.5rem);
+}
+
+.about .centtext {
+  text-align: center;
+  line-height: 1.4em;
+  margin-bottom: 4em;
+  font-size: clamp(0.7rem, 2.7vw, 1rem);
+}
+
+.about .reds {
+  color: brown;
+}
+
+.about article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 5em;
+}
+
+.about article section {
+  width: 40%;
+}
+
+.about article section p {
+  line-height: 2em;
+  font-weight: 100;
+  text-align: justify;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
+
+.about article section img {
+  width: 100%;
+}
+
+.about h3 {
+  text-align: center;
+  color: #c0c0c0;
+  font-size: clamp(1.35rem, 7vw, 1.8rem);
+  font-weight: 100;
+  text-shadow: 0 0 2px bisque, 0 0 4px bisque, 0 0 8px bisque, 0 0 16px bisque;
+  margin-bottom: .5em;
+  border-bottom: 2px solid #606060;
+  -webkit-animation: aboutanim 12s linear infinite;
+          animation: aboutanim 12s linear infinite;
+  white-space: nowrap;
+}
+
+.about .lasth {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2em 0 1em 0;
+}
+
+.about .reds {
+  color: brown;
+}
+
+.about div {
+  position: relative;
+  height: 50px;
+}
+
+.about div .animatedp {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: clamp(0.9rem, 3.3vw, 1.1rem);
+  font-family: 'Roboto Mono', monospace;
+  -webkit-filter: blur(0.5px);
+          filter: blur(0.5px);
+  text-shadow: 0 0 2px blue;
+  white-space: nowrap;
+}
+
+.about div .animated {
+  -webkit-animation: letspc 3s;
+          animation: letspc 3s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes aboutanim {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes aboutanim {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(360deg);
+            filter: hue-rotate(360deg);
+  }
+}
+
+@-webkit-keyframes letspc {
+  0% {
+    letter-spacing: 100px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
+
+@keyframes letspc {
+  0% {
+    letter-spacing: 100px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .about article {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .about article:last-of-type {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .about article section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 2em 1em;
+  }
+  .about article section p {
+    line-height: normal;
+    margin-bottom: 1em;
+  }
+  .about h1 {
+    text-align: center;
+  }
+  .about div .animatedp {
+    position: static;
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    white-space: normal;
+    text-align: center;
+  }
+}

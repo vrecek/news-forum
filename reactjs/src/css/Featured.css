@@ -184,6 +184,9 @@
 @media (max-width: 768px) {
   .featured article {
     position: relative;
+    background: rgba(60, 60, 60, 0.5);
+    padding: 1em .3em;
+    border-radius: .3em;
   }
   .featured article img {
     position: absolute;
@@ -214,15 +217,24 @@
 
 @media (max-width: 480px) {
   .featured article {
-    background: #101010;
-    padding: .5em;
-    height: 125vw;
+    background: linear-gradient(10deg, #141414 49%, #1b1919 59%);
+    padding: 1em .5em;
+    margin-top: 50%;
   }
   .featured article img {
-    width: 100%;
+    width: 60%;
     height: auto;
+    top: 0;
   }
   .featured article p {
     font-size: clamp(0.8rem, 4vw, 1rem);
+    height: auto;
+    margin: 5em 0 1em 0;
+  }
+  .featured article button {
+    margin: 0 auto;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    display: block;
   }
 }

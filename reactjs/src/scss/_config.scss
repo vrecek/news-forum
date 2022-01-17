@@ -11,3 +11,10 @@
    align-items: center;
    justify-content: center;
 }
+
+$fullheight: calc(100vh - 70px);
+
+@mixin back{
+   background: url('https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg');
+   background-size: cover;
+}

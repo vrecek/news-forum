@@ -272,7 +272,7 @@ $lines: (
    .nav{
       div.image{ display: none; }
       
-      section{ width:250px; }
+      
    }
 }
 
@@ -284,6 +284,12 @@ $lines: (
 
 @media (max-width: 480px){
    .nav{
+      .loggedicons{
+         position: static;
+         a{ display: none; }
+         p{ top:75%; left:50%; }
+      }
+
       ul{ 
          li{ 
             margin-right: .7em;

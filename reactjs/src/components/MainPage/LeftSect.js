@@ -13,17 +13,65 @@ import { shuffle } from '../../js/shuffle'
 
 const LeftSect = () => {
    const slide = useRef(null)
+   const beggining = useRef(null)
    const [news, setNews] = useState(null)
+   const [pages, setPages] = useState(null)
    const navigate = useNavigate()
 
+   function redirect(e){
+      const nr = e.target.textContent
+      window.location.href = `/${nr}`
+   }
+
+   // pages , news
+   useEffect(() => {
+      const load = new Loading(document.body, true)
+      load.attach()
+
+      async function fetchdata(){
+         try{
+            const path = window.location.pathname
+            const nr = parseInt(path.slice(1))
+   
+            const data = await fetchGet('/api/news/pages')
+
+            if(nr > data.length){
+               const err = new Error(`Page ${nr} does not exist! Dont mess with URL`)
+               err.code = 404
+               throw err
+            }
+   
+            if(nr && nr !== 1){
+               window.num = nr
+               const news = await fetchGet(`/api/news/page/${nr}`)
+               beggining.current.scrollIntoView()
+               setNews(shuffle(news))
+            }else{
+               window.num = 1
+               const news = await fetchGet('/api/news')
+               setNews(shuffle(news))
+            }
+   
+            setPages(data)
+         }
+         catch(err){
+            navigate('/error', { state: { msg: err.message, code: err.code } })
+         }
+         finally{
+            load.delete()
+         }
+      }
+
+      fetchdata()
+
+   }, [navigate])
+
+   // img slider
    useEffect(() => {
       const slider = slide.current
       const len = slider.childNodes.length - 1
       const radioArr = slider.parentElement.childNodes[1].childNodes
       let counter = 1
-
-      const load = new Loading(document.body, true)
-      load.attach()
 
       slider.style.transform = `translateX(-100%)`
       radioArr[0].className = 'activeradio'
@@ -50,17 +98,10 @@ const LeftSect = () => {
          radioArr[counter - 2].className = ''
          radioArr[counter - 1].className = 'activeradio'
       })
-
-      fetchGet('/api/news')
-      .then(data => {
-         setNews(shuffle(data))
-      })
-      .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
-      .finally(() => load.delete())
    }, [])
 
    return (
-      <section className='leftsection'>
+      <section ref={ beggining } className='leftsection'>
          <figure>
             <div ref={ slide } className='outer'>
                <SliderImg src='https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg' text='Dolor sit amet ?' />
@@ -96,17 +137,11 @@ const LeftSect = () => {
          </section>
 
          <section className='numpages'>
-            <div className='active'>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div className='overflowed'>4</div>
-            <div className='overflowed'>5</div>
-            <div>...</div>
-            <div className='overflowed'>1029</div>
-            <div className='overflowed'>1030</div>
-            <div>1031</div>
-            <div>1032</div>
-            <div>1033</div>
+            {
+               pages && pages.map((x,i) => (
+                  <div onClick={ redirect } className={ (x === window.num).toString() } key={i}>{ x }</div>
+               ))
+            }
          </section>
 
       </section>

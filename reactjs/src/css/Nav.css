@@ -343,9 +343,6 @@
   .nav div.image {
     display: none;
   }
-  .nav section {
-    width: 250px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -355,6 +352,16 @@
 }
 
 @media (max-width: 480px) {
+  .nav .loggedicons {
+    position: static;
+  }
+  .nav .loggedicons a {
+    display: none;
+  }
+  .nav .loggedicons p {
+    top: 75%;
+    left: 50%;
+  }
   .nav ul li {
     margin-right: .7em;
   }

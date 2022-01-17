@@ -208,4 +208,7 @@
   .slidercont .inner-cont figure.plfig {
     width: 60%;
   }
+  .slidercont .inner-cont article figure {
+    margin: 1em 0;
+  }
 }

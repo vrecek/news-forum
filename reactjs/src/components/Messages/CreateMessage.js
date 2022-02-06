@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { Loading } from '../../js/Loading'
 
-const CreateMessage = ({ toggleF, refere, is_this_answer }) => {
+const CreateMessage = ({ toggleF, refere, is_this_answer, is_profile_send }) => {
    const navigate = useNavigate()
    const [res, setRes] = useState(null)
    const emoteRef = useRef(null)
@@ -18,6 +18,19 @@ const CreateMessage = ({ toggleF, refere, is_this_answer }) => {
          it.addEventListener('click', e => emoteRef.current.parentElement.children[0].value += it.textContent)
       })
    }, [])
+
+   useEffect(() => {
+      if(is_profile_send){
+         const userQuery = window.location.pathname.replace(/\/user\//ig, '')
+         const [toa] = refere.current.elements
+         
+         toa.parentElement.children[0].style.top = '0'
+         toa.value = userQuery
+         toa.style.pointerEvents = 'none'
+         toa.style.borderColor = 'rgb(0, 233, 0)'
+         toa.parentElement.children[0].style.color = 'rgb(0, 233, 0)'
+      }
+   }, [is_profile_send])
 
    useEffect(() => {
       if(is_this_answer){
@@ -80,7 +93,7 @@ const CreateMessage = ({ toggleF, refere, is_this_answer }) => {
 
          setRes({ classname: data.success, msg: data.msg })
 
-         if(data.success){
+         if(data.success && !is_profile_send){
             [...e.target.parentElement.elements].forEach((x, i) => {
                x.value = ''
                if(i === 3) return

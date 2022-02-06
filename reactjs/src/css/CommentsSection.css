@@ -1,0 +1,125 @@
+.comments {
+  margin: 4em auto;
+  width: 55%;
+}
+
+.comments h3.comments-str {
+  margin-bottom: .2em;
+  font-weight: 100;
+  font-size: .9rem;
+}
+
+.comments section.com-cont {
+  background: #555555;
+  padding: .8em;
+  border: 1px solid cornflowerblue;
+}
+
+.comments section.com-cont article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: .8em;
+  background: #282828;
+}
+
+.comments section.com-cont article:last-of-type {
+  margin: 0;
+}
+
+.comments section.com-cont article section.com-infos {
+  width: 17%;
+  border-right: 2px solid black;
+  padding: .3em;
+}
+
+.comments section.com-cont article section.com-infos figure {
+  height: 6vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.comments section.com-cont article section.com-infos figure img {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.comments section.com-cont article section.com-infos figcaption {
+  text-align: center;
+  padding: .1em 0;
+}
+
+.comments section.com-cont article section.com-infos figcaption a {
+  text-decoration: none;
+  color: orange;
+  font-size: 1.1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.comments section.com-cont article section.com-infos figcaption a:hover {
+  color: orangered;
+}
+
+.comments section.com-cont article section.com-infos h5 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: .1em 0;
+  font-size: .75rem;
+}
+
+.comments section.com-cont article section.com-infos h5 span {
+  color: #e4a021;
+}
+
+.comments section.com-cont article section.com-text {
+  width: 83%;
+  padding: .5em .5em 3em .5em;
+  position: relative;
+}
+
+.comments section.com-cont article section.com-text p {
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.comments section.com-cont article section.com-text .rating-cont {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 12%;
+  padding: 0 .5em;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div {
+  cursor: pointer;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div svg {
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div:hover:nth-child(1) svg {
+  color: #05b605;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div:hover:nth-child(2) svg {
+  color: red;
+}

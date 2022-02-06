@@ -1,6 +1,7 @@
 .contact {
   background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
   background-size: cover;
+  background-attachment: fixed;
   min-height: calc(100vh - 70px);
   padding: 2em 1em;
   position: relative;
@@ -47,9 +48,57 @@
 .contact .divinf p {
   margin: .7em;
   font-size: clamp(0.7rem, 5vw, 1rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.contact .divinf p span {
+.contact .divinf p .copyclip {
+  cursor: pointer;
+  position: relative;
+}
+
+.contact .divinf p .copyclip:active svg {
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+
+.contact .divinf p .copyclip::before {
+  position: absolute;
+  content: 'Copy to clipboard';
+  top: 100%;
+  background: #151515;
+  padding: .3em;
+  font-size: .8rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-transition: .3s;
+  transition: .3s;
+  pointer-events: none;
+}
+
+.contact .divinf p .copyclip:hover::before {
+  opacity: 1;
+}
+
+.contact .divinf p svg {
+  position: static;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  pointer-events: none;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.contact .divinf p span:not(.copyclip) {
   font-weight: 700;
   color: burlywood;
 }

@@ -1,0 +1,102 @@
+@import '../config';
+
+.usersettings{
+   @include back;
+   min-height: $fullheight;
+   padding: 1em 0;
+
+   .sett-wrap{
+      width: 90%;    
+      margin:0 auto;    
+   }
+   
+   .titlesettings{
+      text-align: center;
+      padding:.8em 0;
+      background:#202020;
+      font-size: 1.5rem;
+      border: 2px solid #606060;
+      border-bottom: 0;
+      @include flex-c-c;
+   }
+
+   .main-cont{
+      min-height: 75vh;
+      background-color: #353535;
+      border: 2px solid #606060;
+      display: flex;
+
+      .lefts{
+         width: 20%;
+         min-width: 180px;
+         border-right: 2px solid #606060;
+         position: relative;
+
+         div{
+            position: absolute;
+            bottom:3%;
+            left:0;
+            width: 100%;
+            
+            p{ text-align: center; }
+         }
+
+         ul{
+            list-style: none;
+
+            li{
+               text-align: center;
+               padding:1.5em 0;
+               background: #171717;
+               transition: .3s;
+               cursor: pointer;
+               @include flex-c-c;
+
+               svg{
+                  width: 25px;
+                  height: 25px;
+                  pointer-events: none;
+               }
+
+               &.del-acc{
+                  color:red;
+               }
+
+               &.tok-acc{
+                  color: yellow;
+               }
+
+               &.active{
+                  background: rgb(18, 101, 211);
+                  pointer-events: none;
+               }
+
+               &:hover{
+                  background: #454545;
+               }
+            }
+         }
+      }
+
+      .rights{
+         position: relative;
+         width: 80%;
+         height:100%;
+      }
+   }
+}
+
+@media (max-width: 768px){
+   .usersettings{
+      .main-cont{
+         height: auto;
+         flex-direction: column;
+         .lefts{ width: 100%; div{ display: none; } border-bottom: 2px solid cornflowerblue; }
+         .rights{ width: 100%; }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .usersettings{ .sett-wrap{ width: 100%; } }
+} 

@@ -32,6 +32,23 @@
           justify-content: center;
   color: white;
   position: relative;
+  margin: 0 .5em;
+}
+
+.nav .loggedicons a div {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.nav .loggedicons a div img {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .nav .loggedicons a span {
@@ -258,6 +275,10 @@
 
 .nav section aside ol a li.last {
   padding: .5em .5em 1em .5em;
+}
+
+.nav section aside ol a li.write-article {
+  color: yellow;
 }
 
 .nav section aside ol a li span {

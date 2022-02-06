@@ -43,8 +43,46 @@
       p{
          margin: .7em;
          font-size: clamp(.7rem, 5vw, 1rem);
+         display: flex;
+         align-items: center;
 
-         span{
+         .copyclip{
+            cursor: pointer; 
+            position: relative;
+
+            &:active svg{
+               transform: scale(.7);
+            }
+
+            &::before{
+               position: absolute;
+               content: 'Copy to clipboard';
+               top:100%;
+               background: #151515;
+               padding:.3em;
+               font-size: .8rem;
+               left:50%; transform: translateX(-50%);
+               white-space: nowrap;
+               opacity: 0;
+               transition: .3s;
+               pointer-events: none;
+            }
+
+            &:hover::before{
+               opacity: 1;
+            }
+         }
+
+         svg{
+            position: static;
+            width: 20px;
+            height:20px;
+            transform: translateY(0);
+            pointer-events: none;
+            transition: .2s;
+         }
+
+         span:not(.copyclip){
             font-weight: 700;
             color:burlywood;
          }

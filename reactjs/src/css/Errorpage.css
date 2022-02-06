@@ -1,6 +1,7 @@
 .errorpage {
   background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
   background-size: cover;
+  background-attachment: fixed;
   height: calc(100vh - 70px);
   padding: 1em 0;
   display: -webkit-box;

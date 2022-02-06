@@ -82,6 +82,7 @@
          width:50%;
          height:530px;
          position: relative;
+         overflow: hidden;
 
          figure{
             height:40%;
@@ -89,6 +90,17 @@
 
             img{
                height: 100%;
+            }
+         }
+
+         section{
+            display: flex;
+            height: inherit;
+
+            div{ 
+               width: 100%;
+               flex-shrink: 0;
+               position: relative;
             }
          }
 
@@ -169,8 +181,8 @@
 @media (max-width: 480px){
    .slidercont{
       .inner-cont{
-         figure.plfig{ width: 60%; }
-         article{ figure{ margin:1em 0; } }
+         figure.plfig{ width: 50%; }
+         article{ figure{ margin:1em 0; img{ width: 100%; } } }
       }
    }
 } 

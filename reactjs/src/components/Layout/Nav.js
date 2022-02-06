@@ -1,9 +1,10 @@
 import React from 'react'
 import '../../css/Nav.css'
 import logo from '../../images/logo.png'
-import { AiOutlineFire, AiOutlineHome, AiOutlineMail, AiOutlineQuestionCircle, AiFillLock,AiOutlinePoweroff } from 'react-icons/ai'
-import { BiWorld, BiLogIn, BiUserPlus, BiMessageDetail, BiCog } from 'react-icons/bi'
+import { AiOutlineFire,AiOutlineHome,AiOutlineMail,AiOutlineQuestionCircle,AiFillLock,AiOutlinePoweroff,AiOutlineUser } from 'react-icons/ai'
+import { BiWorld, BiLogIn, BiUserPlus, BiMessageDetail, BiEnvelope } from 'react-icons/bi'
 import { MdOutlineForum, MdOutlinePrivacyTip } from 'react-icons/md'
+import { HiPencil } from 'react-icons/hi'
 import { FaUserCog } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
@@ -13,8 +14,13 @@ import { Loading } from '../../js/Loading'
 const Nav = () => {
    const [toggle, setToggle] = useState(false)
    const [logged, setLogged] = useState(false)
+   const [avatar, setAvatar] = useState(null)
    const navigate = useNavigate()
    const perc = [20, 50, 80];
+
+   const redirectProfile = () => {
+      window.location.href = `/user/${logged.user.username}`
+   }
 
    function toggleMenu(e){
       const targ = e.target
@@ -50,21 +56,29 @@ const Nav = () => {
    }
 
    useEffect(() => {
-      const load = new Loading(document.body, true)
-      load.attach()
+      (async function init(){
+         const load = new Loading(document.body, true)
 
-      fetchGet('/api/users/is-authed')
-      .then(data =>{
-         if(data.user){
-            const notViewedMsgs = data.user.messages.filter(x => x.viewed === false)
-            setLogged({ result: data.result, user: data.user, msgs: notViewedMsgs.length })
-         }else{
-            setLogged({ result: data.result, user: data.user })
-         }     
-      })
-      .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
-      .finally(() => load.delete())
-   }, [])
+         try{
+            load.attach()
+   
+            const data = await fetchGet('/api/users/is-authed')
+
+            if(data.user){
+               const data_avatar = await fetchGet('/api/users/get-avatar')
+
+               const notViewedMsgs = data.user.messages.filter(x => x.viewed === false)
+
+               setAvatar(data_avatar)
+               setLogged({ result: data.result, user: data.user, msgs: notViewedMsgs.length })
+            }else{
+               setLogged({ result: data.result, user: data.user })
+            }     
+         }catch(err){
+            navigate('/error', { state: { msg: err.message, code: err.code } })
+         }finally{ load.delete() }
+      })()
+   }, [navigate])
 
    return (
       <nav className='nav'>
@@ -74,7 +88,7 @@ const Nav = () => {
 
          <ul>
             <li> <Link to='/'> <AiOutlineHome /> <span>Homepage</span> </Link> </li>
-            <li> <Link to='/'> <AiOutlineFire /> <span>Latest</span> </Link></li>
+            <li> <Link to='/latest-news'> <AiOutlineFire /> <span>Latest</span> </Link></li>
             <li> <Link to='/'> <BiWorld /> <span>Popular</span> </Link></li>
             <li> <Link to='/'> <MdOutlineForum /> <span>Forum</span> </Link> </li>
          </ul>
@@ -86,7 +100,14 @@ const Nav = () => {
                   <a per='Messages' href='/my-messages'> <BiMessageDetail />
                      { logged.msgs !== 0 && <span>{ logged.msgs }</span> } 
                   </a>
-                  <a per='Settings' href='/user-settings'> <BiCog /> </a>
+                  <a onClick={ redirectProfile } per='Profile'> 
+                     { 
+                        avatar && avatar.source ? 
+                           <div><img src={`data:image/${avatar.content};base64,${avatar.source}`} alt='avatar_error' /></div>
+                        : 
+                           <AiOutlineUser /> 
+                     } 
+                  </a>
                   <p className='log-as'>Logged: <span>{ logged.user.username }</span></p>
                </section>
                :
@@ -103,7 +124,9 @@ const Nav = () => {
                   {
                      logged.result ? 
                      <>
-                        <a href='/user-settings'> <li className='first'>  <FaUserCog /> <span>Profile</span> </li> </a>
+                        <a onClick={ redirectProfile }> <li className='first'>  <AiOutlineUser /> <span>Profile</span> </li> </a>
+                        <a href='/user-settings'> <li>  <FaUserCog /> <span>Settings</span> </li> </a>
+                        <a href='/my-messages'> <li>  <BiEnvelope /> <span>Messages</span> </li> </a>
                         <a className='logout-red' href='http://localhost:5000/api/users/logout'> <li> <AiOutlinePoweroff /> <span>Logout</span> </li></a>
                      </>
                      :
@@ -114,9 +137,13 @@ const Nav = () => {
                   }
                   
                   <li className='line'></li>
+                  {
+                     logged?.user?.role !== 'normal' && 
+                     <a href='/write-news'> <li className='write-article'>  <HiPencil /> <span>Write new article</span> </li></a>
+                  }
                   <Link to='/'> <li>  <AiOutlineHome /> <span>Homepage</span> </li></Link>
                   <Link to='/'> <li>  <MdOutlineForum /> <span>Forum</span> </li></Link>
-                  <Link to='/'> <li>  <AiOutlineFire /> <span>Latest news</span> </li></Link>
+                  <a href='/latest-news'> <li>  <AiOutlineFire /> <span>Latest news</span> </li></a>
                   <Link to='/'> <li>  <BiWorld /> <span>Now popular</span> </li></Link>
                   <li className='line'></li>
                   <Link to='/'> <li>  <AiFillLock /> <span>Terms &amp; Services</span> </li></Link>

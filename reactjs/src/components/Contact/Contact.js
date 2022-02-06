@@ -2,8 +2,14 @@ import React from 'react'
 import '../../css/Contact.css'
 import { BsFillPersonBadgeFill, BsHeadset } from 'react-icons/bs'
 import { ImLocation } from 'react-icons/im'
+import { FaClipboard } from 'react-icons/fa'
  
 const Contact = () => {
+   async function copyToClip(e){
+      const text = e.target.parentElement.children[0].textContent;
+      await navigator.clipboard.writeText(text)
+   }
+
    return (
       <main className='contact'>
          <h1>Contact:</h1>
@@ -17,13 +23,13 @@ const Contact = () => {
 
          <div className='divinf'>
             <p>Webpage administrator: <span>John Doe</span></p>
-            <p>Server administrator: <span>Norbert Gierczak</span></p>
-            <p>CEO: <span>Damian Ziaja</span></p>
+            <p>Server administrator: <span>Mark Ipsum</span></p>
+            <p>CEO: <span>Steven Dolore</span></p>
             <BsFillPersonBadgeFill />
          </div>
 
          <div className='divinf'>
-            <p>Business mail: <span>fsdsoksf@gmail.com</span></p>
+            <p>Business mail: <span>dolorein@gmail.com</span> <span onClick={ copyToClip } className='copyclip'><FaClipboard /></span> </p>
             <p>Support phone: <span>123987456</span></p>
             <BsHeadset />
          </div>

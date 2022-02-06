@@ -5,13 +5,13 @@
           box-sizing: border-box;
   font-weight: 300;
   scroll-behavior: smooth;
+  font-family: 'Sora', sans-serif;
 }
 
 body {
   min-height: 100vh;
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Sora', sans-serif;
   color: white;
 }
 
@@ -30,7 +30,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: #001d30;
   z-index: 999999999999999;
 }
 

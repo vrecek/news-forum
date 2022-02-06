@@ -17,4 +17,12 @@ $fullheight: calc(100vh - 70px);
 @mixin back{
    background: url('https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg');
    background-size: cover;
+   background-attachment: fixed;
+}
+
+@mixin abs50{
+   position: absolute;
+   left:50%;
+   top:50%;
+   transform: translate(-50%,-50%);
 }

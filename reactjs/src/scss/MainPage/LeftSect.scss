@@ -58,17 +58,16 @@
       div.radiocont{
          position: absolute;
          right:5%;
-         bottom:8%;
-         display: flex;
+         top: 50%;
+         transform: translateY(-50%);
 
          span{
             display: block;
-            width:clamp(10px, 4vw, 20px);
-            height:clamp(10px, 4vw, 20px);
+            width:clamp(5px, 2vw, 10px);
+            height:clamp(15px, 6vw, 30px);
             background: rgb(230, 226, 0);
             border:1px solid black;
-            border-radius: 50%;
-            margin:0 .3em;
+            margin:.5em 0;
 
             &.activeradio{
                background: rgb(0, 130, 190);

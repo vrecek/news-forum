@@ -1,0 +1,10 @@
+.p-inf {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.wrap-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}

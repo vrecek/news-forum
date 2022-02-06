@@ -1,0 +1,101 @@
+@import '../config';
+
+.deleteacc{
+   h3{
+      font-size: clamp(1rem, 5vw, 1.5rem);
+      text-align: center;
+      &:first-of-type{ margin-top: 2em; }
+      &.redh{ color:red; margin-bottom: 8%; }
+   }
+
+   section{
+      @include flex-c-c;
+      flex-direction: column;
+      background: #202020;
+      padding:2em 0;
+      position: relative;
+
+      h4{
+         position: absolute;
+         bottom:100%;   
+         padding:1em 0;
+         width: 100%;
+         text-align: center;
+         font-weight: 600;
+         animation: delaccanim 1s;
+         animation-delay: 1s;
+
+         &.false{ background: rgb(128, 0, 0); }
+         &.true{ background: rgb(51, 161, 0); }
+      }
+
+      button{
+         background: #303030;
+         border:2px solid rgb(211, 211, 211);
+         border-radius: .2em;
+         padding:.9em 2em;
+         color:rgb(211, 211, 211);
+         margin-top: .5em;
+         font-size: 1.1rem;
+         cursor: pointer;
+         transition: .3s;
+
+         &:hover{ border-color: red; color:red; }
+      }
+
+      p{ color:rgb(228, 13, 13); font-weight: 700; }
+
+      div{
+         position: relative;
+         width: 320px;
+         margin-bottom: 2em;
+
+         input{
+            background: none;
+            border: 0;
+            outline: 0;
+            border-bottom: 2px solid rgb(199, 17, 17);
+            width: 100%;
+            font-size: 1.2rem;
+            padding: .5em 1em;
+            color:white;
+         }
+
+         span{
+            position: absolute;
+            top:50%;
+            right:0;
+            transform: translateY(-50%);
+            cursor: pointer;
+
+            svg{ width: 30px; height: 30px; pointer-events: none; }    
+            
+            span{
+               position: absolute;
+               width: 3px;
+               height:100%;
+               background: white;
+               pointer-events: none;
+               left:55%;
+               top:-5%;
+               transform: translate(-55%,0) rotate(120deg);
+            }
+         }
+      }
+   }
+}
+
+@keyframes delaccanim{
+   0%{ opacity: 1; }
+   100%{ opacity: 0; }
+} 
+
+@media (max-width: 768px){
+   .deleteacc{ h3{ &.redh{ margin-bottom: 4em; } } }
+} 
+
+@media (max-width: 480px){
+   .deleteacc{
+      section{ div{ width: 98%; p{ text-align: center; } } }
+   }
+} 

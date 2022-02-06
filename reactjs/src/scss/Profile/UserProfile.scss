@@ -1,0 +1,253 @@
+@import '../config';
+
+.profile{
+   @include back;
+   min-height: $fullheight;
+   padding: 3em 0;
+
+   .wrap{
+      display: flex;
+      width: 85%;
+      margin:0 auto;
+      background-color: #282828;
+      border: 1px solid #151515;
+      border-radius: .2em;
+
+      .leftprof{
+         width: 25%;
+         min-width: 200px;
+         border-right: 2px solid black;
+         padding:.5em;
+
+         h5{
+            background: #232323;
+            padding:.5em 0;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid cornflowerblue; border-top: 0;
+            border-radius: .1em;
+
+            &.Administrator{
+               color:red;
+            }
+         }
+
+         h4,
+         h3{   
+            background: #191919;
+            margin:.5em 0;
+            padding:.5em 0 .5em 1em;
+            display: flex;
+            flex-direction: column;
+            color:cornflowerblue;
+            font-weight: 100;
+            font-size: 1.1rem;
+
+            span{
+               color:orangered;
+               font-weight: 600;
+               font-size: .85rem;
+               margin-top: .3em;
+               font-family: 'Roboto Mono', monospace;
+            }
+         }
+
+         h3{ text-align: center; padding-left: 0; font-weight: 700; }
+
+         figure{
+            height:18vw;
+            min-height: 175px;
+            overflow: hidden;
+            position: relative;
+            border:1px solid cornflowerblue;
+            border-radius: .2em;
+
+            img{ height: 100%; @include abs50; }
+         }
+      }
+
+      .rightprof{
+         width: 75%;
+         padding:1em;
+
+         .picons{
+            display: flex;
+            justify-content: flex-end;
+
+            span{
+               cursor: pointer;
+               position: relative;
+               margin:0 .5em;
+
+               &::before,
+               &::after{
+                  position: absolute;
+                  left:50%;
+                  background: #191919;
+                  border: 1px solid #535353;
+                  opacity: 0;
+                  pointer-events: none;
+                  text-align: center;
+                  transition: .3s;
+               }
+
+               &::before{
+                  content: attr(per);
+                  transform: translateX(-50%);
+                  top:100%;          
+                  font-size: .8rem;
+                  padding: .2em;
+                  z-index: 9;         
+               }
+
+               &::after{
+                  content: '';
+                  transform: translateX(-50%) rotate(45deg);
+                  top:90%;
+                  width: 10px;
+                  height:10px;
+               }
+
+               &:hover{
+                  &::before{ opacity: 1; }
+                  &::after{ opacity: 1; }
+               }
+
+               svg{ width: 40px; height: 40px; }
+            }
+         }
+
+         .fpdiv{
+            background: #202020;
+            padding:.5em;
+            border-radius: .2em;
+
+            article{
+               background: #181818;
+               border-radius: .2em;
+               padding: .2em 0;
+               display: flex;
+               margin-bottom: 1.5em;
+               justify-content: space-around;
+               align-items: center;
+               cursor: pointer;
+               transition: .3s;
+
+               &:hover{
+                  filter:sepia(100%) blur(1px);
+               }
+
+               &:last-of-type{ margin:0; }
+
+               h5{
+                  color: orangered;
+                  text-transform: uppercase;
+                  font-weight: 100;
+                  font-size: 1rem;
+                  margin-bottom: .2em;
+               }
+
+               h6{
+                  font-size: .75rem;
+                  margin-bottom: .2em;
+                  display: flex;
+                  align-items: center;
+               }
+            }
+         }
+
+         .fp{
+            position: relative;
+            z-index: 2;
+
+            h2{
+               text-align: center;
+               text-transform: uppercase;
+               font-size: 1.2rem;
+               font-weight: 100;
+               background: #282828;
+               width: 220px;
+               margin:3em auto 1em auto;
+               z-index: 3;
+            }
+
+            &::before{
+               content: '';
+               @include abs50;
+               width: clamp(210px, 85vw, 330px);
+               height:2px;
+               background: rgb(211, 211, 211);
+               z-index: -1;
+            }
+         }     
+
+         fieldset{
+            border: 1px solid cornflowerblue;
+            border-radius: .1em;
+            height: 350px;
+            overflow-y:scroll;
+            overflow-x: hidden;
+            position: relative;
+
+            &::-webkit-scrollbar {
+               background: #101010;
+               width: 5px;
+               border-radius: .2em;
+            }
+
+            &::-webkit-scrollbar-thumb {
+               background: #505050; 
+               border-radius: 10px;
+            }
+
+            p{
+               padding:1em;
+               line-height: 1.5em;
+            }
+
+            legend{
+               margin-left: 1em;
+               font-size: .9rem;
+               color: cornflowerblue;
+               font-weight: 500;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 768px){
+   .profile{
+      .wrap{
+         flex-direction: column;
+         width: 99%;
+         .leftprof{ width: 100%; figure{ border:0; height:150px; max-width: 100%; img{ border: 1px solid cornflowerblue; } } }
+         .rightprof{
+            width: 100%;
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .profile{
+      .wrap{
+         .rightprof{
+            padding: 1em .1em;
+
+            .fpdiv{
+               padding: .5em .1em;
+
+               article{
+                  flex-direction: column;
+                  justify-content: center;
+                  h5{ margin-bottom: .5em; }
+                  h6{ span{ padding-left: .5em; } }
+                  div:first-of-type{ margin-bottom: 1em; }
+               }
+            }
+         }
+      }
+   }
+} 

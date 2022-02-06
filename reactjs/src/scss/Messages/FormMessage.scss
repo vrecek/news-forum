@@ -3,7 +3,8 @@
 .formmessage{
    background: #252525;
    position: absolute;
-   width: 80%;
+   width: clamp(600px, 80%, 100%);
+   max-width: 100%;
    height:95%;
    left:50%;
    top:50%;
@@ -29,11 +30,11 @@
       }
       
       &.res{
-         padding:1.7em 0;
+         padding:2vw 0;
          z-index: 99;
          width: 100%;
          position: absolute;
-         font-size: 1.3rem;
+         font-size: clamp(1rem,4vw,1.3rem);
          left:50%;
          top:50%;
          transform: translate(-50%,-50%);
@@ -63,7 +64,7 @@
       margin: 0 auto;
       border: 2px solid rgb(228, 56, 56);
       background: rgb(167, 44, 44);
-      width: 20%;
+      width: 200px;
       text-align: left;
       color:white;
       text-transform: uppercase;
@@ -139,7 +140,7 @@
          width:100%;
          border:2px solid #dfdfdf;
          background:none;
-         font-size: 1.3rem;
+         font-size: clamp(.9rem, 4.5vw, 1.3rem);
          outline: 0;
          padding:.7em 1em;
          color:white;
@@ -156,6 +157,7 @@
          background: #252525;
          padding:.1em .3em;
          font-weight: 700;
+         font-size: clamp(.8rem, 3vw, 1rem);
          font-family: 'Roboto Mono', monospace;
       }
 
@@ -166,10 +168,21 @@
          border:2px solid #dfdfdf;
          background: none;
          outline: 0;
-         font-size: 1.3rem;
+         font-size: clamp(.9rem, 4.5vw, 1.3rem);
          padding:1em;
          color:white;
          transition: .3s;
+         padding-bottom: 2em;
+         &::-webkit-scrollbar {
+            width: 10px;
+         }
+         &::-webkit-scrollbar-thumb {
+            background: #353535; 
+            border-radius: .5em;
+         }
+         &::-webkit-scrollbar-thumb:hover {
+            background: #454545;
+         }
       }
    }
 }
@@ -178,3 +191,13 @@
    0%{ opacity: 1; }
    100%{ opacity: 0; }
 }
+
+@media (max-width: 480px){
+   .formmessage{
+      padding:0 .2em;
+      div:not(.loadgif){
+         input{ width: 100%; }
+         textarea{ line-height: 2em; }
+      }
+   }
+} 

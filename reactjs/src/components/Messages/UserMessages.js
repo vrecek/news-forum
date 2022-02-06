@@ -15,6 +15,12 @@ const UserMessages = () => {
    const [formT, setFormT] = useState(false)
    const ref = useRef(null)
 
+   function refresh(id){
+      const deletedFilter = user.messages.filter(x => x._id !== id)
+      const obj = { messages: deletedFilter }
+      setUser(obj)
+   }
+
    function toggleForm(){
       if(formT){
          setFormT(false)
@@ -45,7 +51,7 @@ const UserMessages = () => {
       .catch(err => { navigate('/error', { state: { msg: err.message, code: err.code } }) })
       .finally(() => load.delete())
    }, [navigate])
-   // CHANGE LOADING IMAGE AND OPACITY ETC WYGLAD
+
    if(loaded)
    return (
       <main className='messages'>
@@ -68,6 +74,7 @@ const UserMessages = () => {
                         date={ x.dateTime } 
                         from={ x.from } 
                         status={ x.viewed } 
+                        ajax={ refresh }
                      />
                   ))
                :

@@ -2,6 +2,7 @@
   min-height: calc(100vh - 70px);
   background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
   background-size: cover;
+  background-attachment: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,14 +12,17 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  padding: 1em 0;
 }
 
 .msg-read .cont {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 80%;
-  height: 40vw;
+  width: 1225px;
+  max-width: 100%;
+  height: 80%;
+  padding-bottom: 4em;
   background: linear-gradient(83deg, #292929 38%, #2b2929 59%);
   border: 1px solid black;
   position: relative;
@@ -26,6 +30,7 @@
 
 .msg-read .cont section.info {
   width: 20%;
+  min-width: 200px;
   padding-top: 2em;
   border-right: 1px solid black;
   position: relative;
@@ -35,8 +40,8 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 110%;
-  top: 1%;
+  left: 100%;
+  top: 0;
 }
 
 .msg-read .cont section.info img {
@@ -75,7 +80,7 @@
           transform: translateX(-60%);
   background: #151515;
   padding: 1rem 0;
-  width: 15%;
+  width: 180px;
   border-radius: .2em;
   border: 3px solid red;
   outline: 0;
@@ -102,4 +107,35 @@
   text-align: center;
   margin-bottom: 1em;
   font-size: 2rem;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .msg-read .cont {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .msg-read .cont section.info {
+    width: 100%;
+  }
+  .msg-read .cont section.info img {
+    width: auto;
+    height: 40vw;
+    max-height: 250px;
+  }
+  .msg-read .cont section.text {
+    text-align: justify;
+    width: 100%;
+    padding: 2em .5em 4em .5em;
+  }
+  .msg-read .cont section.text button {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  .msg-read .cont section.text p {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
 }

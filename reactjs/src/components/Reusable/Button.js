@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = ({ text, cname, action, additional }) => {
+const Button = ({ text, cname, action, additional, id }) => {
    return (
-      <button style={ !cname ? basicStyle : null } onClick={ action } className={ cname }>
+      <button id={ id } style={ !cname ? basicStyle : null } onClick={ action } className={ cname }>
          <span className='addspan add'>{ additional }</span>
          <span className='addspan'></span>
          <span className='addspan'></span>

@@ -1,0 +1,318 @@
+.profile {
+  background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: calc(100vh - 70px);
+  padding: 3em 0;
+}
+
+.profile .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 85%;
+  margin: 0 auto;
+  background-color: #282828;
+  border: 1px solid #151515;
+  border-radius: .2em;
+}
+
+.profile .wrap .leftprof {
+  width: 25%;
+  min-width: 200px;
+  border-right: 2px solid black;
+  padding: .5em;
+}
+
+.profile .wrap .leftprof h5 {
+  background: #232323;
+  padding: .5em 0;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid cornflowerblue;
+  border-top: 0;
+  border-radius: .1em;
+}
+
+.profile .wrap .leftprof h5.Administrator {
+  color: red;
+}
+
+.profile .wrap .leftprof h4,
+.profile .wrap .leftprof h3 {
+  background: #191919;
+  margin: .5em 0;
+  padding: .5em 0 .5em 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: cornflowerblue;
+  font-weight: 100;
+  font-size: 1.1rem;
+}
+
+.profile .wrap .leftprof h4 span,
+.profile .wrap .leftprof h3 span {
+  color: orangered;
+  font-weight: 600;
+  font-size: .85rem;
+  margin-top: .3em;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.profile .wrap .leftprof h3 {
+  text-align: center;
+  padding-left: 0;
+  font-weight: 700;
+}
+
+.profile .wrap .leftprof figure {
+  height: 18vw;
+  min-height: 175px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid cornflowerblue;
+  border-radius: .2em;
+}
+
+.profile .wrap .leftprof figure img {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.profile .wrap .rightprof {
+  width: 75%;
+  padding: 1em;
+}
+
+.profile .wrap .rightprof .picons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.profile .wrap .rightprof .picons span {
+  cursor: pointer;
+  position: relative;
+  margin: 0 .5em;
+}
+
+.profile .wrap .rightprof .picons span::before, .profile .wrap .rightprof .picons span::after {
+  position: absolute;
+  left: 50%;
+  background: #191919;
+  border: 1px solid #535353;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.profile .wrap .rightprof .picons span::before {
+  content: attr(per);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  top: 100%;
+  font-size: .8rem;
+  padding: .2em;
+  z-index: 9;
+}
+
+.profile .wrap .rightprof .picons span::after {
+  content: '';
+  -webkit-transform: translateX(-50%) rotate(45deg);
+          transform: translateX(-50%) rotate(45deg);
+  top: 90%;
+  width: 10px;
+  height: 10px;
+}
+
+.profile .wrap .rightprof .picons span:hover::before {
+  opacity: 1;
+}
+
+.profile .wrap .rightprof .picons span:hover::after {
+  opacity: 1;
+}
+
+.profile .wrap .rightprof .picons span svg {
+  width: 40px;
+  height: 40px;
+}
+
+.profile .wrap .rightprof .fpdiv {
+  background: #202020;
+  padding: .5em;
+  border-radius: .2em;
+}
+
+.profile .wrap .rightprof .fpdiv article {
+  background: #181818;
+  border-radius: .2em;
+  padding: .2em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1.5em;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.profile .wrap .rightprof .fpdiv article:hover {
+  -webkit-filter: sepia(100%) blur(1px);
+          filter: sepia(100%) blur(1px);
+}
+
+.profile .wrap .rightprof .fpdiv article:last-of-type {
+  margin: 0;
+}
+
+.profile .wrap .rightprof .fpdiv article h5 {
+  color: orangered;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 1rem;
+  margin-bottom: .2em;
+}
+
+.profile .wrap .rightprof .fpdiv article h6 {
+  font-size: .75rem;
+  margin-bottom: .2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile .wrap .rightprof .fp {
+  position: relative;
+  z-index: 2;
+}
+
+.profile .wrap .rightprof .fp h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 100;
+  background: #282828;
+  width: 220px;
+  margin: 3em auto 1em auto;
+  z-index: 3;
+}
+
+.profile .wrap .rightprof .fp::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: clamp(210px, 85vw, 330px);
+  height: 2px;
+  background: lightgray;
+  z-index: -1;
+}
+
+.profile .wrap .rightprof fieldset {
+  border: 1px solid cornflowerblue;
+  border-radius: .1em;
+  height: 350px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.profile .wrap .rightprof fieldset::-webkit-scrollbar {
+  background: #101010;
+  width: 5px;
+  border-radius: .2em;
+}
+
+.profile .wrap .rightprof fieldset::-webkit-scrollbar-thumb {
+  background: #505050;
+  border-radius: 10px;
+}
+
+.profile .wrap .rightprof fieldset p {
+  padding: 1em;
+  line-height: 1.5em;
+}
+
+.profile .wrap .rightprof fieldset legend {
+  margin-left: 1em;
+  font-size: .9rem;
+  color: cornflowerblue;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .profile .wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 99%;
+  }
+  .profile .wrap .leftprof {
+    width: 100%;
+  }
+  .profile .wrap .leftprof figure {
+    border: 0;
+    height: 150px;
+    max-width: 100%;
+  }
+  .profile .wrap .leftprof figure img {
+    border: 1px solid cornflowerblue;
+  }
+  .profile .wrap .rightprof {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile .wrap .rightprof {
+    padding: 1em .1em;
+  }
+  .profile .wrap .rightprof .fpdiv {
+    padding: .5em .1em;
+  }
+  .profile .wrap .rightprof .fpdiv article {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .profile .wrap .rightprof .fpdiv article h5 {
+    margin-bottom: .5em;
+  }
+  .profile .wrap .rightprof .fpdiv article h6 span {
+    padding-left: .5em;
+  }
+  .profile .wrap .rightprof .fpdiv article div:first-of-type {
+    margin-bottom: 1em;
+  }
+}

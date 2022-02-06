@@ -1,6 +1,7 @@
 .about {
   background: url("https://images.wallpaperscraft.com/image/single/surface_dark_background_texture_50754_1920x1080.jpg");
   background-size: cover;
+  background-attachment: fixed;
   min-height: calc(100vh - 70px);
   padding: 2em 4em;
 }
@@ -30,7 +31,7 @@
 .about .centtext {
   text-align: center;
   line-height: 1.4em;
-  margin-bottom: 4em;
+  margin-bottom: 6.5em;
   font-size: clamp(0.7rem, 2.7vw, 1rem);
 }
 
@@ -52,6 +53,24 @@
 
 .about article section {
   width: 40%;
+}
+
+.about article section:not(.imgcont) {
+  opacity: 0;
+}
+
+.about article section.sectext1 {
+  -webkit-animation: ghosttext 1.5s;
+          animation: ghosttext 1.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.about article section.sectext2 {
+  -webkit-animation: ghosttext2 1.5s;
+          animation: ghosttext2 1.5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .about article section p {
@@ -151,6 +170,74 @@
   }
   100% {
     letter-spacing: 0px;
+  }
+}
+
+@-webkit-keyframes ghosttext {
+  0% {
+    -webkit-transform: translateX(-150%);
+            transform: translateX(-150%);
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ghosttext {
+  0% {
+    -webkit-transform: translateX(-150%);
+            transform: translateX(-150%);
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes ghosttext2 {
+  0% {
+    -webkit-transform: translateX(150%);
+            transform: translateX(150%);
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ghosttext2 {
+  0% {
+    -webkit-transform: translateX(150%);
+            transform: translateX(150%);
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
   }
 }
 

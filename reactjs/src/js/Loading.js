@@ -7,7 +7,7 @@ export class Loading{
       this.element = element
       this.divClassname = divClassname
       this.autostyle = autostyle
-      this.gif = 'https://thumbs.gfycat.com/UglyUnripeAzurewingedmagpie-max-1mb.gif'
+      this.gif = 'https://i.pinimg.com/originals/7b/73/6a/7b736a33be802fc2e737e3df56b4ef0e.gif'
 
       // PRIVATE FIELD TO HELP DELETE CREATED ELEMENT
       this._div = null
@@ -25,15 +25,16 @@ export class Loading{
          div.style.position = 'fixed'
          div.style.left = '0'
          div.style.top = '0'
-         div.style.width = '100%'
-         div.style.height = '100%'
+         div.style.width = '100vw'
+         div.style.height = '100vh'
+         div.style.overflow = 'hidden'
          div.style.zIndex = '9999999999'
-         div.style.background = 'rgba(0,0,0,1)'
+         div.style.background = 'rgba(0,29,48,1)'
          div.style.display = 'flex'
          div.style.justifyContent = 'center'
          div.style.alignItems = 'center'
 
-         img.style.height = '50%'
+         img.style.maxWidth = '100%'
       }else{
          div.className = this.divClassname ?? ''
       }

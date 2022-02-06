@@ -6,6 +6,7 @@ import img from '../../images/error-image.png'
 const Errorpage = () => {
    let {msg, code} = useLocation().state
    code = code ?? 500
+   msg = msg ?? 'Unkown error'
 
    return (
       <main className='errorpage'>

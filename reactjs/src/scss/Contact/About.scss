@@ -27,7 +27,7 @@
    .centtext{
       text-align: center;
       line-height: 1.4em;
-      margin-bottom: 4em;
+      margin-bottom: 6.5em;
       font-size: clamp(.7rem, 2.7vw, 1rem);
    }
 
@@ -41,6 +41,19 @@
 
       section{
          width: 40%;
+
+         &:not(.imgcont){ opacity: 0; }
+
+         &.sectext1{
+            animation: ghosttext 1.5s;
+            animation-fill-mode: forwards;
+         }
+
+         &.sectext2{
+            animation: ghosttext2 1.5s;
+            animation-fill-mode: forwards;
+         }
+
          p{
             line-height: 2em;
             font-weight: 100;
@@ -116,6 +129,33 @@
       letter-spacing: 0px;
    }
 }
+
+@keyframes ghosttext{
+   0%{
+      transform: translateX(-150%);
+      filter:blur(100px);
+      opacity: 0;
+   }
+   100%{
+      transform: translateX(0);
+      filter: blur(0);
+      opacity: 1;
+   }
+}
+
+@keyframes ghosttext2{
+   0%{
+      transform: translateX(150%);
+      filter:blur(100px);
+      opacity: 0;
+   }
+   100%{
+      transform: translateX(0);
+      filter: blur(0);
+      opacity: 1;
+   }
+}
+
 
 @media (max-width: 1024px){
    .about{

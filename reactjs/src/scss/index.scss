@@ -6,13 +6,13 @@
    box-sizing:border-box;
    font-weight: 300;
    scroll-behavior: smooth;
+   font-family: 'Sora', sans-serif;
 }
 
 body{
    min-height: 100vh;
    max-width:100vw;
    overflow-x:hidden;
-   font-family: 'Sora', sans-serif;
    color:white;
 }
 
@@ -23,7 +23,7 @@ body{
    width: 100%;
    height: 100%;
    @include flex-c-c;
-   background: rgba($color: #000000, $alpha: .7);
+   background: rgba(0,29,48,1);
    z-index: 999999999999999;
    
    img{

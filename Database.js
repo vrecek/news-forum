@@ -43,6 +43,55 @@ class Database{
 
 
    /* ----------------------------------------------------------------------------------- */
+   /*                                      ITERATORS                                      */
+   /* ----------------------------------------------------------------------------------- */
+
+
+   // ---------------------------------------------- ASYNC ITERATOR  ------------------------------------------------
+
+   // SEARCHES this.schemas AND YIELDS OBJECT WITH KEY NAMES AND TOTAL ELEMENTS
+   // USE WITH for await
+   async* [Symbol.asyncIterator](){
+      const object = {}
+
+      for(let x in this.schemas){
+         const keys = []
+
+         for(let y in this.schemas[x].schema.paths){
+            if('_id' === y || '__v' === y) continue
+            keys.push(y)
+         }
+
+         const query = await this.schemas[x].find()
+         const total = query.length
+         
+         object[x] = {
+            name: x,
+            keys,
+            total
+         }
+
+         yield object[x]
+      }
+   } 
+
+
+   // ---------------------------------------------- NORMAL ITERATOR  ------------------------------------------------
+
+   // SAME AS ASYNC BUT YIELDS KEY FIELDS AND NAME AS STRING, NO TOTAL ITEMS
+   *[Symbol.iterator](){
+      for(let x in this.schemas){
+         yield x
+
+         for(let y in this.schemas[x].schema.paths){
+            if('_id' === y || '__v' === y) continue
+            yield y
+         }
+      }
+   }
+
+
+   /* ----------------------------------------------------------------------------------- */
    /*                                  STATIC METHODS                                     */
    /* ----------------------------------------------------------------------------------- */
 
@@ -59,6 +108,148 @@ class Database{
       }
 
       return result
+   }
+
+
+   // --------------------------------- CONVERT DEFAULT Date.now TO READABLE STRING ------------------------------------------------
+
+   static convertDefaultDate(modelObject, dateField){
+      if(Array.isArray(modelObject)){
+         const copyArray = []
+         for(let x of modelObject){     
+            const copy = {...x}._doc
+            const data = copy.data.toString()
+            const arr = data.split(' ')
+
+            let dateStr = ''    
+            dateStr = arr[2]
+            switch(arr[1]){
+               case 'Jan':
+                  dateStr += '.01.'
+                  break;
+               case 'Feb':
+                  dateStr += '.02.'
+                  break;
+            }
+            dateStr += arr[3]
+         
+            let timeStr = ''
+            const split = arr[4].split(':')
+            timeStr += `${split[0]}:${split[1]}`
+
+            const fullDate = `${dateStr} - ${timeStr}`
+            copy.data = fullDate
+            copyArray.push(copy)
+         }
+         return copyArray
+      }else{
+         const strdata = dateField.toString()
+         const arr = strdata.split(' ')
+
+         let dateStr = ''    
+         dateStr = arr[2]
+         switch(arr[1]){
+            case 'Jan':
+               dateStr += '.01.'
+               break;
+            case 'Feb':
+               dateStr += '.02.'
+               break;
+         }
+         dateStr += arr[3]
+
+         let timeStr = ''
+         const split = arr[4].split(':')
+         timeStr += `${split[0]}:${split[1]}`
+
+         const fullDate = `${dateStr} - ${timeStr}`
+
+         let copy = {}
+         if(modelObject._doc){
+            copy = {...modelObject}._doc
+         }else{
+            copy = {...modelObject}
+         }
+   
+         copy.data = fullDate
+
+         return copy
+      }  
+   }
+
+
+   // --------------------------------- TIME ------------------------------------------------
+
+   static hasTimePassed(actualNumber, lastNumber, returnLeft = false, ddhhmm = false){
+      
+      if(typeof actualNumber !== 'number' || typeof lastNumber !== 'number') return false
+ 
+      const ms = Date.now();
+
+      const passed = (lastNumber + actualNumber) < ms
+
+      if(returnLeft){
+         let left = (lastNumber + actualNumber) - ms
+         if(left < 1) left = 1
+
+         if(ddhhmm){
+            const d = Math.floor(left / 1000 / 60 / 60 / 24)
+            const h = Math.floor(left / 1000 / 60 / 60 % 24)
+            const m = Math.floor(left / 1000 / 60 % 60)
+
+            return {
+               passed: passed,
+               day: d,
+               hour: h,
+               minute: m
+            }
+         }
+
+         return {
+            passed: passed,
+            left: left
+         }
+      }
+
+      return passed
+   }
+
+
+   // ----------------------------------------- BINARY TO IMAGE ------------------------------------------------
+
+   // binary MUST BE A OBJECT WITH data(actual content) AND contentType(image/jpeg,image/png etc) FIELD
+   // RETURNS source AND content(image ext)
+   static bufferToImg(binary, return_img_tag_string = false){
+      if(!binary) return false
+
+      if(binary.data !== 'undefined' && binary.contentType !== 'undefined'){
+         const base64 = btoa(new Uint8Array(binary.data).reduce((data, byte) => {
+            return data + String.fromCharCode(byte);
+         }, ''));
+
+         if(return_img_tag_string){
+            return `<img src={data:image/${ binary.contentType };base64,${ base64 }} alt='avatar_error' />`
+         }
+
+         return { source: base64, content: binary.contentType }
+      }else return false   
+   }
+
+
+   // ----------------------------------------- ESCAPE CHARACTERS ------------------------------------------------
+
+   // illegal MUST BE AN ARRAY
+   static escapeCharacters(str, illegal=['<', '>', ';'], replacedChar='%'){
+      if(Array.isArray(illegal)){   
+         const regx = illegal.reduce((p, c) => p + c)
+
+         const reg = new RegExp(`[${regx}]`, 'ig')
+         const replaced = str.replace(reg, replacedChar)
+
+         return replaced
+      }else{
+         return encodeURI(str)
+      }
    }
 
    /* ----------------------------------------------------------------------------------- */
@@ -150,7 +341,7 @@ class Database{
 
 
    // -------------------------------------------- VIEW ONE ITEM IN model DOCUMENT ------------------------------------------------
-   // fix
+
    async viewOne(model, value, findBy = '_id'){
       if(!this.schemas[model]){ 
          this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
@@ -158,10 +349,21 @@ class Database{
 
       if(findBy === '_id'){
          const user = await this.schemas[model].findById(value)
-         //return user.length !== 0 ? user : false
-         console.log(user)
-         return 'xd'
-      }
+         return user ?? false
+
+      }else if(this.schemas[model].schema.paths[findBy]){
+         const reg = new RegExp(value, 'i')
+
+         const user = await this.schemas[model].find({ [findBy]: reg })
+         if(user.length !== 0) return user
+         else{
+            this.__throw404('This user does not exist')
+         }
+      }else{
+         const err = new Error(`Field ${findBy} does not exist on ${model} model.`)
+         err.code = 501
+         throw err
+      }    
    }
 
 
@@ -266,7 +468,7 @@ class Database{
 
 
    /* ----------------------------------------------------------------------------------- */
-   /*                                 POST / PUT REQUESTS                                 */
+   /*                             POST / PUT / DELETE REQUESTS                            */
    /* ----------------------------------------------------------------------------------- */
 
 
@@ -279,21 +481,20 @@ class Database{
 
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model]){ 
-         this.__throw400(`Model: -${model}- does not exist in class instance schemas.`)
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
       }
 
       const fields = this.schemas[model].schema.paths
-      
+
       // IF addAllDefault IS FALSE, NEW MODEL WILL BE CREATED BASED ON body
       if(addAllDefault === false){
          for(let x in fields){
-
             // SKIP THE DEFAULT VALUES AND _id AND __v
-            if(fields[x].options.default || (x === '_id' || x === '__v') ) continue
-            console.log(body[x])
+            if((typeof fields[x].options.default && fields[x].options.default === 0) || fields[x].options.default || fields[x].options.default === null || (x === '_id' || x === '__v') ) continue
+
             // IF FIELD IN body IS NOT PRESENT IN PASSED MODEL, THROW ERROR 
             if(typeof body[x] === 'undefined'){ 
-               this.__throw400(`Cant find model required: -${x}- field in passed body.`)
+               this.__throw500(`Cant find model required: -${x}- field in passed body.`)
             }
          }
 
@@ -327,12 +528,12 @@ class Database{
                   break;
 
                default:
-                  this.__throw400('Unkown model type! Please change addAllDefault to false')
+                  this.__throw500('Unkown model type! Please change addAllDefault to false')
             }
          }
 
          // CREATE AND SAVE
-         const newModel = new this.schemas[model](bodyDef)
+         const newModel = new this.schemas[model](bodyDef, { minimize: false })
          await newModel.save()
 
        // IF addAllDefault IS NOT BOOLEAN, THROW ERROR
@@ -424,6 +625,73 @@ class Database{
       }
    }
 
+
+   // ---------------------------------------- DELETE ITEM FROM MODEL ARRAY ------------------------------------------------
+
+   // ARGUMENTS ARE SELF EXPLANATORY; SAME AS updateArray
+   async deleteFromArray(model, modelId, arrayName, array_id_or_index){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      // MAKE SURE MODEL AND ARRAY EXIST
+      const main_model = await this.schemas[model].find({ _id: modelId })
+      const arr = main_model[0][arrayName]  
+      if(!Array.isArray(arr)){
+         this.__throw500(`-arrayName- is not an array. Got ${typeof arr} instead`)
+      }
+
+      const deletedItem = await this.schemas[model].updateOne(
+         { _id: modelId },
+         {
+            $pull: {
+               [arrayName]: { _id: array_id_or_index }
+            }
+         }
+      )
+
+      return deletedItem
+   }
+
+
+   // -------------------------------------------- DELETE WHOLE DOCUMENT ------------------------------------------------
+
+   async deleteDoc(model, docId){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      try{
+         const checkid = await this.schemas[model].find({ _id: docId })
+         if(checkid.length === 0) throw new Error('')
+      }catch(err){
+         return false
+      }
+
+      await this.schemas[model].deleteOne({ _id: docId })
+      return true
+   }
+
+
+   // ------------------------------------------ UPDATE MODEL OBJECT ------------------------------------------------
+
+   async updateObject(model, modelId, objName, whatField, value){
+
+      // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
+      if(!this.schemas[model]){ 
+         this.__throw500(`Model: -${model}- does not exist in class instance schemas.`)
+      }
+
+      const select = `${objName}.${whatField}`
+
+      await this.schemas[model].updateOne({ _id: modelId }, { $set: { [select]: value } })
+   }
+   
+
    /* ----------------------------------------------------------------------------------- */
    /*            NICKNAME, MAIL, PASSWORD, CONFIRM PASSWORD, CHECKBOX, CAPTCHA            */
    /* ----------------------------------------------------------------------------------- */
@@ -434,8 +702,8 @@ class Database{
    // CHECK IF IS ALPHANUMERIC
    // CHECK IF HAVE min AND max LENGTH OKAY
    // arrayToAddError IS EITHER false OR PASSED ARRAY
-   validateNick_AlphaNumeric(str, min = 0, max = 999, arrayToAddError = false){
-      const regex = /^[a-z0-9 ]+$/i
+   validateNick_AlphaNumeric(str, min = 0, max = 999, arrayToAddError = false, sentencePunctuation = false){
+      const regex = sentencePunctuation ? /^[a-z0-9 !?.]+$/i : /^[a-z0-9 ]+$/i
       let success = true
       let errMsg = ''
 

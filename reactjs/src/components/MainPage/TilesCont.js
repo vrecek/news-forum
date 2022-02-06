@@ -39,8 +39,8 @@ const TilesCont = () => {
          <h1>Category topics <span>Category topics</span> </h1>
          
          <section>
-            <Tile text='Worldwide' src={ t1 }/>
-            <Tile text='Local area' src={ t3 }/>
+            <Tile text='Politics' src={ t1 }/>
+            <Tile text='Discovery' src={ t3 }/>
             <Tile text='Universe' src={ t5 }/>
             <Tile text='Accidents' src={ t2 }/>
             <Tile text='Achievements' src={ t4 }/>

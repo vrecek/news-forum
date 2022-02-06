@@ -22,6 +22,19 @@ $lines: (
          @include flex-c-c;
          color:white;
          position: relative;
+         margin:0 .5em;
+
+         div{
+            width: 30px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+
+            img{
+               height:100%;
+               @include abs50;
+            }
+         }
 
          span{
             position: absolute;
@@ -191,6 +204,9 @@ $lines: (
                   }
                   &.last{
                      padding: .5em .5em 1em .5em;
+                  }
+                  &.write-article{
+                     color:yellow;
                   }
 
                   span{

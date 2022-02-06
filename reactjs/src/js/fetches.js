@@ -1,4 +1,4 @@
-export const fetchPost = async (url, body, method='POST') => {
+export const fetchPost = async (url, body=null, method='POST') => {
    try{
       const controller = new AbortController()
       setTimeout(() => {
@@ -15,8 +15,9 @@ export const fetchPost = async (url, body, method='POST') => {
       }
    
       const res = await fetch(url, opt)
-
       if(!res.ok){
+         if(res.status === 400) return await res.json()
+         
          const err = new Error(res.statusText)
          err.code = res.status
          throw err
@@ -26,6 +27,11 @@ export const fetchPost = async (url, body, method='POST') => {
    }catch(err){
       let msg = ''
 
+      if(err.code === 404 && method === 'DELETE'){
+         msg = 'Can not find fetch address. Contact us if you encounter this more times.'
+         return new Promise((resolve,reject) => reject({ message: msg, code: err.code, success: false }))
+      }
+
       switch(err.code){     
          case 20: 
             msg = 'Server waited too long for response'; 
@@ -34,7 +40,8 @@ export const fetchPost = async (url, body, method='POST') => {
             msg = 'Can not find fetch address. Contact us if you encounter this more times.'
             break;
          default: 
-            msg = err.message //reject
+            msg = err.message
+            return new Promise((resolve,reject) => reject({ message: msg, code: err.code, success: false }))
       }
 
       return new Promise((resolve,reject) => resolve({ msg: msg, success: false }))
@@ -45,7 +52,6 @@ export const fetchGet = async url => {
       const res = await fetch(url)
 
       if(!res.ok){
-         console.log(res.statusText, res)
          throwError(res.statusText, res.status)
       }
 

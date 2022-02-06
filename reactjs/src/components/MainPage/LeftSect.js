@@ -104,13 +104,15 @@ const LeftSect = () => {
       <section ref={ beggining } className='leftsection'>
          <figure>
             <div ref={ slide } className='outer'>
-               <SliderImg src='https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg' text='Dolor sit amet ?' />
+               <SliderImg src='https://images.unsplash.com/photo-1493243350443-9e3048ce7288?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1340&q=80' text='Dolor sit amet ?' />
 
-               <SliderImg src='https://static5.depositphotos.com/1037262/521/i/600/depositphotos_5215941-stock-photo-road-panorama.jpg' text='Labore et nes' />
-               <SliderImg src='https://t3.ftcdn.net/jpg/02/32/78/38/240_F_232783878_w8lOB70on1NDrnLcmcC0QuslEB1HTWDF.jpg' text='Unde omnis iste' />
-               <SliderImg src='https://upload.wikimedia.org/wikipedia/commons/4/45/Wide_lightning.jpg' text='Dolor sit amet ?' />
+               <SliderImg src='https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' text='Labore et nes' />
 
-               <SliderImg src='https://static5.depositphotos.com/1037262/521/i/600/depositphotos_5215941-stock-photo-road-panorama.jpg' text='Labore et nes' />
+               <SliderImg src='https://images.unsplash.com/photo-1611570226710-0a7c0eac6315?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' text='Unde omnis iste' />
+
+               <SliderImg src='https://images.unsplash.com/photo-1493243350443-9e3048ce7288?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1340&q=80' text='Dolor sit amet ?' />
+
+               <SliderImg src='https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' text='Labore et nes' />
             </div> 
 
             <div className='radiocont'>

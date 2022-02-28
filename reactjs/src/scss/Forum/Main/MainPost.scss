@@ -1,0 +1,162 @@
+@import '../../config';
+
+.main-post{
+   min-height: $fullheight;
+   background: url('https://cdn.wallpapersafari.com/19/76/yfV2nm.jpg');
+   background-attachment: fixed;
+   background-size: cover;
+   padding: 2em 0;
+
+   article.mp-wrap{
+      background: rgba(30,30,30,.9);
+      width: 1210px;
+      max-width: 99%;
+      margin:0 auto;
+
+      section.post{
+         padding:.5em 0 2em 0;
+
+         section.post-icons{
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1em;
+            position: relative;
+
+            .fr,
+            .rr{
+               position: absolute;
+               top:100%;
+               white-space: nowrap;
+               background: #101010;
+               padding:.1em;
+               border: 1px solid rgb(179, 179, 171);
+               border-radius: .2em;        
+            }
+
+            .fr{
+               left:9%;
+               animation: fanim 2s;
+            }
+
+            .rr{
+               left: 50%;
+               transform: translateX(-50%);     
+               animation: ranim 2s;  
+            }
+            
+
+            svg{ pointer-events: none; transition: .2s; }
+            span{ cursor: pointer; }
+
+            div{
+               position: relative;
+               display: flex;        
+
+               span:first-child{
+                  &.true{
+                     svg{ color:rgb(2, 201, 2); }
+                     pointer-events: none;
+                  }
+
+                  margin-right: 1em;
+
+                  &:hover svg{
+                     color:green;
+                  }
+               } 
+
+               span:last-child{
+                  &.true{
+                     svg{ color:red; }
+                     pointer-events: none;
+                  }
+
+                  &:hover svg{
+                     color: rgb(230, 40, 40);
+                  }
+               }
+            }
+
+            span{
+               &#p-fav{
+                  &:hover svg{
+                     color:royalblue;
+                  }
+                  
+                  &.true{
+                     color:royalblue;
+                  }
+               }
+
+               @include flex-c-c;
+               svg{ width: clamp(30px, 4vw, 40px); height: clamp(30px, 4vw, 40px); }
+            }
+         }
+
+         section.post-text{
+            font-family: 'Sora', sans-serif;
+            padding:clamp(.2em, 2vw, 1em);
+            text-align: justify;
+
+            span{
+               font-size: clamp(.75rem, 3vw, .9rem);
+               line-height: 1.5em;
+
+               img{ width: 830px; max-width: 100%; display: block; margin:.8em auto; }
+            }
+         }
+
+         section.user-info{
+            display: flex;
+            align-items: center;
+            background: #151515;
+            padding:.3em .5em;
+
+            h2{
+               font-size: 1rem;
+               cursor: pointer;
+               color:orangered;
+               transition: .2s;
+
+               &:hover{
+                  color: rgb(255, 136, 0);
+                  text-shadow: 0 0 2px purple, 0 0 4px purple;
+               }
+            }
+
+            h3{
+               font-size: clamp(.8rem, 4vw, .85rem);
+               color:rgb(209, 162, 162);
+            }
+
+            h1{
+               font-size: clamp(.9rem, 4vw, 1.1rem);
+               color:orange;
+               margin-top: .5em;
+            }
+
+            figure{
+               min-width: clamp(45px, 8vw, 60px);
+               height: clamp(45px, 8vw, 60px);
+               overflow: hidden;
+               position: relative;
+               display: block;
+               margin: 0 .5em auto 0;
+
+               img{ height: 100%; @include abs50; }
+            }
+         }
+      }
+   }
+
+   @keyframes ranim {
+      0%{ transform: translateX(-50%) scale(0); }
+      50%{ transform: translateX(-50%) scale(1); }
+      100%{ transform: translateX(-50%) scale(0); }
+   }
+   @keyframes fanim {
+      0%{ transform: scale(0); }
+      50%{ transform: scale(1); }
+      100%{ transform: scale(0); }
+   }
+}

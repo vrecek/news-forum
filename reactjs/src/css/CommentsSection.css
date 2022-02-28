@@ -1,18 +1,29 @@
 .comments {
   margin: 4em auto;
-  width: 55%;
+  width: 830px;
+  max-width: 99%;
 }
 
 .comments h3.comments-str {
-  margin-bottom: .2em;
+  margin-bottom: 1em;
   font-weight: 100;
-  font-size: .9rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 0 2px black, 0 0 4px black;
 }
 
 .comments section.com-cont {
   background: #555555;
   padding: .8em;
   border: 1px solid cornflowerblue;
+}
+
+.comments section.com-cont h2.no-com {
+  text-align: center;
+  font-size: 1rem;
+  color: #faf2e8;
+  font-weight: 600;
 }
 
 .comments section.com-cont article {
@@ -28,13 +39,13 @@
 }
 
 .comments section.com-cont article section.com-infos {
-  width: 17%;
+  width: 135px;
   border-right: 2px solid black;
   padding: .3em;
 }
 
 .comments section.com-cont article section.com-infos figure {
-  height: 6vw;
+  height: 90px;
   overflow: hidden;
   position: relative;
 }
@@ -51,18 +62,15 @@
 .comments section.com-cont article section.com-infos figcaption {
   text-align: center;
   padding: .1em 0;
-}
-
-.comments section.com-cont article section.com-infos figcaption a {
-  text-decoration: none;
   color: orange;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-transition: .3s;
   transition: .3s;
+  cursor: pointer;
 }
 
-.comments section.com-cont article section.com-infos figcaption a:hover {
+.comments section.com-cont article section.com-infos figcaption:hover {
   color: orangered;
 }
 
@@ -75,7 +83,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   margin: .1em 0;
-  font-size: .75rem;
+  font-size: clamp(0.65rem, 2vw, 0.75rem);
 }
 
 .comments section.com-cont article section.com-infos h5 span {
@@ -90,6 +98,7 @@
 
 .comments section.com-cont article section.com-text p {
   overflow: hidden;
+  font-size: clamp(0.8rem, 3vw, 0.95rem);
   word-break: break-all;
 }
 
@@ -103,17 +112,48 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 12%;
+  width: 80px;
   padding: 0 .5em;
 }
 
 .comments section.com-cont article section.com-text .rating-cont div {
   cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div.trueg {
+  pointer-events: none;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div.trueg svg {
+  color: #05b605;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div.truer {
+  pointer-events: none;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div.truer svg {
+  color: red;
 }
 
 .comments section.com-cont article section.com-text .rating-cont div svg {
   -webkit-transition: .3s;
   transition: .3s;
+  margin-bottom: .2em;
+  pointer-events: none;
 }
 
 .comments section.com-cont article section.com-text .rating-cont div:hover:nth-child(1) svg {
@@ -122,4 +162,20 @@
 
 .comments section.com-cont article section.com-text .rating-cont div:hover:nth-child(2) svg {
   color: red;
+}
+
+.comments section.com-cont article section.com-text .rating-cont div h6 {
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .comments section.com-cont {
+    padding: .8em .1em;
+  }
+  .comments section.com-cont article section.com-infos {
+    width: auto;
+  }
+  .comments section.com-cont article section.com-infos figure {
+    height: 17vw;
+  }
 }

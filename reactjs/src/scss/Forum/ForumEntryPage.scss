@@ -1,0 +1,112 @@
+@import '../config';
+
+.forum-entry-page{
+   min-height: $fullheight;
+   background: url('https://cdn.wallpapersafari.com/19/76/yfV2nm.jpg');
+   background-size: cover;
+   padding:4em 0;
+
+   .line{
+      width:50%;
+      height: 2px;
+      margin-bottom: 3em;
+      background: white;
+      position: relative;
+      p{
+         position: absolute;
+         top:100%;
+         left:50%;
+         transform: translateX(-50%);
+         font-family: 'Roboto Mono', monospace;
+      }
+   }
+
+   .fep-wrap{
+      width: 1220px;
+      max-width: 99%;
+      background: rgba(22, 22, 22, .95);
+      margin:0 auto;
+      position: relative;
+      padding-bottom: 1em;
+
+      div.f-para-anim{
+         margin:1em 0 2em 0;   
+         position: relative;
+         width: 71%;
+         overflow: hidden;
+
+         p{
+            font-size: .85rem;
+            color:azure;
+            animation: sanim 8s linear infinite;
+            position: relative;
+            left:-50%;
+         }
+
+         @keyframes sanim{
+            0%{ left:-50%; }
+            100%{ left:102%; }
+         }
+      }
+
+      .f-logcheck{
+         position: absolute;
+         bottom: 100%;
+         right:0;
+
+         span{ color:orangered; }
+         
+         p,
+         a{
+            font-size: .7rem;
+         }
+
+         a{
+            text-decoration: none;
+            color:bisque;
+            &:hover{ color:rgb(39, 92, 248); }
+         }
+      }
+
+      nav{
+         display: flex;
+         justify-content: space-between;
+         background: #080808;
+         border-bottom: 1px solid orangered;
+
+         ul{
+            list-style: none;
+            display: flex;
+            border-right: 1px solid orangered;
+
+            li{
+               padding:.7em 1em;
+               cursor: pointer;
+               transition: .2s;
+               font-size: clamp(.7rem, 2.2vw, .9rem);
+               font-weight: 100;
+               @include flex-c-c;
+
+               svg{ margin-right: .1em; }
+
+               &:hover{
+                  background: #151515;
+               } 
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .forum-entry-page{
+      .line{ width: 90%; margin:3em auto 3.5em auto; }
+      .fep-wrap{
+         div.f-para-anim{
+            width: 100%;
+         }
+         nav{ svg{ width: 15px; height: 15px; } span{ display: none; } }
+      }
+   }
+} 
+

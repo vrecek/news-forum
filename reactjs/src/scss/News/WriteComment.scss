@@ -1,0 +1,137 @@
+@import '../config';
+
+form.write-com-cont{
+   margin-top: 4em;
+   position: relative;
+
+   h3{
+      position: absolute;
+      left:0;
+      width: 100%;
+      padding:.5em;
+      bottom:100%;
+      color:white;
+      animation: pcanim 1s;
+      animation-delay: 2s;
+      text-align: center;
+      font-size: .95rem;
+
+      &.false{ background: red; }
+      &.true{ background: green; }
+   }
+
+   h4{
+      font-weight: 600;
+      margin-bottom: .5em;
+      display: flex;
+      align-items: center;
+      svg{ margin-right: .5em; }
+   }
+
+   h2{
+      position: absolute;
+      left:0;
+      top:0;
+      width: 100%;
+      height:100%;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      @include flex-c-c;
+   }
+
+   section{
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid royalblue;
+      padding:.5em;
+      background: #282828;
+      height:200px;
+
+      figure{
+         width: 19%;
+         min-width: 120px;
+         margin-right: .5em;
+         height: 100%;
+         overflow: hidden;
+         position: relative;
+
+         div{
+            position: relative;
+            height: 65%;
+
+            img{
+               height: 100%;
+               @include abs50;
+               border:1px solid #404040;
+            }
+         }
+
+         figcaption{
+            text-align: center;
+            color:orange;
+            margin-top: .5em;
+            font-weight: 500;
+         }
+      }
+
+      textarea{
+         width: 80%;
+         background: #313131;
+         resize: none;
+         outline: 0;
+         border:1px solid #404040;
+         padding:.5em;
+         color:white;
+
+         &::-webkit-scrollbar{
+            width: 4px;
+            background: black;
+         }
+
+         &::-webkit-scrollbar-thumb{
+            width: 2px;
+            background: grey;
+         }
+      }
+   }
+
+   button{
+      margin:.5em auto 0 auto;
+      display: block;
+      background: #404040;
+      border: 2px solid rgb(190, 130, 17);
+      color:white;
+      padding:1em;
+      width: 25%;
+      min-width: 150px;
+      border-radius: .3em;
+      transition: .2s;
+      cursor: pointer;
+
+      &:hover{
+         background: #303030;
+         box-shadow: 0 0 2px orange, 0 0 4px orange;
+      }
+
+      span{ font-weight: 500; }
+   }
+}
+
+@keyframes pcanim{
+   0%{ opacity: 1; }
+   100%{ opacity: 0; }
+}
+
+@media (max-width: 480px){
+   form.write-com-cont{
+      section{
+         figure{
+            display: none;
+         }
+         textarea{
+            width: 100%;
+         }
+      }
+   }
+} 

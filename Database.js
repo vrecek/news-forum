@@ -116,8 +116,8 @@ class Database{
    static convertDefaultDate(modelObject, dateField){
       if(Array.isArray(modelObject)){
          const copyArray = []
-         for(let x of modelObject){     
-            const copy = {...x}._doc
+         for(let x of modelObject){   
+            const copy = {...x}._doc || {...x}
             const data = copy.data.toString()
             const arr = data.split(' ')
 
@@ -282,7 +282,7 @@ class Database{
 
    // -------------------------------------- VIEW ALL ITEMS IN model DOCUMENT ------------------------------------------------
 
-   // searchOptions: { string, searchWhat, returnValue, limit }
+   // searchOptions: { string, searchWhat, returnValue, limit(num), shuffle(bool) }
    async viewAll(model, searchOptions = null){
       try{
          // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
@@ -303,7 +303,15 @@ class Database{
             const regex = new RegExp(searchOptions.string, 'i')
             const split = searchOptions.searchWhat.split(' ')
             const words = []
+
             for(let x of split){
+               if(x.indexOf('.') !== -1){
+                  words.push({
+                     [x]: regex
+                  })
+                  continue
+               }
+
                if(!this.schemas[model].schema.paths[x]){ 
                   this.__throw500(`Field -${searchOptions.searchWhat}- does not exist on ${model} model`)
                }
@@ -318,16 +326,31 @@ class Database{
             // IF NOT YOU CAN SET returnValue AND limit
             // ELSE SET ALL 4 VALUES
             let result = null
-            if(searchOptions.string === ''){
-               result = await this.schemas[model].find()
-                                                 .select(searchOptions.returnValue)
-                                                 .limit(searchOptions.limit)
+            if(searchOptions.shuffle){
+               if(searchOptions.string === ''){
+                  result = await this.schemas[model].find()
+                                                    .select(searchOptions.returnValue)
+
+               }else{
+                  result = await this.schemas[model].find({ $or: words })
+                                                    .select(searchOptions.returnValue)
+               }
+               const index = Math.abs(Math.floor(Math.random() * result.length - searchOptions.limit) + 1)
+               const limitedArray = result.splice(index, 4)
+               return limitedArray
+
             }else{
-               result = await this.schemas[model].find({ $or: words })
-                                                 .select(searchOptions.returnValue)
-                                                 .limit(searchOptions.limit)
+               if(searchOptions.string === ''){
+                  result = await this.schemas[model].find()
+                                                    .select(searchOptions.returnValue)
+                                                    .limit(searchOptions.limit)
+               }else{
+                  result = await this.schemas[model].find({ $or: words })
+                                                    .select(searchOptions.returnValue)
+                                                    .limit(searchOptions.limit)
+               }
             }
-            
+                    
             return result
          }else{  
             // RETURN ALL   
@@ -412,7 +435,7 @@ class Database{
          this.__throw500(`Model / Field: -${model}- does not exist in class instance schemas.`)
       }
 
-      const elems = await this.schemas[model].find().select('_id')
+      const elems = await this.schemas[model].find().select('_id').lean()
 
       return elems.length
    }
@@ -501,6 +524,7 @@ class Database{
          // CREATE AND SAVE
          const newModel = new this.schemas[model](body)
          await newModel.save()
+         return newModel._id
 
        // IF addAllDefault IS TRUE, FILL ALL FIELDS WITH DEFAULT VALUES
       }else if(addAllDefault === true){
@@ -548,7 +572,8 @@ class Database{
    // updateWhatField MUST BE A STRING AND THIS WILL BE UPDATED
    // body IS A REPLACING VALUE, DEPENDS ON SCHEMA TYPE, IT COULD BE STRING, OBJECT, ETC
    // isThisArray BOOLEAN, IF YES, PUSHES TO ARRAY OTHERWISE NORMAL UPDATE 
-   async updateOne(model, whichOneDocumentUpdate, updateWhatField, body, isThisArray = false){
+   // increment NUMBER
+   async updateOne(model, whichOneDocumentUpdate, updateWhatField, body, isThisArray = false, increment=false){
       
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model]){ 
@@ -580,6 +605,15 @@ class Database{
          await this.schemas[model].findOneAndUpdate(whichOneDocumentUpdate, { $push: { [updateWhatField]: body } })
          return true
       }
+
+      // INCREMENT
+      if(increment && typeof body === 'number'){
+         await this.schemas[model].findOneAndUpdate(whichOneDocumentUpdate, { 
+            $inc: { [updateWhatField]: body }
+         }).lean()
+         return true
+      }
+
       // ELSE REGULAR UPDATE
       await this.schemas[model].findOneAndUpdate(whichOneDocumentUpdate, { [updateWhatField]: body })
       return true
@@ -592,7 +626,7 @@ class Database{
    // modelId IS A VALID MONGOOSE ID TO MODEL WHICH CONTAIN ARRAY
    // arrayName, array_id_or_index IS SELF-EXPLANATORY ; STRINGS
    // arrayField IS ARRAY FIELD STRING
-   async updateArray(model, modelId, arrayName, array_id_or_index, arrayField, value){
+   async updateArray(model, modelId, arrayName, array_id_or_index, arrayField, value, push = false, increment = false){
 
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model]){ 
@@ -616,10 +650,30 @@ class Database{
          const arrSelect = `${arrayName}._id`
          const arrField = `${arrayName}.$.${arrayField}`
 
+         if(push){
+            await this.schemas[model].updateOne({ _id: modelId, [arrSelect]: array_id_or_index }, 
+               { $push:
+                   { [arrField]: value } 
+               })
+
+            return true
+         }
+
+
+         if(increment){
+            await this.schemas[model].updateOne({ _id: modelId, [arrSelect]: array_id_or_index }, 
+               { $inc:
+                   { [arrField]: value } 
+               })
+
+            return true
+         }
+
+
          await this.schemas[model].updateOne({ _id: modelId, [arrSelect]: array_id_or_index }, 
-         { $set:
-             { [arrField]: value } 
-         })
+            { $set:
+                { [arrField]: value } 
+            })
 
          return true
       }
@@ -629,7 +683,7 @@ class Database{
    // ---------------------------------------- DELETE ITEM FROM MODEL ARRAY ------------------------------------------------
 
    // ARGUMENTS ARE SELF EXPLANATORY; SAME AS updateArray
-   async deleteFromArray(model, modelId, arrayName, array_id_or_index){
+   async deleteFromArray(model, modelId, arrayName, array_id_or_value, delByValue=false, nestedArray=false, nestedFieldValue=false){
 
       // IF model MODEL WAS NOT PASSED IN CONSTRUCTOR THROW ERROR
       if(!this.schemas[model]){ 
@@ -643,16 +697,39 @@ class Database{
          this.__throw500(`-arrayName- is not an array. Got ${typeof arr} instead`)
       }
 
-      const deletedItem = await this.schemas[model].updateOne(
-         { _id: modelId },
-         {
-            $pull: {
-               [arrayName]: { _id: array_id_or_index }
+      if(delByValue){
+         await this.schemas[model].updateOne(
+            { _id: modelId },
+            {
+               $pull: {
+                  [arrayName]: { $in: array_id_or_value }
+               }
             }
-         }
-      )
+         )
+      }else if(nestedArray){
+         const arrSelect = `${arrayName}._id`
+         const arrField = `${arrayName}.$.${nestedArray}`
 
-      return deletedItem
+         await this.schemas[model].updateOne(
+            { _id: modelId, [arrSelect]: array_id_or_value },
+            {
+               $pull: {
+                  [arrField]: { $in: nestedFieldValue }
+               }
+            }
+         )
+      }else{
+         await this.schemas[model].updateOne(
+            { _id: modelId },
+            {
+               $pull: {
+                  [arrayName]: { _id: array_id_or_value }
+               }
+            }
+         )
+      }
+
+      return true
    }
 
 

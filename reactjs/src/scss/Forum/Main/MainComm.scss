@@ -1,0 +1,152 @@
+@import '../../config';
+
+.post-comms{
+   border-top: 1px solid lightgray;
+   margin-top: 2em;
+   border-bottom: 1px solid lightgray;
+   padding:.2em;
+}
+
+.main-art-comm{
+   display: flex;
+   &:not(&:last-of-type){
+      margin-bottom: 2em;
+   }
+
+   svg{ pointer-events:none; }
+
+   div:not(.comm-dots):not(.comm-del-proc){
+      border:1px solid orangered;
+      background: rgba(255, 68, 0, 0.1);
+      text-align: center;
+
+      h4{
+         padding:.5em 0;
+         font-weight: 700;
+         color:orange;
+         cursor: pointer;
+         transition: .2s;
+         font-size: clamp(.8rem, 2.5vw, 1rem);
+
+         &:hover{ color: orangered; }
+      }
+
+      h5{
+         padding:.2em;
+         font-size: .6rem;
+      }
+   }
+
+   figure{
+      height: clamp(40px, 13vw, 150px);
+      overflow: hidden;
+
+      img{
+         height: 100%;
+      }
+   }
+
+   section{
+      width: 100%;
+      background: #151515;
+      padding:.5em;
+      position: relative;
+      padding-bottom: 2.5em;
+      padding-right: 1em;
+      font-size: clamp(.7rem, 4vw, 1rem);
+
+      .comm-del-proc{
+         @include abs50;
+         padding:.5em 1em;
+         background: #404040;
+         border-radius: .2em;
+         border:1px solid brown;
+      }
+
+      .comm-dots{
+         position: absolute;
+         right:5px;
+         top:0;
+
+         ul{
+            position: absolute;
+            list-style: none;
+            right: 0;
+            border-radius: .2em;
+            background: #252525;
+            border: 1px solid #505050;
+            display: none;
+            height:0;
+            overflow: hidden;
+            transition: all .5s;
+
+            li{
+               white-space: nowrap;
+               font-size: .8rem;
+               padding:.5em;
+               border-radius: .2em;
+               display: flex;
+               align-items: center;
+               cursor: pointer;
+               transition: .2s;
+               color:red;
+               text-transform: uppercase;
+               font-weight: 700;
+
+               &:hover{
+                  background: rgb(74, 97, 139);
+               }
+            }
+         }
+
+         span.dots{
+            cursor: pointer;
+            &:hover svg{ color:rgb(181, 203, 223); }
+            svg{ width: clamp(20px, 4vw, 25px); height: clamp(20px, 4vw, 25px); pointer-events: none; }
+         }
+      }
+
+      #comm-like{
+         position: absolute;
+         left:5px;
+         bottom:5px;
+         @include flex-c-c;
+
+         i{ cursor: pointer; }
+
+         &:hover i{
+            color:green;  
+         }
+
+         &.true i{
+            color:rgb(9, 202, 9);
+         }
+
+         svg{
+            margin-right: .2em;
+            transition: .2s;
+            width: 25px;
+            height: 25px;
+            pointer-events: none;
+         }
+      }
+   }
+}
+
+@media (max-width: 480px){
+   .main-art-comm{
+      flex-direction: column;
+
+      section{
+         min-height: 100px;
+         padding-bottom: 4em;
+      }
+
+      div:not(.comm-dots):not(.comm-del-proc){
+         width: 100%;
+         text-align: left;
+         display: flex;
+         h4,h5{ padding: .1em .5em; }
+      }
+   }
+} 

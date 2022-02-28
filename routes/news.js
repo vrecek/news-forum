@@ -67,20 +67,38 @@ router.get('/get-one/:id', async (req,res) => {
          res.statusMessage = 'URL not found'
          return res.status(404).end()
       }
-      
       gotNews = gotNews[0]
 
    }
-      if(gotNews?.data){
-         const upd = Database.convertDefaultDate(gotNews, gotNews.data)
-         const author = await db.viewOne('User', upd.author?.nickname, 'username')
-   
-         await buffimage(upd)
 
-         return res.json(upd)
-      }
-   
-      res.json(gotNews)
+   await db.updateOne('News', { _id: gotNews._id }, 'views', gotNews.views + 1)
+
+   if(gotNews?.data){
+      const upd = Database.convertDefaultDate(gotNews, gotNews.data)
+
+      await buffimage(upd)
+      const fromAuthor = await db.viewAll('News', {
+         string: upd.author.nickname,
+         searchWhat: 'author.nickname',
+         returnValue: 'shortTitle',
+         limit: 4,
+         shuffle: true
+      })
+      const fromCategory = await db.viewAll('News', {
+         string: upd.category,
+         searchWhat: 'category',
+         returnValue: 'shortTitle',
+         limit: 4,
+         shuffle: true
+      })
+
+      upd.fromAuthor = fromAuthor
+      upd.fromCategory = fromCategory.filter(x => x._id.toString() !== gotNews._id.toString())
+
+      return res.json(upd)
+   }
+
+   res.json(gotNews)
 })
 
 
@@ -131,6 +149,95 @@ router.post('/', async (req,res) => {
    })
 
    res.json({ success: true, msg: 'Successfully created!' })
+})
+
+
+// POST NEW COMMENT
+router.post('/post-comment', async (req, res) => {
+   const [val, newsId] = req.body
+
+   if(!val){
+      return res.status(400).json({ success: false, msg: 'Field is empty' })
+   }
+   const db = new Database('', { News: News, User: User })
+
+   const currentUser = await db.isAuthed(req, 'User')
+   const { source, content } = Database.bufferToImg(currentUser.user.avatar)
+   const dataConv = Database.convertDefaultDate( {}, new Date(Date.now()))
+   const textEscape = Database.escapeCharacters(val)
+
+   const com = {
+      author: {
+         name: currentUser.user.username,
+         avatar: {
+            mime: content,
+            src: source
+         }
+      },
+      dateTime: dataConv.data,
+      text: textEscape
+   }
+
+   try{
+      await db.updateOne('News', { _id: newsId }, 'comments', com, true)
+      return res.json({ success: true, msg: 'Successfully commented' })
+   }catch(err){
+      return res.json({ success: false, msg: err.message })
+   }
+})
+
+
+// RATE NEWS
+router.put('/put-news/:type/:newsid/:curuser', async (req, res) => {
+   const {type, newsid, curuser} = req.params
+   const db = new Database('', { News: News })
+
+   const news = await db.viewOne('News', newsid, '_id')
+
+   if(type === 'like'){
+      if(news.whoDisliked.includes(curuser)){
+         await db.deleteFromArray('News', newsid, 'whoDisliked', curuser, true)
+         await db.updateOne('News', { _id: newsid }, 'dislikes', news.dislikes - 1)
+      }
+      await db.updateOne('News', { _id: newsid }, 'whoLiked', curuser, true)
+      await db.updateOne('News', { _id: newsid }, 'likes', news.likes + 1)
+
+   }else{
+      if(news.whoLiked.includes(curuser)){
+         await db.deleteFromArray('News', newsid, 'whoLiked', curuser, true)
+         await db.updateOne('News', { _id: newsid }, 'likes', news.likes - 1)
+      }
+      await db.updateOne('News', { _id: newsid }, 'whoDisliked', curuser, true)
+      await db.updateOne('News', { _id: newsid }, 'dislikes', news.dislikes + 1)
+   }
+   res.json(true)
+})
+
+
+// RATE COMMENT
+router.put('/put-comment/:type/:newsid/:comid/:curuser', async (req, res) => {
+   const {type, newsid, comid, curuser} = req.params
+   const db = new Database('', { News: News })
+
+   const com = await db.viewArray('News', newsid, 'comments', comid)
+
+   if(type === 'like'){
+      if(com[0].whoDisliked.includes(curuser)){
+         await db.deleteFromArray('News', newsid, 'comments', comid, false, 'whoDisliked', curuser)
+         await db.updateArray('News', newsid, 'comments', comid, 'dislikes', com[0].dislikes - 1)
+      }
+      await db.updateArray('News', newsid, 'comments', comid, 'whoLiked', curuser, true)
+      await db.updateArray('News', newsid, 'comments', comid, 'likes', com[0].likes + 1)
+
+   }else{
+      if(com[0].whoLiked.includes(curuser)){
+         await db.deleteFromArray('News', newsid, 'comments', comid, false, 'whoLiked', curuser)
+         await db.updateArray('News', newsid, 'comments', comid, 'likes', com[0].likes - 1)
+      }
+      await db.updateArray('News', newsid, 'comments', comid, 'whoDisliked', curuser, true)
+      await db.updateArray('News', newsid, 'comments', comid, 'dislikes', com[0].dislikes + 1)
+   }
+   res.json(true)
 })
 
 

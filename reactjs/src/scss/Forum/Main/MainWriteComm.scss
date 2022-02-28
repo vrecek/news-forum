@@ -1,0 +1,79 @@
+@import '../../config';
+
+form.m-w-comm{
+   margin-bottom: 2em;
+   padding: .5em;
+   position: relative;
+
+   h5{
+      position: absolute;
+      top:90%;
+      left:50%;
+      transform: translateX(-50%);
+      width: max-content;
+      background: #303030;
+      border: 1px solid #606060;
+      border-radius: .2em;
+      padding:.5em;
+   }
+
+   section{
+      display: flex;
+   }
+
+   figure{
+      div{
+         width: clamp(40px, 14vw, 80px);
+         height: clamp(40px, 14vw, 80px);
+         overflow: hidden;
+         position: relative;
+         img{ height: 100%; @include abs50; }
+      }
+
+      figcaption{
+         text-align: center;
+         font-size: .9rem;
+      }
+   }
+
+   textarea{
+      background: #101010;
+      resize: none;
+      border:1px solid #303030;
+      width: 60%;
+      height: 200px;
+      outline: 0;
+      color:white;
+      padding:.3em;
+      width: 100%;
+   }
+
+   button{
+      display: block;
+      position: relative;
+      margin:0 0 0 auto;
+      background: orangered;
+      border:0;
+      border-radius: .2em;
+      padding:1em 0;
+      width: 100px;
+      color:white;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: .2s;
+      font-size: clamp(.7rem, 3vw, .8rem);
+
+      span{ font-weight: 700; text-shadow: 0 0 2px black, 0 0 4px black; }
+
+      &:hover{
+         background: orange;
+      }
+   }
+}
+
+@media (max-width: 480px){
+   form.m-w-comm{
+      padding:0;
+      figure{ figcaption{ display: none; } }
+   }
+} 

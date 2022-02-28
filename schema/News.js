@@ -38,6 +38,24 @@ const News = mongoose.Schema({
       default: 'Default text'
    },
 
+   likes: {
+      type: Number,
+      default: 0
+   },
+
+   dislikes: {
+      type: Number,
+      default: 0
+   },
+   whoLiked: {
+      type: [String],
+      default: []
+   },
+   whoDisliked: {
+      type: [String],
+      default: []
+   },
+
    author: {
       type: {
          firstname: { type: String },
@@ -54,10 +72,21 @@ const News = mongoose.Schema({
       type: [{
          author: {
             name: { type: String },
-            avatar: { type: String }
+            avatar: {
+               mime: String,
+               src: String
+            }
+         },
+         whoLiked: {
+            type: [String],
+            default: []
+         },
+         whoDisliked: {
+            type: [String],
+            default: []
          },
          text: String,
-         dateTime: { type: Date, default: Date.now() },
+         dateTime: String,
          likes: { type: Number, default: 0 },
          dislikes: { type: Number, default: 0 }
       }],

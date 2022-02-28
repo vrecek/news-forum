@@ -19,7 +19,7 @@ const About = () => {
       window.addEventListener('scroll', eventHandle2)
 
       window.addEventListener('scroll', eventHandle3)
-   }, [])
+   }, [item, sec_one, sec_two])
 
    function removeEvents(func, loadev = false){
       window.removeEventListener('scroll', func)

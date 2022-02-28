@@ -18,7 +18,8 @@ $lines: (
    .loggedicons{
       position: relative;
 
-      a{
+      a,
+      div.redp{
          @include flex-c-c;
          color:white;
          position: relative;
@@ -173,7 +174,8 @@ $lines: (
             width:95%;
             margin: 0 0 0 auto;
 
-            a{
+            a,
+            p.redp{
                color:white;
                text-decoration: none;   
 
@@ -287,8 +289,6 @@ $lines: (
 @media (max-width: 1024px){
    .nav{
       div.image{ display: none; }
-      
-      
    }
 }
 
@@ -304,6 +304,8 @@ $lines: (
          position: static;
          a{ display: none; }
          p{ top:75%; left:50%; }
+
+         div.redp{ display: none; }
       }
 
       ul{ 
@@ -316,7 +318,6 @@ $lines: (
 
       section{
          width: auto;
-
          button{ display: none; } 
       }
    }

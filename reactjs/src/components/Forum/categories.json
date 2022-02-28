@@ -1,0 +1,43 @@
+[
+   {
+      "title": "Other / Any",
+      "desc": "None of the categories fits? Here you can write any topic, easiest and most common to use",
+      "svg": "bulb"
+   },
+
+   {
+      "title": "Achievements",
+      "desc": "Set of worldwide successess including own from all sources. Maybe you did something you're proud of?",
+      "svg": "trophy"
+   },
+   
+   {
+      "title": "Politics",
+      "desc": "Section includes politic topics from every place on earth. You can share your own opinions without any consequences, feel free to write your thoughts",
+      "svg": "earth"
+   },
+
+   {
+      "title": "Discoveries",
+      "desc": "Have you found something interesting? Or maybe some global discovery shaked you? If yes, this is section for you.",
+      "svg": "warning"
+   },
+
+   {
+      "title": "Universe",
+      "desc": "Todays space is very focused by humans. Everyday there are ideas and plans about conquering universe. Find out some mysterious things",
+      "svg": "space"
+   },
+
+   {
+      "title": "Technologies",
+      "desc": "In present time, nothing exists without computers and neww technologies. Thats why this is important and interesting, especially because of evolving speed",
+      "svg": "laptop"
+   },
+
+   {
+      "title": "Accidents",
+      "desc": "Every minute somewhere in the world happens tragic moment. Some are lucky enough to be alive, other ones dont have luck, includes your own experiences",
+      "svg": "skull"
+   }
+]

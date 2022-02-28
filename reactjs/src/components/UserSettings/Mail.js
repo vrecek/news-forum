@@ -45,7 +45,7 @@ const Mail = ({ user_mail }) => {
          }finally{ load.delete() }   
       }
       init()
-   }, [])
+   }, [navigate])
 
    return (
       <>

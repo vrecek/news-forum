@@ -1,0 +1,94 @@
+form.m-w-comm {
+  margin-bottom: 2em;
+  padding: .5em;
+  position: relative;
+}
+
+form.m-w-comm h5 {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  background: #303030;
+  border: 1px solid #606060;
+  border-radius: .2em;
+  padding: .5em;
+}
+
+form.m-w-comm section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+form.m-w-comm figure div {
+  width: clamp(40px, 14vw, 80px);
+  height: clamp(40px, 14vw, 80px);
+  overflow: hidden;
+  position: relative;
+}
+
+form.m-w-comm figure div img {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+form.m-w-comm figure figcaption {
+  text-align: center;
+  font-size: .9rem;
+}
+
+form.m-w-comm textarea {
+  background: #101010;
+  resize: none;
+  border: 1px solid #303030;
+  width: 60%;
+  height: 200px;
+  outline: 0;
+  color: white;
+  padding: .3em;
+  width: 100%;
+}
+
+form.m-w-comm button {
+  display: block;
+  position: relative;
+  margin: 0 0 0 auto;
+  background: orangered;
+  border: 0;
+  border-radius: .2em;
+  padding: 1em 0;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  -webkit-transition: .2s;
+  transition: .2s;
+  font-size: clamp(0.7rem, 3vw, 0.8rem);
+}
+
+form.m-w-comm button span {
+  font-weight: 700;
+  text-shadow: 0 0 2px black, 0 0 4px black;
+}
+
+form.m-w-comm button:hover {
+  background: orange;
+}
+
+@media (max-width: 480px) {
+  form.m-w-comm {
+    padding: 0;
+  }
+  form.m-w-comm figure figcaption {
+    display: none;
+  }
+}

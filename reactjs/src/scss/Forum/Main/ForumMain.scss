@@ -1,0 +1,238 @@
+@import '../../config';
+
+.f-route-main{
+   min-height: $fullheight;
+   background: url('https://cdn.wallpapersafari.com/19/76/yfV2nm.jpg');
+   background-size: cover;
+   padding: 2em 0;
+
+   section.num-pages{
+      background: #101010;
+      @include flex-c-c;
+
+      div{
+         padding:.5em;
+         min-width: 33px;
+         @include flex-c-c;
+         margin:0 .5em;
+         transition: .2s;
+         cursor: pointer;
+         font-size: .9rem;
+
+         &.active{
+            background: royalblue;
+            pointer-events: none;
+            color:black;
+            font-weight: 600;
+         }
+         
+         &:hover{
+            background: rgb(196, 54, 2);
+         }
+      }
+   }
+
+   section.frm-wrap{
+      width: 685px;
+      max-width: 99%;
+      background: #171717;
+      margin: 0 auto 2em auto;
+      padding: 2em 0;
+      border-radius: .2em;
+      position: relative;
+
+      .f-m-path{
+         position: absolute;
+         bottom:100%;
+         font-size: .8rem;
+
+         a{
+            text-decoration: none;
+            color:rgb(131, 158, 240);
+            &:hover{ color: royalblue; }
+         }
+      }
+
+      article{
+         width: 90%;
+         margin:0 auto 2em auto;
+         padding-bottom: .9em;
+         background: #101010;
+
+         .user-info{
+            display: flex;
+            border-bottom: 1px solid orange;
+            padding:.2em;
+
+            figure{
+               height:50px;
+               width: 50px;
+               overflow: hidden;
+               position: relative;
+               margin-right: .5em;
+
+               img{ height: 100%; @include abs50; }
+            }
+
+            div{
+               display: flex;
+               justify-content: center;
+               flex-direction: column;
+
+               h4{
+                  color: orangered;
+                  transition: .2s;
+                  cursor: pointer;
+
+                  &:hover{
+                     color:orange;
+                     text-shadow: 0 0 2px white;
+                  }
+               }
+
+               h5{
+                  font-size: .6rem;
+               }
+            }
+         }
+
+         .text-art{
+            padding:.5em;
+
+            h2{
+               color:orange;
+               font-size: clamp(1rem, 5vw, 1.2rem);
+               width: 90%;
+               font-weight: 600;
+            }
+
+            p{
+               font-size: clamp(.75rem, 3vw, .85rem);
+               margin:.5em 0;
+            }
+
+            img{
+               width: 100%;
+               margin:.5em 0;
+            }
+         }
+
+         .icons-art{
+            display: flex;
+
+            .in{
+               @include flex-c-c;
+               span{ 
+                  @include flex-c-c; 
+                  cursor: pointer;
+
+                  svg{ 
+                     width: clamp(25px, 7vw, 30px); 
+                     height:clamp(25px, 7vw, 30px);  
+                     transition: .3s;
+                  }  
+
+                  h6{ font-size: 1rem; } 
+
+                  margin:0 .5em; 
+               }
+            }
+
+            .fia-l{
+               width:20%;
+               position: relative;
+
+               svg{ pointer-events:none; }
+
+               span.true{
+                  svg{ color: rgb(0, 119, 255); }
+               }
+
+               span:hover svg{
+                  color:rgb(3, 142, 206);
+               }
+            }
+
+            .fia-c{
+               width:60%;
+               position: relative;
+
+               svg, h6{ pointer-events: none; }
+
+               span{      
+                  &:first-of-type.true{
+                     svg{ color:green; }
+                     pointer-events: none;
+                  }
+                  &:last-of-type.true{
+                     svg{ color:red; }
+                     pointer-events: none;
+                  }
+               }
+
+               span#alike:hover svg{
+                  color:rgb(0, 189, 0);
+               }
+               span#adlike:hover svg{
+                  color:red;
+               }
+            }
+
+            .fia-r{
+               width:20%;
+
+               svg:hover{
+                  color:#707070;
+               }
+
+               span{ svg{ margin-right:.3em; } }
+            }
+
+            h3{
+               position: absolute;
+               left:50%;
+               transform: translateX(-50%) scale(0);
+               top:100%;
+               background: rgb(27, 27, 27);
+               padding:.2em;
+               border-radius: .2em;
+               border: 1px solid whitesmoke;
+               font-size: .8rem;
+               box-shadow: 0 0 1px blue;
+               animation: ranim 2s;
+               white-space: nowrap;
+            }
+         }
+      }
+   }
+
+   @keyframes ranim{
+      0%{ transform: translateX(-50%) scale(0); }
+      50%{ transform: translateX(-50%) scale(1); }
+      100%{ transform: translateX(-50%) scale(0); }
+   }
+}
+
+.click{
+   position: fixed;
+   width: 20px;
+   height: 20px;
+   background: rgba(30,30,30,.6);
+   box-shadow: 0 0 2px white, 0 0 4px white;
+   border-radius: 50%;
+   transform: scale(0);
+   animation: canim .5s;
+
+   @keyframes canim{
+      0%{ transform: scale(0); }
+      100%{ transform: scale(1); }
+   }
+}
+
+@media (max-width: 480px){
+   .f-route-main{
+      section.frm-wrap{
+         article{ width: 98%; }
+      }
+   }
+} 

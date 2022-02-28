@@ -1,30 +1,82 @@
 import React from 'react';
-import { AiFillLike, AiFillDislike, AiOutlineFieldTime } from 'react-icons/ai'
+import { AiFillLike, AiFillDislike } from 'react-icons/ai'
+import { fetchPost } from '../../js/fetches';
+import SignInToComment from './SignInToComment';
+import { useState } from 'react';
 
-const Comment = ({ avatar, authorName, data, text, likes, dislikes }) => {
+const Comment = ({ whoLiked,whoDisliked, whoRead, newsId, id, av_mime, av_src, authorName, data, text, likes, dislikes }) => {
+   const [dmr, hm] = [data.slice(0, data.indexOf('-') - 1), data.slice(data.indexOf('-') + 2)]
+   const [sign, setSign] = useState(null)
+   const hasLiked = whoLiked.some(x => x === whoRead)
+   const hasDisliked = whoDisliked.some(x => x === whoRead)
+
+   const likef = async e => {
+      if(!whoRead){
+         setSign(true)
+         return
+      }
+
+      const h2 = e.target.children[1]     
+      h2.textContent = parseInt(h2.textContent) + 1
+
+      const dislike = e.target.parentElement.children[1]
+      if(dislike.classList.contains('truer')){
+         const num = dislike.children[1]
+         dislike.className = ''
+         num.textContent = parseInt(num.textContent - 1)
+      }
+
+      e.target.className = 'trueg'
+      
+      await fetchPost(`/api/news/put-comment/like/${newsId}/${id}/${whoRead}`, {}, 'PUT')
+   }
+
+   const dislikef = async e => {
+      if(!whoRead){
+         setSign(true)
+         return
+      }
+
+      const h2 = e.target.children[1]
+      h2.textContent = parseInt(h2.textContent) + 1
+
+      const like = e.target.parentElement.children[0]
+      if(like.classList.contains('trueg')){
+         const num = like.children[1]
+         like.className = ''
+         num.textContent = parseInt(num.textContent - 1)
+      }
+
+      e.target.className = 'truer'
+      
+      await fetchPost(`/api/news/put-comment/dislike/${newsId}/${id}/${whoRead}`, {}, 'PUT')
+   }
+
    return (
       <article>
+         { sign && <SignInToComment close={ () => setSign(null) } /> }
+
          <section className='com-infos'>
             <figure>
-               <img src='https://media.istockphoto.com/photos/portrait-of-a-man-picture-id155360935' alt='avatar' />
+               <img src={`data:image/${av_mime};base64,${av_src}`} alt='avatar' />
             </figure>
-            <figcaption> <a href='/'>vrecek</a> </figcaption>
+            <figcaption onClick={()=>window.location.href=`/user/${authorName}`}> { authorName } </figcaption>
 
-            <h5>Commented: <span>18:46</span> <span>19.02.2022</span></h5>
+            <h5>Commented: <span>{dmr}</span><span>{hm}</span></h5>
          </section>
 
          <section className='com-text'>
-            <p>kodskafokafdokafdsoakfoakfdkodskafokafdokafdsoakfoakfdkodskafokafdokafdsoakfoakfdkodskafokafdokafdsoakfoakfdkodskafokafdokafd</p>
+            <p>{ text }</p>
                      
             <div className='rating-cont'>
-               <div>
+               <div className={ hasLiked ? 'trueg' : '' } onClick={ likef }>
                   <AiFillLike />
-                  <h6>624</h6>
+                  <h6>{ likes }</h6>
                </div>
 
-               <div>
+               <div className={ hasDisliked ? 'truer' : '' } onClick={ dislikef }>
                   <AiFillDislike />
-                  <h6>62</h6>
+                  <h6>{ dislikes }</h6>
                </div>
             </div>
          </section>

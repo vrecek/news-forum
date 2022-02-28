@@ -14,7 +14,6 @@ import { Loading } from '../../js/Loading'
 const Nav = () => {
    const [toggle, setToggle] = useState(false)
    const [logged, setLogged] = useState(false)
-   const [avatar, setAvatar] = useState(null)
    const navigate = useNavigate()
    const perc = [20, 50, 80];
 
@@ -65,12 +64,9 @@ const Nav = () => {
             const data = await fetchGet('/api/users/is-authed')
 
             if(data.user){
-               const data_avatar = await fetchGet('/api/users/get-avatar')
-
                const notViewedMsgs = data.user.messages.filter(x => x.viewed === false)
-
-               setAvatar(data_avatar)
                setLogged({ result: data.result, user: data.user, msgs: notViewedMsgs.length })
+
             }else{
                setLogged({ result: data.result, user: data.user })
             }     
@@ -90,7 +86,7 @@ const Nav = () => {
             <li> <Link to='/'> <AiOutlineHome /> <span>Homepage</span> </Link> </li>
             <li> <Link to='/latest-news'> <AiOutlineFire /> <span>Latest</span> </Link></li>
             <li> <Link to='/'> <BiWorld /> <span>Popular</span> </Link></li>
-            <li> <Link to='/'> <MdOutlineForum /> <span>Forum</span> </Link> </li>
+            <li> <Link to='/forum'> <MdOutlineForum /> <span>Forum</span> </Link> </li>
          </ul>
 
          <section>
@@ -100,14 +96,14 @@ const Nav = () => {
                   <a per='Messages' href='/my-messages'> <BiMessageDetail />
                      { logged.msgs !== 0 && <span>{ logged.msgs }</span> } 
                   </a>
-                  <a onClick={ redirectProfile } per='Profile'> 
+                  <div className='redp' onClick={ redirectProfile } per='Profile'> 
                      { 
-                        avatar && avatar.source ? 
-                           <div><img src={`data:image/${avatar.content};base64,${avatar.source}`} alt='avatar_error' /></div>
+                        logged && logged.user.avatarString ? 
+                           <div><img src={`data:image/${logged.user.avatar.contentType};base64,${logged.user.avatarString}`} alt='avatar_error' /></div>
                         : 
                            <AiOutlineUser /> 
                      } 
-                  </a>
+                  </div>
                   <p className='log-as'>Logged: <span>{ logged.user.username }</span></p>
                </section>
                :
@@ -124,7 +120,7 @@ const Nav = () => {
                   {
                      logged.result ? 
                      <>
-                        <a onClick={ redirectProfile }> <li className='first'>  <AiOutlineUser /> <span>Profile</span> </li> </a>
+                        <p className='redp' onClick={ redirectProfile }> <li className='first'>  <AiOutlineUser /> <span>Profile</span> </li> </p>
                         <a href='/user-settings'> <li>  <FaUserCog /> <span>Settings</span> </li> </a>
                         <a href='/my-messages'> <li>  <BiEnvelope /> <span>Messages</span> </li> </a>
                         <a className='logout-red' href='http://localhost:5000/api/users/logout'> <li> <AiOutlinePoweroff /> <span>Logout</span> </li></a>
@@ -138,11 +134,11 @@ const Nav = () => {
                   
                   <li className='line'></li>
                   {
-                     logged?.user?.role !== 'normal' && 
+                     logged?.result && logged?.user?.role !== 'normal' && 
                      <a href='/write-news'> <li className='write-article'>  <HiPencil /> <span>Write new article</span> </li></a>
                   }
                   <Link to='/'> <li>  <AiOutlineHome /> <span>Homepage</span> </li></Link>
-                  <Link to='/'> <li>  <MdOutlineForum /> <span>Forum</span> </li></Link>
+                  <Link to='/forum'> <li>  <MdOutlineForum /> <span>Forum</span> </li></Link>
                   <a href='/latest-news'> <li>  <AiOutlineFire /> <span>Latest news</span> </li></a>
                   <Link to='/'> <li>  <BiWorld /> <span>Now popular</span> </li></Link>
                   <li className='line'></li>

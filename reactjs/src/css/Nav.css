@@ -20,7 +20,8 @@
   position: relative;
 }
 
-.nav .loggedicons a {
+.nav .loggedicons a,
+.nav .loggedicons div.redp {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,14 +36,16 @@
   margin: 0 .5em;
 }
 
-.nav .loggedicons a div {
+.nav .loggedicons a div,
+.nav .loggedicons div.redp div {
   width: 30px;
   height: 30px;
   overflow: hidden;
   position: relative;
 }
 
-.nav .loggedicons a div img {
+.nav .loggedicons a div img,
+.nav .loggedicons div.redp div img {
   height: 100%;
   position: absolute;
   left: 50%;
@@ -51,7 +54,8 @@
           transform: translate(-50%, -50%);
 }
 
-.nav .loggedicons a span {
+.nav .loggedicons a span,
+.nav .loggedicons div.redp span {
   position: absolute;
   min-width: 20px;
   min-height: 20px;
@@ -71,7 +75,8 @@
   bottom: 85%;
 }
 
-.nav .loggedicons a:hover svg {
+.nav .loggedicons a:hover svg,
+.nav .loggedicons div.redp:hover svg {
   color: orange;
   -webkit-filter: blur(0.6px);
           filter: blur(0.6px);
@@ -79,11 +84,13 @@
           box-shadow: 0 0 2px blue, 0 0 4px blue, 0 0 8px blue, 0 0 16px blue;
 }
 
-.nav .loggedicons a:hover::before {
+.nav .loggedicons a:hover::before,
+.nav .loggedicons div.redp:hover::before {
   opacity: 1;
 }
 
-.nav .loggedicons a::before {
+.nav .loggedicons a::before,
+.nav .loggedicons div.redp::before {
   opacity: 0;
   pointer-events: none;
   position: absolute;
@@ -101,7 +108,8 @@
   transition: .4s;
 }
 
-.nav .loggedicons a svg {
+.nav .loggedicons a svg,
+.nav .loggedicons div.redp svg {
   width: 30px;
   height: 30px;
   -webkit-transition: .3s;
@@ -234,16 +242,19 @@
   margin: 0 0 0 auto;
 }
 
-.nav section aside ol a {
+.nav section aside ol a,
+.nav section aside ol p.redp {
   color: white;
   text-decoration: none;
 }
 
-.nav section aside ol a.logout-red {
+.nav section aside ol a.logout-red,
+.nav section aside ol p.redp.logout-red {
   color: #e22424;
 }
 
-.nav section aside ol a li {
+.nav section aside ol a li,
+.nav section aside ol p.redp li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -256,7 +267,8 @@
   position: relative;
 }
 
-.nav section aside ol a li::before {
+.nav section aside ol a li::before,
+.nav section aside ol p.redp li::before {
   position: absolute;
   content: '';
   top: 50%;
@@ -269,33 +281,40 @@
   transition: all .2s;
 }
 
-.nav section aside ol a li.first {
+.nav section aside ol a li.first,
+.nav section aside ol p.redp li.first {
   padding: 1em .5em .5em .5em;
 }
 
-.nav section aside ol a li.last {
+.nav section aside ol a li.last,
+.nav section aside ol p.redp li.last {
   padding: .5em .5em 1em .5em;
 }
 
-.nav section aside ol a li.write-article {
+.nav section aside ol a li.write-article,
+.nav section aside ol p.redp li.write-article {
   color: yellow;
 }
 
-.nav section aside ol a li span {
+.nav section aside ol a li span,
+.nav section aside ol p.redp li span {
   margin: 0 auto;
   font-size: clamp(0.8rem, 5vw, 1rem);
 }
 
-.nav section aside ol a li svg {
+.nav section aside ol a li svg,
+.nav section aside ol p.redp li svg {
   width: clamp(20px, 6vw, 25px);
   height: clamp(20px, 6vw, 25px);
 }
 
-.nav section aside ol a li:hover {
+.nav section aside ol a li:hover,
+.nav section aside ol p.redp li:hover {
   background: #0080ca;
 }
 
-.nav section aside ol a li:hover:not(.last):not(.first)::before {
+.nav section aside ol a li:hover:not(.last):not(.first)::before,
+.nav section aside ol p.redp li:hover:not(.last):not(.first)::before {
   background: #0080ca;
   width: 8px;
   height: 140%;
@@ -382,6 +401,9 @@
   .nav .loggedicons p {
     top: 75%;
     left: 50%;
+  }
+  .nav .loggedicons div.redp {
+    display: none;
   }
   .nav ul li {
     margin-right: .7em;

@@ -56,9 +56,9 @@ const Latest = () => {
             
             const path = window.location.pathname
             const nr = parseInt( path.slice(path.indexOf('s/') + 2) )
-            
+
             const numpages = await fetchGet('/api/news/pages')
-            
+
             if(nr > numpages.length){
                const err = new Error(`Page ${nr} does not exist! Dont mess with URL`)
                err.code = 404
@@ -81,8 +81,8 @@ const Latest = () => {
                Object.assign(x, { shrt: shortText })
             }
             setNews(data)
-            
             setPages(numpages)
+            
          }catch(err){
             navigate('/error', { state: { msg: err.message, code: err.code } })
          }finally{

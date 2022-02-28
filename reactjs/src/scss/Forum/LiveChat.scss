@@ -1,0 +1,139 @@
+@import '../config';
+
+section.f-chat{
+   width: 1220px;
+   max-width: 99%;
+   margin:1em auto 0 auto;
+
+   h5{
+      padding:.1em;
+   }
+
+   article{
+      background: transparent;
+      box-shadow: 0 0 1px white;
+      padding:.5em;
+      height: 300px;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar{
+         width: 5px;
+         background: black;
+      }
+
+      &::-webkit-scrollbar-thumb{
+         width: 100%;
+         background: #202020;
+      }
+
+      div{
+         background: rgba(20,20,20,.9);
+         padding:.5em;
+         margin-bottom: .5em;
+
+         h6{
+            width: max-content;
+            margin-bottom: .4em;
+            border-bottom: 1px solid cornflowerblue;
+            color:transparent;
+            text-shadow: 0 0 1px cornflowerblue;
+            font-size: .7rem;
+            padding-bottom: .1em;
+            cursor: pointer;
+
+            span{ text-shadow: 0 0 1px orangered; }
+         }
+
+         p{ font-size: clamp(.85rem, 3vw, 1rem); }
+      }
+   }
+
+   form{
+      margin-top: .5em;
+      align-items: center;
+      position: relative;
+
+      p{
+         position: absolute;
+         top:100%;
+         left:20%;
+         color: red;
+         text-transform: uppercase;
+         font-weight: 600;
+         animation: panim 1s;
+         animation-delay: 1s;
+
+         @keyframes panim{
+            0%{ opacity: 1; }
+            100%{ opacity: 0; }
+         }
+      }
+
+      button{
+         display: block;
+         padding:.5em 1.5em;
+         cursor: pointer;
+         border-radius: .2em;
+         background: #f4a5601a;
+         outline: 0;
+         border: 1px solid #f4a460;
+         color:white;
+         transition: all .5s;
+         position: relative;
+
+         &:hover{
+            background: #f4a56042;
+         }
+
+         span.add{
+            position: absolute;
+            left:50%;
+            top:0;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 100%;
+            border-radius: .2em;
+            background: #f4a5601a;
+
+            &.clickedanim {
+               animation: animbtn .3s;
+            }
+         }
+
+         @keyframes animbtn{
+            0%{ transform: translateX(-50%) scaleX(0); }
+            100%{transform: translateX(-50%) scaleX(1); }
+         }
+
+      }
+
+      textarea{
+         resize: none;
+         width: 620px;
+         max-width: 99%;
+         outline: 0;
+         background: transparent;
+         border: 2px solid #303030;
+         border-radius: .2em;
+         color:white;
+         filter: blur(.4px);
+         padding:.5em;
+         transition: .2s;
+         height:80px;
+
+         &:focus{
+            border-color: #725b4a;
+         }
+
+         &::-webkit-scrollbar{
+            width: 2px;
+            background: black;
+         }
+   
+         &::-webkit-scrollbar-thumb{
+            width: 100%;
+            background: #202020;
+         }
+      }
+   }
+}

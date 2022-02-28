@@ -1,9 +1,11 @@
-export const fetchPost = async (url, body=null, method='POST') => {
+export const fetchPost = async (url, body=null, method='POST', turnOffControllerAbort=true) => {
    try{
       const controller = new AbortController()
-      setTimeout(() => {
-         controller.abort()
-      }, 8000);
+      if(turnOffControllerAbort){
+         setTimeout(() => {
+            controller.abort()
+         }, 8000);
+      }
 
       const opt = {
          method: method,

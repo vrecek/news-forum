@@ -14,6 +14,10 @@ import UserSettings from './components/UserSettings/UserSettings';
 import ViewNews from './components/News/ViewNews';
 import UserProfile from './components/Profile/UserProfile';
 import WriteNews from './components/News/WriteNews';
+import EntryPage from './components/Forum/EntryPage';
+import ForumMain from './components/Forum/Main/ForumMain';
+import WriteNew from './components/Forum/Main/WriteNew';
+import MainPost from './components/Forum/Main/MainPost';
 
 function App() {
   return (
@@ -40,6 +44,16 @@ function App() {
 
         <Route path='/contact' element={ <Contact /> } />
         <Route path='/about' element={ <About /> } />
+
+        {/*  */}
+
+        <Route path='/forum' element={ <EntryPage /> } />
+
+        <Route path='/forum/main' element={ <ForumMain /> } />
+        <Route path='/forum/main/:nr' element={ <ForumMain /> } />
+        <Route path='/forum/main/:nr/:postId' element={ <MainPost /> } />
+
+        <Route path='/forum/main/write-new' element={ <WriteNew /> } />
 
         <Route path='/error' element={ <Errorpage /> } />
 

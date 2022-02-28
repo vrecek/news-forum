@@ -40,10 +40,16 @@ const WriteNews = () => {
                case 'sH':
                   area.value += '{-sh}{sh-}'
                break;
+
+               case 'Link':
+                  area.value += "{-l::}{l-}"
+               break;
+
+               default: break;
             }
          })
       })
-   }, [])
+   }, [navigate])
    
    // onchange event
    function displayImage(e){
@@ -94,7 +100,7 @@ const WriteNews = () => {
       try{
          load.attach()
 
-         const data = await fetchPost('/api/news', body)
+         const data = await fetchPost('/api/news', body, 'POST', false)
          if(data.success){
             const formdata = new FormData()
             formdata.append('artBack', body[2])
@@ -163,7 +169,7 @@ const WriteNews = () => {
                </div>
 
                <div>
-                  <label>Image thumbnail <span>(1080p and higher, must fit in border)</span></label>
+                  <label>Image thumbnail <span>(1080p+)</span></label>
                   <div className='select-image-cont'>
                      <input onChange={ displayImage } type='file' />
                      <figure>
@@ -192,6 +198,7 @@ const WriteNews = () => {
                      <section ref={ shortcutCont }>
                         <span>bH</span>
                         <span>sH</span>
+                        <span>Link</span>
                      </section>
                   </div>
                </div>

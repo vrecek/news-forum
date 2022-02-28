@@ -62,9 +62,20 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/api/us
 
 
 // return true,user or false
+const appendAvatar = async obj => {
+   const avatarstr = Database.bufferToImg(obj?.user?.avatar)
+   obj.user = {...obj.user._doc, avatarString: avatarstr.source}
+
+   return new Promise((resolve, reject) => resolve(obj))
+}
 router.get('/is-authed', async (req, res) => {
    const db = new Database('', { User: User })
    const authResult = await db.isAuthed(req, 'User')
+
+   if(authResult.result){
+      const updated = await appendAvatar(authResult)
+      return res.json(updated)
+   }
 
    res.json(authResult)
 })

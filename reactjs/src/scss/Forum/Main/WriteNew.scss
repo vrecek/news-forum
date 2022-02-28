@@ -1,0 +1,142 @@
+@import '../../config';
+
+.write-new-main{
+   min-height: $fullheight;
+   background: url('https://cdn.wallpapersafari.com/19/76/yfV2nm.jpg');
+   background-size: cover;
+   padding:2em;
+
+   form{
+      background: rgba(20,20,20,.9);
+      border-radius: .2em;
+      border: 1px solid #303030;
+      padding: 1em;
+      width: 50%;
+      margin:0 auto;
+      position: relative;
+
+      h2{
+         position: absolute;
+         left:0;
+         width: 100%;
+         top:50%;
+         transform: translateY(-50%);
+         color: white;
+         z-index: 999;
+         text-align: center;
+         font-weight: 700;
+         font-size: 1rem;
+         padding:.5em 0;
+
+         span{
+            display: block;
+            cursor: pointer;
+         }
+
+         &::before{
+            content: '';
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 15px;
+            height: 15px;
+            top:80%;
+         }
+         
+         &.false{
+            background: rgb(185, 5, 5); 
+            animation: an 1s;
+            animation-delay: 2s;
+            &::before{ background: rgb(185, 5, 5); }
+         }
+
+         &.true{
+            background: rgb(5, 139, 16);
+            &::before{ background: rgb(5, 139, 16); }
+         }
+
+         @keyframes an{
+            0%{opacity: 1;}
+            100%{opacity: 0;}
+         }
+      }
+
+      button{
+         margin: 0 auto;
+         display: block;
+         transition: .2s;
+         position: relative;
+         outline: 0;
+
+         &:hover{
+            background: #1a329e !important;
+         }
+      }
+
+      h3{
+         font-size: 1rem;
+         margin-bottom: .5em;
+      }
+
+      h1{
+         font-size: 1.2rem;
+         font-weight: 100;
+         filter: blur(.2px);
+         text-shadow: 0 0 2px grey, 0 0 4px grey;
+         color:rgba(255, 255, 255, .4);
+         margin-bottom: 2em;
+      }
+
+      section.wnm-title{
+
+         input{
+            background: none;
+            outline: 0;
+            border: 0;
+            border-bottom: 2px solid green;
+            color:white;
+            width: 100%;
+         }
+      }
+
+      section.wnm-img{
+         margin: 3em 0 2em 0;
+
+         div.wnm-img-cont input{ display: block; margin-bottom: 1em; &:last-child{ margin: 0; } }
+
+         div.wnm-img-opt{
+            display: flex;
+
+            span{
+               cursor: pointer;
+               margin:0 .5em;
+   
+               svg{
+                  width: 30px;
+                  height: 30px;
+                  pointer-events: none;
+               }
+            }
+         }
+
+         div.wnm-img-cont{
+            background: #202020;
+            padding:1em;
+         }
+      }
+
+      section.wnm-text{
+         textarea{
+            resize: none;
+            width: 100%;
+            background: #151515;
+            outline: 0;
+            border:1px solid #252525;
+            padding:.5em;
+            color:white;
+            font-size: .9rem;
+            height: 300px;
+         }
+      }
+   }
+}

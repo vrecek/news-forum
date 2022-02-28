@@ -2,18 +2,29 @@
 
 .comments{
    margin: 4em auto;
-   width: 55%;
+   width: 830px;
+   max-width: 99%;
 
    h3.comments-str{
-      margin-bottom: .2em;
+      margin-bottom: 1em;
       font-weight: 100;
-      font-size: .9rem;
+      font-size: 1.5rem;
+      color:white;
+      font-weight: 700;
+      text-shadow: 0 0 2px black, 0 0 4px black;
    }
    
    section.com-cont{
       background: #555555;
       padding:.8em;
       border: 1px solid cornflowerblue;
+
+      h2.no-com{
+         text-align: center;
+         font-size: 1rem;
+         color:rgb(250, 242, 232);
+         font-weight: 600;
+      }
 
       article{
          display: flex;
@@ -23,12 +34,12 @@
 
          section{
             &.com-infos{
-               width: 17%;
+               width: 135px;
                border-right: 2px solid black;
                padding:.3em;
 
                figure{
-                  height:6vw;
+                  height:90px;
                   overflow: hidden;
                   position: relative;
                   img{ height: 100%; @include abs50; }
@@ -37,22 +48,19 @@
                figcaption{
                   text-align: center;
                   padding:.1em 0;
-
-                  a{       
-                     text-decoration: none;
-                     color:orange;               
-                     font-size: 1.1rem;
-                     font-family:Arial, Helvetica, sans-serif;
-                     transition: .3s;
-                     &:hover{ color:orangered; }
-                  }
+                  color:orange;               
+                  font-size: clamp(.9rem, 4vw, 1.1rem);
+                  font-family:Arial, Helvetica, sans-serif;
+                  transition: .3s;
+                  cursor: pointer;
+                  &:hover{ color:orangered; }
                }
 
                h5{
                   display: flex;
                   flex-direction: column;
                   margin:.1em 0;
-                  font-size: .75rem;
+                  font-size: clamp(.65rem, 2vw, .75rem);
 
                   span{             
                      color:rgb(228, 160, 33);
@@ -67,6 +75,7 @@
 
                p{
                   overflow: hidden;
+                  font-size: clamp(.8rem, 3vw, .95rem);
                   word-break: break-all;
                }
 
@@ -76,17 +85,24 @@
                   bottom:5px;
                   display: flex;
                   justify-content: space-between;
-                  width: 12%;
+                  width: 80px;
                   padding: 0 .5em;
                   div{
                      cursor: pointer;
+                     @include flex-c-c;
+                     flex-direction: column;
 
-                     svg{ transition: .3s; }
+                     &.trueg{ pointer-events: none; svg{ color:rgb(5, 182, 5); } }
+                     &.truer{ pointer-events: none; svg{ color:red; } }
+
+                     svg{ transition: .3s; margin-bottom: .2em; pointer-events: none; }
                      
                      &:hover{
                         &:nth-child(1){ svg{ color:rgb(5, 182, 5); } }
                         &:nth-child(2){ svg{ color:red; } }
                      }
+
+                     h6{ pointer-events: none; }
                   }
                   
                }
@@ -95,3 +111,22 @@
       }
    }
 }
+
+@media (max-width: 480px){
+   .comments{
+      section.com-cont{
+         padding: .8em .1em;
+
+         article{
+            section{
+               &.com-infos{
+                  width: auto;
+                  figure{
+                     height: 17vw;
+                  }
+               }
+            }
+         }
+      }
+   }
+} 

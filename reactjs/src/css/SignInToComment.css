@@ -1,0 +1,112 @@
+section.logintocomment {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 9999;
+}
+
+section.logintocomment div {
+  background: #202020;
+  padding: 2em;
+  border: 3px solid grey;
+  border-radius: .5em;
+}
+
+section.logintocomment div svg {
+  color: red;
+  display: block;
+  margin: 0 0 0 auto;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+section.logintocomment div svg:hover {
+  color: #970a0a;
+}
+
+section.logintocomment div h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 5% 0 10% 0;
+}
+
+section.logintocomment div h4 {
+  position: relative;
+  z-index: 9;
+}
+
+section.logintocomment div h4 span.text {
+  text-align: center;
+  font-weight: 700;
+  color: #e9e3e3;
+  text-transform: uppercase;
+  display: block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  text-align: center;
+  margin: 2em auto;
+  font-size: 1.35rem;
+  background: #202020;
+  z-index: 9;
+  padding: 0 .5em;
+}
+
+section.logintocomment div h4 span.line {
+  position: absolute;
+  height: 2px;
+  display: block;
+  width: 50%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: -2;
+}
+
+section.logintocomment div button {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid blue;
+  border-radius: .4em;
+  background: #0f0f0f;
+  padding: 1em 0;
+  width: 50%;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+section.logintocomment div button:hover {
+  -webkit-box-shadow: 0 0 2px #190cd3, 0 0 4px #190cd3, 0 0 8px #190cd3;
+          box-shadow: 0 0 2px #190cd3, 0 0 4px #190cd3, 0 0 8px #190cd3;
+}
+
+section.logintocomment div button:hover span {
+  color: #87bb3a;
+}
+
+section.logintocomment div button span {
+  color: blue;
+  font-weight: 700;
+  -webkit-transition: .2s;
+  transition: .2s;
+}

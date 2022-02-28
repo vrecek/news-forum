@@ -239,7 +239,7 @@ const SearchCont = () => {
             <section>
                {
                   search && search.map(it => (
-                     <a key={ it._id } href='/'>{ it.shortTitle }</a>
+                     <div onClick={ () => window.location.href=`/news/${it._id}` } key={ it._id } href='/'>{ it.shortTitle }</div>
                   ))
                }
             </section>

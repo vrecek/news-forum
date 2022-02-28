@@ -1,0 +1,351 @@
+.f-route-main {
+  min-height: calc(100vh - 70px);
+  background: url("https://cdn.wallpapersafari.com/19/76/yfV2nm.jpg");
+  background-size: cover;
+  padding: 2em 0;
+}
+
+.f-route-main section.num-pages {
+  background: #101010;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.f-route-main section.num-pages div {
+  padding: .5em;
+  min-width: 33px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 .5em;
+  -webkit-transition: .2s;
+  transition: .2s;
+  cursor: pointer;
+  font-size: .9rem;
+}
+
+.f-route-main section.num-pages div.active {
+  background: royalblue;
+  pointer-events: none;
+  color: black;
+  font-weight: 600;
+}
+
+.f-route-main section.num-pages div:hover {
+  background: #c43602;
+}
+
+.f-route-main section.frm-wrap {
+  width: 685px;
+  max-width: 99%;
+  background: #171717;
+  margin: 0 auto 2em auto;
+  padding: 2em 0;
+  border-radius: .2em;
+  position: relative;
+}
+
+.f-route-main section.frm-wrap .f-m-path {
+  position: absolute;
+  bottom: 100%;
+  font-size: .8rem;
+}
+
+.f-route-main section.frm-wrap .f-m-path a {
+  text-decoration: none;
+  color: #839ef0;
+}
+
+.f-route-main section.frm-wrap .f-m-path a:hover {
+  color: royalblue;
+}
+
+.f-route-main section.frm-wrap article {
+  width: 90%;
+  margin: 0 auto 2em auto;
+  padding-bottom: .9em;
+  background: #101010;
+}
+
+.f-route-main section.frm-wrap article .user-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid orange;
+  padding: .2em;
+}
+
+.f-route-main section.frm-wrap article .user-info figure {
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  position: relative;
+  margin-right: .5em;
+}
+
+.f-route-main section.frm-wrap article .user-info figure img {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.f-route-main section.frm-wrap article .user-info div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.f-route-main section.frm-wrap article .user-info div h4 {
+  color: orangered;
+  -webkit-transition: .2s;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.f-route-main section.frm-wrap article .user-info div h4:hover {
+  color: orange;
+  text-shadow: 0 0 2px white;
+}
+
+.f-route-main section.frm-wrap article .user-info div h5 {
+  font-size: .6rem;
+}
+
+.f-route-main section.frm-wrap article .text-art {
+  padding: .5em;
+}
+
+.f-route-main section.frm-wrap article .text-art h2 {
+  color: orange;
+  font-size: clamp(1rem, 5vw, 1.2rem);
+  width: 90%;
+  font-weight: 600;
+}
+
+.f-route-main section.frm-wrap article .text-art p {
+  font-size: clamp(0.75rem, 3vw, 0.85rem);
+  margin: .5em 0;
+}
+
+.f-route-main section.frm-wrap article .text-art img {
+  width: 100%;
+  margin: .5em 0;
+}
+
+.f-route-main section.frm-wrap article .icons-art {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.f-route-main section.frm-wrap article .icons-art .in {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.f-route-main section.frm-wrap article .icons-art .in span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  margin: 0 .5em;
+}
+
+.f-route-main section.frm-wrap article .icons-art .in span svg {
+  width: clamp(25px, 7vw, 30px);
+  height: clamp(25px, 7vw, 30px);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.f-route-main section.frm-wrap article .icons-art .in span h6 {
+  font-size: 1rem;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-l {
+  width: 20%;
+  position: relative;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-l svg {
+  pointer-events: none;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-l span.true svg {
+  color: #0077ff;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-l span:hover svg {
+  color: #038ece;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c {
+  width: 60%;
+  position: relative;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c svg, .f-route-main section.frm-wrap article .icons-art .fia-c h6 {
+  pointer-events: none;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span:first-of-type.true {
+  pointer-events: none;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span:first-of-type.true svg {
+  color: green;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span:last-of-type.true {
+  pointer-events: none;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span:last-of-type.true svg {
+  color: red;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span#alike:hover svg {
+  color: #00bd00;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-c span#adlike:hover svg {
+  color: red;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-r {
+  width: 20%;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-r svg:hover {
+  color: #707070;
+}
+
+.f-route-main section.frm-wrap article .icons-art .fia-r span svg {
+  margin-right: .3em;
+}
+
+.f-route-main section.frm-wrap article .icons-art h3 {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%) scale(0);
+          transform: translateX(-50%) scale(0);
+  top: 100%;
+  background: #1b1b1b;
+  padding: .2em;
+  border-radius: .2em;
+  border: 1px solid whitesmoke;
+  font-size: .8rem;
+  -webkit-box-shadow: 0 0 1px blue;
+          box-shadow: 0 0 1px blue;
+  -webkit-animation: ranim 2s;
+          animation: ranim 2s;
+  white-space: nowrap;
+}
+
+@-webkit-keyframes ranim {
+  0% {
+    -webkit-transform: translateX(-50%) scale(0);
+            transform: translateX(-50%) scale(0);
+  }
+  50% {
+    -webkit-transform: translateX(-50%) scale(1);
+            transform: translateX(-50%) scale(1);
+  }
+  100% {
+    -webkit-transform: translateX(-50%) scale(0);
+            transform: translateX(-50%) scale(0);
+  }
+}
+
+@keyframes ranim {
+  0% {
+    -webkit-transform: translateX(-50%) scale(0);
+            transform: translateX(-50%) scale(0);
+  }
+  50% {
+    -webkit-transform: translateX(-50%) scale(1);
+            transform: translateX(-50%) scale(1);
+  }
+  100% {
+    -webkit-transform: translateX(-50%) scale(0);
+            transform: translateX(-50%) scale(0);
+  }
+}
+
+.click {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: rgba(30, 30, 30, 0.6);
+  -webkit-box-shadow: 0 0 2px white, 0 0 4px white;
+          box-shadow: 0 0 2px white, 0 0 4px white;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-animation: canim .5s;
+          animation: canim .5s;
+}
+
+@-webkit-keyframes canim {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes canim {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .f-route-main section.frm-wrap article {
+    width: 98%;
+  }
+}

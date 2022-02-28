@@ -25,13 +25,7 @@ const NameSurname = () => {
          load.attach()
 
          const us = await fetchGet('/api/users/is-authed')
-
-         if(us.user.avatar.data){
-            const base64 = btoa(new Uint8Array(us.user.avatar.data.data).reduce(function (data, byte) {
-               return data + String.fromCharCode(byte);
-            }, ''));
-            setAvatar({ source: base64, ct: us.user.avatar.contentType })
-         }
+         setAvatar({contentType: us.user.avatar.contentType, data: us.user.avatarString })
 
          if(us.user.firstname !== 'Not set') setFirst(us.user.firstname)
 
@@ -123,7 +117,7 @@ const NameSurname = () => {
             <h4>Your avatar: 
                {
                   avatar ?
-                  <div className='usavatar'> <img src={`data:image/${avatar.ct};base64,${avatar.source}`} alt='avatar_error' /> </div>
+                  <div className='usavatar'> <img src={`data:image/${avatar.contentType};base64,${avatar.data}`} alt='avatar_error' /> </div>
                   :
                   <span>Not set</span>
                }

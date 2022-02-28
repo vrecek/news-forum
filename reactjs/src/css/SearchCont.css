@@ -139,7 +139,7 @@
   pointer-events: none;
 }
 
-.searchcont div section a {
+.searchcont div section div {
   display: block;
   width: 100%;
   padding: .5em 0;
@@ -151,9 +151,10 @@
           filter: blur(0.4px);
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.searchcont div section a:hover {
+.searchcont div section div:hover {
   background: #252525;
 }
 

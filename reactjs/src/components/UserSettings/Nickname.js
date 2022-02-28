@@ -66,7 +66,7 @@ const Nickname = ({ user_name }) => {
          }finally{ load.delete()}    
       }
       init()
-   }, [])
+   }, [navigate])
 
    return (
       <>

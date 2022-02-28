@@ -1,0 +1,192 @@
+.post-comms {
+  border-top: 1px solid lightgray;
+  margin-top: 2em;
+  border-bottom: 1px solid lightgray;
+  padding: .2em;
+}
+
+.main-art-comm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-art-comm:not(.main-art-comm:last-of-type) {
+  margin-bottom: 2em;
+}
+
+.main-art-comm svg {
+  pointer-events: none;
+}
+
+.main-art-comm div:not(.comm-dots):not(.comm-del-proc) {
+  border: 1px solid orangered;
+  background: rgba(255, 68, 0, 0.1);
+  text-align: center;
+}
+
+.main-art-comm div:not(.comm-dots):not(.comm-del-proc) h4 {
+  padding: .5em 0;
+  font-weight: 700;
+  color: orange;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
+.main-art-comm div:not(.comm-dots):not(.comm-del-proc) h4:hover {
+  color: orangered;
+}
+
+.main-art-comm div:not(.comm-dots):not(.comm-del-proc) h5 {
+  padding: .2em;
+  font-size: .6rem;
+}
+
+.main-art-comm figure {
+  height: clamp(40px, 13vw, 150px);
+  overflow: hidden;
+}
+
+.main-art-comm figure img {
+  height: 100%;
+}
+
+.main-art-comm section {
+  width: 100%;
+  background: #151515;
+  padding: .5em;
+  position: relative;
+  padding-bottom: 2.5em;
+  padding-right: 1em;
+  font-size: clamp(0.7rem, 4vw, 1rem);
+}
+
+.main-art-comm section .comm-del-proc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: .5em 1em;
+  background: #404040;
+  border-radius: .2em;
+  border: 1px solid brown;
+}
+
+.main-art-comm section .comm-dots {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+.main-art-comm section .comm-dots ul {
+  position: absolute;
+  list-style: none;
+  right: 0;
+  border-radius: .2em;
+  background: #252525;
+  border: 1px solid #505050;
+  display: none;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.main-art-comm section .comm-dots ul li {
+  white-space: nowrap;
+  font-size: .8rem;
+  padding: .5em;
+  border-radius: .2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: red;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.main-art-comm section .comm-dots ul li:hover {
+  background: #4a618b;
+}
+
+.main-art-comm section .comm-dots span.dots {
+  cursor: pointer;
+}
+
+.main-art-comm section .comm-dots span.dots:hover svg {
+  color: #b5cbdf;
+}
+
+.main-art-comm section .comm-dots span.dots svg {
+  width: clamp(20px, 4vw, 25px);
+  height: clamp(20px, 4vw, 25px);
+  pointer-events: none;
+}
+
+.main-art-comm section #comm-like {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main-art-comm section #comm-like i {
+  cursor: pointer;
+}
+
+.main-art-comm section #comm-like:hover i {
+  color: green;
+}
+
+.main-art-comm section #comm-like.true i {
+  color: #09ca09;
+}
+
+.main-art-comm section #comm-like svg {
+  margin-right: .2em;
+  -webkit-transition: .2s;
+  transition: .2s;
+  width: 25px;
+  height: 25px;
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .main-art-comm {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .main-art-comm section {
+    min-height: 100px;
+    padding-bottom: 4em;
+  }
+  .main-art-comm div:not(.comm-dots):not(.comm-del-proc) {
+    width: 100%;
+    text-align: left;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .main-art-comm div:not(.comm-dots):not(.comm-del-proc) h4, .main-art-comm div:not(.comm-dots):not(.comm-del-proc) h5 {
+    padding: .1em .5em;
+  }
+}

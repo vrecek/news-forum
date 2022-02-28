@@ -87,7 +87,7 @@
 .write-news-cont section.left-info-form-section h2 {
   width: 80%;
   margin: 0 auto;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 3vw, 1rem);
   text-align: center;
   font-weight: 700;
   color: #d8bbbb;
@@ -145,6 +145,7 @@
   display: block;
   margin: 0 auto;
   width: 20%;
+  min-width: 130px;
   padding: 1em;
   background: none;
   border: 2px solid orangered;
@@ -322,6 +323,7 @@
   transition: .2s;
   padding: 0em .5em;
   font-weight: 400;
+  font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .write-news-cont form div.text-art div section span:hover {
@@ -339,7 +341,7 @@
   outline: 0;
   padding: 1em .5em 3em .5em;
   line-height: 1.5em;
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
   color: white;
   border-radius: .2em;
   min-height: 490px;
@@ -360,5 +362,60 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .write-news-cont .wrap-write {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: auto;
+  }
+  .write-news-cont section.left-info-form-section {
+    width: 100%;
+    padding: 1em 0;
+  }
+  .write-news-cont form {
+    width: 100%;
+    height: 100vh;
+  }
+  .write-news-cont form div input[type='text']:not(.tag).sh {
+    width: 100%;
+  }
+  .write-news-cont form div.select-image-cont {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .write-news-cont form div.select-image-cont figure {
+    position: relative;
+    right: auto;
+    width: 30vw;
+    min-width: 150px;
+    height: 17vw;
+    min-height: 87px;
+    margin-bottom: .5em;
+  }
+  .write-news-cont form div .tag-cont span {
+    bottom: auto;
+    top: 103%;
+  }
+  .write-news-cont form div .tag-cont span:first-child {
+    left: 0;
+  }
+  .write-news-cont form div .tag-cont span:last-of-type {
+    left: 15%;
+  }
+}
+
+@media (max-width: 480px) {
+  .write-news-cont form {
+    padding: 1em .5em;
   }
 }

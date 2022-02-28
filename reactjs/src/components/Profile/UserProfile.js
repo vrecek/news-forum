@@ -14,7 +14,6 @@ import CreateMessage from '../Messages/CreateMessage'
 const UserProfile = () => {
    const [us, setUs] = useState(null)
    const [isMine, setIsMine] = useState(false)
-   const [imLogged, setImLogged] = useState(false)
    const edRef = useRef()
    const formRef = useRef()
    const descRef = useRef()
